@@ -1,0 +1,32 @@
+// 
+pre {
+    background: aliceblue;
+    padding: 0.3rem 1rem;
+}
+
+.card {
+    .card-text {
+        font-family: var(--font-family-serif);
+        // @extend .bg-white;
+    }
+}
+
+// { toabr.de } < braces
+.braces {
+    &::before {
+        content: '{';
+        // font-weight: 800;
+        color: $gray-300;
+        padding-right: 1rem;
+    }
+    &::after {
+        content: '}';
+        color: $gray-300;
+        padding-left: 1rem;
+    }
+}
+
+// .navbar-brand, 
+#home h1 {
+    @extend .braces;
+}

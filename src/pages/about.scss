@@ -1,0 +1,53 @@
+// 
+$about-width: 350px;
+
+html, body, #root, #about {
+  min-height: 100vh;
+}
+
+body {
+    background-color: var(--bs-dark);
+    background-image: url('https://unsplash.com/photos/hnysCJrPpkc/download?force=true&w=1920');
+    background-size: contain;
+
+    &.open {
+        #about {
+            opacity: 1;
+            .title {
+                transform: translateX(0);
+            }
+        }
+        #page {
+            width: 100%;
+            transform: translate($about-width, 58px);
+            position: fixed;
+            opacity: .8;
+            &::before {
+                content: '';
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                background-color: rgb(0 0 0 / 35%);
+                background-image: url('https://www.dreamhome.berlin/themes/custom/dreamhome/img/overlays/02.png');
+                z-index: 1100;
+            }
+        }
+    }
+    
+}
+#page {
+    background: var(--body-bg);
+    transition: transform .3s ease-out;
+}
+#about {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: $about-width;
+    opacity: 0;
+    transition: all 1.8s ease-out;
+    .title {
+        transform: translateX(-25px);
+        transition: all 1.8s ease-out;
+    }
+}

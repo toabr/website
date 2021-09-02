@@ -1,0 +1,62 @@
+@mixin btn-brand(
+  $color,
+  $color-hover: color-contrast($color),
+  $active-background: $color,
+  $active-border: shade-color($color, 8%),
+  $active-color: $white
+) {
+  color: $gray-600;
+  border-color: $gray-500;
+
+  svg {
+    color: $color;
+  }
+
+  &:hover {
+    color: $active-color;
+    background-color: $active-background;
+    background-image: var(--bs-gradient);
+    border-color: $active-border;
+    box-shadow: 0 6px 6px -6px $gray-600;
+    svg {
+      color: $active-color;
+    }
+  }
+
+  .btn-check:focus + &,
+  &:focus {
+    box-shadow: 0 0 0 .1rem rgba($color, .5);
+  }
+
+  .btn-check:checked + &,
+  .btn-check:active + &,
+  &:active,
+  &.active,
+  &.dropdown-toggle.show {
+    color: $active-color;
+    background-color: $active-background;
+    border-color: $active-border;
+
+    &:focus {
+      @if $enable-shadows {
+        @include box-shadow($btn-active-box-shadow, 0 0 0 $btn-focus-width rgba($color, .5));
+      } @else {
+        // Avoid using mixin so we can pass custom focus shadow properly
+        box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
+      }
+    }
+  }
+
+  &:disabled,
+  &.disabled {
+    color: $color;
+    background-color: transparent;
+  }
+}
+
+
+@each $color, $value in $theme-colors {
+  .btn-brand-#{$color} {
+    @include btn-brand($value);
+  }
+}

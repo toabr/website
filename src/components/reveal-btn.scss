@@ -1,0 +1,26 @@
+#reveal-btn {
+  animation: wiggle 0.5s;
+  animation-delay: 3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  
+  &:hover {
+    animation: flip 0.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+  }
+}
+
+@keyframes wiggle {
+  0% {transform: rotate(20deg);}
+  50% {transform: rotate(-20deg);}
+  100% {transform: rotate(20deg);}
+}
+
+@keyframes flip {
+  0% {transform: rotate(0);}
+  25% {transform: rotate(-200deg);}
+  50% {transform: rotate(-160deg);}
+  75% {transform: rotate(-190deg);}
+  100% {transform: rotate(-180deg);}
+}
