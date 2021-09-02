@@ -1,5 +1,8 @@
 import { useState } from 'react';
+import { LinkContainer } from 'react-router-bootstrap'
+
 import { Navbar, Nav, Container } from 'react-bootstrap'
+
 import Contact from './Contact'
 import RevealBtn from './RevealBtn'
 
@@ -10,7 +13,7 @@ const Navi = () => {
 
   const handleModalShow = () => setModalShow(true)
   const handleModalClose = () => setModalShow(false)
-  
+
   const handleFormSubmit = (e) => {
     console.log(e)
     const form = e.currentTarget;
@@ -28,8 +31,12 @@ const Navi = () => {
         <Container className="border-bottom">
           <RevealBtn />
           <Nav className="">
-            <Nav.Link href="/home#home" className="">Home</Nav.Link>
-            <Nav.Link href="/home#blog" className="">blog</Nav.Link>
+            <LinkContainer to="/" >
+              <Nav.Link className="">Home</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/wiki">
+              <Nav.Link className="">Wiki</Nav.Link>
+            </LinkContainer>
             <Nav.Link eventKey="contact" onClick={handleModalShow}>Contact</Nav.Link>
           </Nav>
         </Container>

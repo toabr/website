@@ -65,7 +65,7 @@ const App = () => {
     <Router>
       <Layout>
         <Switch>
-          <Route path='/home' exact
+          <Route path='/' exact
             render={(props) => (
               <Home {...props} showcaseData={showcaseData} />
             )} />
