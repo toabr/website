@@ -41,8 +41,9 @@ const Post = (props) => {
   }, [])
 
   // redirect when post not available
+  // TODO: redirect using history
   if (!available) {
-    return <Redirect to='/home' />
+    return <Redirect to='/' />
   }
 
   return (
