@@ -31,6 +31,7 @@ const Search = () => {
 
   const queryArticles = (searchTerm) => {
     setArticles([])
+    inputRef.current.readOnly = true
     if (searchTerm === '') return
     setIsLoading(true)
     ApiService.articlesQuery(searchTerm)
@@ -39,6 +40,7 @@ const Search = () => {
         setIsLoading(false)
         setSearchTerm('')
         inputRef.current.focus()
+        inputRef.current.readOnly = false
         console.log(data)
       })
   }
@@ -72,7 +74,11 @@ const Search = () => {
             className="ps-0 shadow-none fs-4"
             placeholder="search ..."
             aria-label="search"
-            aria-describedby="basic-addon1" onChange={(e) => handleOnChange(e)} value={searchTerm} />
+            aria-describedby="basic-addon1"
+            onChange={(e) => handleOnChange(e)}
+            value={searchTerm}
+            readOnly={false}
+          />
 
           <Button
             variant="primary"
