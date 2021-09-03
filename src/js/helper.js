@@ -5,6 +5,11 @@ export const handleLocalStore = ({ key, value }) => {
   return localStorage.getItem(key);
 }
 
+export const formatUTC = (date) => {
+  const formated = new Date(date)
+  return formated.toLocaleDateString()
+} 
+
 export const toLocalDate = (timeStamp) => {
   const date = new Date(timeStamp * 1000);
   // const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -30,3 +35,10 @@ export const orderByTitle = arr => {
       return 0;
   });
 }
+
+// add tag titles to node element
+export const addTagTitles = (fieldTags, tagList) => fieldTags.map(tag => {
+  // find corresponding id in tag list
+  const match = tagList.find(ele => ele.tid == tag.target_id)
+  return {...tag, title: match.title}
+})

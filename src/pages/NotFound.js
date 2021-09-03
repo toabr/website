@@ -13,7 +13,7 @@ const NotFound = () => {
               <Card.Text className=''>
                 Edit Custom 404 error page <code>src/pages/NotFound.js</code>
               </Card.Text>
-              <LinkContainer to='/home'>
+              <LinkContainer to='/'>
                 <Button className=''>Home Page</Button>
               </LinkContainer>
             </Card.Body>

@@ -12,6 +12,7 @@ import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Wiki from './pages/Wiki'
 import Post from './pages/Post'
+import { formatUTC, addTagTitles } from './js/helper'
 
 
 const App = () => {
@@ -19,28 +20,19 @@ const App = () => {
 
   useEffect(() => {
     const addLocale = data => data.map(set => {
-      const created = new Date(set.created[0].value)
-      set.created[0].locale = created.toLocaleDateString()
-
-      const changed = new Date(set.changed[0].value)
-      set.changed[0].locale = changed.toLocaleDateString()
+      set.created[0].locale = formatUTC(set.created[0].value)
+      set.changed[0].locale = formatUTC(set.created[0].value)
       return set
     })
 
     const addTagTiles = async (showcaseData) => {
       // fetch full list of available tags
       const tagList = await ApiService.getTags()
-      // iterate over all showcases and there tag list
-      const output = showcaseData.map(showcase => {
-        showcase.field_tags.map(tag => {
-          // find corresponding title in tag list
-          const match = tagList.find(ele => ele.tid == tag.target_id)
-          tag.title = match.title
-          return tag
-        })
+      // add tag titles to node element
+      return showcaseData.map(showcase => {
+        showcase.field_tags = addTagTitles(showcase.field_tags, tagList)
         return showcase
       })
-      return output
     }
 
     const getShowcase = async () => {

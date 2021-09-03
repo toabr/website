@@ -15,11 +15,11 @@ const Footer = () => {
           </p>
 
           <Nav className="justify-content-end">
-            <LinkContainer to='/home'>
+            <LinkContainer to='/'>
               <Nav.Link className='text-muted'>Home</Nav.Link>
             </LinkContainer>
-            <LinkContainer to='/about'>
-              <Nav.Link className='text-muted'>About</Nav.Link>
+            <LinkContainer to='/wiki'>
+              <Nav.Link className='text-muted'>Wiki</Nav.Link>
             </LinkContainer>
             <Nav.Link href="/home#contact" className="text-muted">Contact</Nav.Link>
           </Nav>
