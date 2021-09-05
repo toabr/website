@@ -1,19 +1,26 @@
 import { useEffect, useState } from 'react'
 import { Button, Col, Container, ListGroup, } from 'react-bootstrap'
-import PageTitle from '../components/PageTitle'
-import Meta from '../components/Meta'
+
+import usePersistedState from '../hooks/usePersistedState'
 import ApiService from '../js/ApiService'
 
+import PageTitle from '../components/PageTitle'
+import Meta from '../components/Meta'
+
+// TODO: Layout!
+// TODO: Searchbar
+
+
 const Wiki = () => {
-  const [tags, setTags] = useState([])
+  const [tags, setTags] = usePersistedState('tagList', [])
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    ApiService.getTags()
-      .then(data => {
-        console.log(data)
-        setTags(data)
-      })
+    if(!tags.length) {
+      console.log('fetch tags')
+      ApiService.getTags()
+        .then(data => setTags(data))
+    }
   }, [])
 
   useEffect(() => {

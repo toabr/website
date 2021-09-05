@@ -3,7 +3,7 @@ import Article from './Article'
 
 const Showcase = ({ data: showcaseData = [] }) => {
   return (
-    <Container as="section" id="blog" fluid className="p-0">
+    <Container as="section" id="showcase" fluid className="p-0">
       <Row sm={12} className="mx-auto mb-4" style={{ maxWidth: '1040px' }}>
         <Col className="mb-4">
           <h2 className="border-bottom text-center pb-3 mb-4">Showcase</h2>

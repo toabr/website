@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 // api call
+import usePersistedState from './hooks/usePersistedState'
 import ApiService from './js/ApiService'
 
 // Layout
@@ -16,7 +17,8 @@ import { formatUTC, addTagTitles } from './js/helper'
 
 
 const App = () => {
-  const [showcaseData, setShowcaseData] = useState(JSON.parse(localStorage.getItem('showcaseData')) || [])
+  const [showcaseData, setShowcaseData] = usePersistedState('showcaseData', [])
+  const [tagList, setTagList] = usePersistedState('tagList', [])
 
   useEffect(() => {
     const addLocale = data => data.map(set => {
@@ -25,30 +27,28 @@ const App = () => {
       return set
     })
 
-    const addTagTiles = async (showcaseData) => {
-      // fetch full list of available tags
-      const tagList = await ApiService.getTags()
+    const addTagTiles = async (data) => {
+      const tags = (!tagList.length) ? await getTags() : tagList
       // add tag titles to node element
-      return showcaseData.map(showcase => {
-        showcase.field_tags = addTagTitles(showcase.field_tags, tagList)
-        return showcase
+      return data.map(node => {
+        node.field_tags = addTagTitles(node.field_tags, tags)
+        return node
       })
     }
 
-    const getShowcase = async () => {
-      const output = await ApiService.getShowcase()
-      console.log('showcaseData', output)
+    const getShowcase = async () => await ApiService.getShowcase()
+
+    const getTags = async () => {
+      const output = await ApiService.getTags()
+      setTagList(output)
       return output
     }
 
-    if(showcaseData.length < 1) {
+    if(!showcaseData.length) {
       getShowcase()
         .then(data => addLocale(data))
         .then(data => addTagTiles(data))
-        .then(data => {
-          localStorage.setItem('showcaseData', JSON.stringify(data))
-          setShowcaseData(data)
-        })
+        .then(data => setShowcaseData(data))
     }
 
   }, [])

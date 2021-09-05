@@ -1,6 +1,8 @@
 import { LinkContainer } from 'react-router-bootstrap'
 import { Card, Col, Row } from 'react-bootstrap'
 
+import './article.scss'
+
 
 const Article = ({ variant, data }) => {
 

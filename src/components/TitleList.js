@@ -23,7 +23,7 @@ const TitleList = (articles) => {
   })
 
   return (
-    <ListGroup variant="" className="text-start mb-5">
+    <ListGroup variant="" className="text-start">
       {Titles}
     </ListGroup>
   )

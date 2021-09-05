@@ -1,52 +1,49 @@
 import React, { useRef, useState } from 'react';
 import { Button, Form, InputGroup, Spinner } from 'react-bootstrap'
 import { Search as SearchIcon } from 'react-bootstrap-icons'
+import { useFetch } from '../hooks/useFetch';
 
-import ApiService from '../js/ApiService'
 import SearchBtnList from './SearchBtnList';
 import TitleList from './TitleList';
 
 
 
 const Search = () => {
-  const [articles, setArticles] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+
+  const [query, setQuery] = useState('')
+  // query && stops fetching on first render
+  const url = query && `${process.env.REACT_APP_API_URL}/api/search?_q=${query}`
+  const { status, data, error } = useFetch(url)
+  const articles = data
+
   const inputRef = useRef(null)
 
-  const queryArticles = (searchTerm) => {
-    setArticles([])
-    inputRef.current.readOnly = true
+  let isLoading = false
 
-    setIsLoading(true)
-    ApiService.articlesQuery(searchTerm)
-      .then(data => {
-        setArticles(data)
-        setIsLoading(false)
-        setSearchTerm('')
-        inputRef.current.focus()
-        inputRef.current.readOnly = false
-        console.log('SearchResult', data)
-      })
+  if (status === 'error') {
+    console.error(error)
   }
 
-  const handleOnChange = (e) => {
-    setSearchTerm(e.currentTarget.value)
+  if (status === 'fetching') {
+    inputRef.current.readOnly = true
+    isLoading = true
+  }
+
+  if (status === 'fetched') {
+    inputRef.current.focus()
+    inputRef.current.readOnly = false
+    isLoading = false
   }
 
   const onFormSubmit = (e) => {
     e.preventDefault()
-    // return on empty input 
-    // TODO: message to the user
-    if (searchTerm === '') {
-      return
-    }
-    queryArticles(searchTerm)
+    const query = inputRef.current.value
+    query !== '' && setQuery(query)
   }
 
-  const tagBtnAction = (term) => {
-    setSearchTerm(term)
-    queryArticles(term)
+  const tagBtnAction = (tag) => {
+    setQuery(tag)
+    inputRef.current.value = tag
   }
 
   return (
@@ -66,8 +63,8 @@ const Search = () => {
             placeholder="search ..."
             aria-label="search"
             aria-describedby="basic-addon1"
-            onChange={(e) => handleOnChange(e)}
-            value={searchTerm}
+            // onChange={(e) => handleOnChange(e)}
+            // value={searchTerm}
             readOnly={false}
           />
 
@@ -86,9 +83,14 @@ const Search = () => {
         </InputGroup>
       </Form>
 
-      {TitleList(articles)}
+      {status === 'fetched' && (
+        <>
+          {!articles.length && <div> No articles found! :( </div>}
+          {!!articles.length && TitleList(articles)}
+        </>
+      )}
 
-      <SearchBtnList action={tagBtnAction}/>
+      <SearchBtnList action={tagBtnAction} className="my-4" />
 
     </div>
   )
