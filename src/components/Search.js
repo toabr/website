@@ -25,7 +25,6 @@ const Search = () => {
   }
 
   if (status === 'fetching') {
-    inputRef.current.readOnly = true
     isLoading = true
   }
 
@@ -38,11 +37,15 @@ const Search = () => {
   const onFormSubmit = (e) => {
     e.preventDefault()
     const query = inputRef.current.value
-    query !== '' && setQuery(query)
+    if(query !== '') {
+      setQuery(query)
+      inputRef.current.readOnly = true
+    }
   }
 
   const tagBtnAction = (tag) => {
     setQuery(tag)
+    inputRef.current.readOnly = true
     inputRef.current.value = tag
   }
 
