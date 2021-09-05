@@ -25,11 +25,12 @@ const Search = () => {
   }
 
   if (status === 'fetching') {
+    inputRef.current.readOnly = true
     isLoading = true
   }
 
   if (status === 'fetched') {
-    inputRef.current.focus()
+    // inputRef.current.focus()
     inputRef.current.readOnly = false
     isLoading = false
   }
@@ -37,15 +38,11 @@ const Search = () => {
   const onFormSubmit = (e) => {
     e.preventDefault()
     const query = inputRef.current.value
-    if(query !== '') {
-      setQuery(query)
-      inputRef.current.readOnly = true
-    }
+    query !== '' && setQuery(query)
   }
 
   const tagBtnAction = (tag) => {
     setQuery(tag)
-    inputRef.current.readOnly = true
     inputRef.current.value = tag
   }
 
