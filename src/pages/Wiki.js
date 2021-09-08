@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Button, Col, Container, ListGroup, } from 'react-bootstrap'
 
 import usePersistedState from '../hooks/usePersistedState'
+import { useFetch } from '../hooks/useFetch'
 import ApiService from '../js/ApiService'
 
 import PageTitle from '../components/PageTitle'
@@ -12,23 +13,18 @@ import Meta from '../components/Meta'
 
 
 const Wiki = () => {
-  const [tags, setTags] = usePersistedState('tagList', [])
+  const [tagList, setTags] = usePersistedState('tagList', [])
   const [posts, setPosts] = useState([])
 
-  useEffect(() => {
-    if(!tags.length) {
-      console.log('fetch tags')
-      ApiService.getTags()
-        .then(data => setTags(data))
-    }
-  }, [])
+  const url = !tagList.length && `${process.env.REACT_APP_API_URL}/api/term`
+  const { status, data, error } = useFetch(url)
+
+  // use local storage or fetch it
+  const tags = (!!tagList.length) ? tagList : data
 
   useEffect(() => {
-    ApiService.getArticles()
-      .then(data => {
-        console.log(data)
-        setPosts(data)
-      })
+    !tagList.length && ApiService.getArticles()
+      .then(data => setPosts(data))
   }, [])
 
   // page content
@@ -45,7 +41,7 @@ const Wiki = () => {
 
   const Posts = posts.map(post => {
     return (
-      <ListGroup.Item as="a" action="true" href={`post/${post.nid[0].value}`}>
+      <ListGroup.Item as="a" action="true" href={`node/${post.nid[0].value}`}>
         {post.title[0].value}
       </ListGroup.Item>
     )

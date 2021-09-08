@@ -42,3 +42,13 @@ export const addTagTitles = (fieldTags, tagList) => fieldTags.map(tag => {
   const match = tagList.find(ele => ele.tid == tag.target_id)
   return {...tag, title: match.title}
 })
+
+export const urlBuilder = ({type, query = '', tags, id, page, items}) => {
+  let output = `${process.env.REACT_APP_API_URL}/rest/v2/node?_q=${query}`
+  if(type) output += `&_type=${type}`
+  if(tags) output += `&_tags=${tags}`
+  if(id) output += `&_id=${id}`
+  if(items) output += `&items_per_page=${items}`
+  if(page) output += `&page=${page}`
+  return output
+}

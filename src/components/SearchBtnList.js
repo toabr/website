@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 
 // button icons
 import { faHashtag } from '@fortawesome/free-solid-svg-icons'
@@ -7,8 +7,8 @@ import { faDocker, faDrupal, faJs, faLinux, faReact, faSass } from '@fortawesome
 import TagBtn from './TagBtn';
 
 
-const SearchBtnList = ({action, className}) => {
-  const tagBtnData = [
+const SearchBtnList = ({ action, className }) => {
+  const data = [
     { title: "linux", faIcon: faLinux, variant: "brand-primary" },
     { title: "drupal", faIcon: faDrupal, variant: "brand-primary" },
     { title: "es6", faIcon: faJs, variant: "brand-primary" },
@@ -20,8 +20,13 @@ const SearchBtnList = ({action, className}) => {
 
   return (
     <div className={`d-flex flex-wrap gap-2 ${className}`}>
-      {tagBtnData.map(tag => TagBtn({ ...tag, onClick: () => action(tag.title) }))}
+
+      {data.map((item, index) =>
+        <TagBtn {...item} onClick={() => action(item.title)} key={index} />
+      )}
+
       {TagBtn({ title: "...", variant: "brand-secondary", as: "a", href: "wiki" })}
+
     </div>
   )
 }

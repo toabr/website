@@ -13,7 +13,7 @@ const TagBtn = ({ title, variant, faIcon, onClick, as, href, className }) => {
       variant={variant}
       className="font-monospace py-2 flex-fill"
       onClick={onClick}>
-      <FontAwesomeIcon icon={faIcon} className="me-2" />
+      {faIcon && <FontAwesomeIcon icon={faIcon} className="me-2" />}
       <span className="">{title}</span>
     </Button>
   )

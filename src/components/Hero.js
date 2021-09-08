@@ -9,7 +9,7 @@ const Hero = () => {
   useEffect(() => {
     const win = { width: window.innerWidth, height: window.innerHeight }
     const mouseMoveHandler = (e) => {
-      console.log('move')
+      // console.log('move')
       setPos({
         xVal: -1/(win.height/2)*e.clientY + 1,
         yVal: 1/(win.width/2)*e.clientX - 1,
@@ -19,9 +19,11 @@ const Hero = () => {
       })
     }
 
-    window.addEventListener('mousemove', throttle(mouseMoveHandler, 300))
+    const mouseMove = throttle(mouseMoveHandler, 300)
+
+    window.addEventListener('mousemove', mouseMove) 
     return function cleanup() {
-      window.removeEventListener('mousemove', throttle(mouseMoveHandler, 300))
+      window.removeEventListener('mousemove', mouseMove)
     }
   }, [])
 
@@ -50,9 +52,9 @@ const Hero = () => {
   
   return (
     <>
-      <div class="hero rounded-circle mx-auto mb-3">
-        <div class="hero__back hero__back--static"></div>
-        <div ref={heroRef} class="hero__back hero__back--mover" ></div>
+      <div className="hero rounded-circle mx-auto mb-3">
+        <div className="hero__back hero__back--static"></div>
+        <div ref={heroRef} className="hero__back hero__back--mover" ></div>
       </div>
       <h1 className="display-5 text-secondary"><span className="text-primary">to</span>abr.de</h1>
       <p className="mb-5">Explore a bunch of code snippets you may find helpful.</p>

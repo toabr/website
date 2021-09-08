@@ -1,22 +1,22 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap'
-
-import { Badge, Button, ListGroup } from "react-bootstrap"
-import { stripTags } from '../js/helper';
+import { Badge, ListGroup } from "react-bootstrap"
 
 
-const TitleList = (articles) => {
+const TitleList = ({ nodes }) => {
 
-  const Titles = articles.map(item => {
-    const tags = stripTags(item.tags).map((tag) => {
-      return <Badge className="bg-secondary-light rounded ms-1">{tag.title}</Badge>
-    })
-
+  const Titles = nodes.map((node, index) => {
     return (
-      <LinkContainer to={`post/${item.nid}`}>
-        <ListGroup.Item action="true" className="d-flex flex-wrap justify-content-between" >
-          {item.title}
-          <span className="text-right">{tags}</span>
+      <LinkContainer to={`node/${node.nid[0].value}`} key={index}>
+        <ListGroup.Item action="true" className="" >
+          {node.title[0].value}
+          <span className="float-end">
+            {node.field_tags.map(tag =>
+              <Badge className="bg-secondary-light rounded ms-1" key={tag.target_id}>
+                # {tag.target_id}
+              </Badge>
+            )}
+          </span>
         </ListGroup.Item>
       </LinkContainer>
     )
@@ -24,7 +24,16 @@ const TitleList = (articles) => {
 
   return (
     <ListGroup variant="" className="text-start">
-      {Titles}
+
+      {!!nodes.length && Titles}
+
+      {/* TODO: nedds to lift up */}
+      {nodes.length > 5 &&
+        <LinkContainer to="wiki">
+          <ListGroup.Item active="false" action="true" className="text-center" >more...</ListGroup.Item>
+        </LinkContainer>
+      }
+
     </ListGroup>
   )
 }

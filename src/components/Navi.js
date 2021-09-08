@@ -9,7 +9,7 @@ import RevealBtn from './RevealBtn'
 
 const Navi = () => {
   const [modalShow, setModalShow] = useState(false)
-  const [validated, setValidated] = useState(false);
+  // const [validated, setValidated] = useState(false);
 
   const handleModalShow = () => setModalShow(true)
   const handleModalClose = () => setModalShow(false)
@@ -22,7 +22,7 @@ const Navi = () => {
       e.stopPropagation()
     }
 
-    setValidated(true)
+    // setValidated(true)
   }
 
   return (

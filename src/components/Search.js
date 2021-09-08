@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Button, Form, InputGroup, Spinner } from 'react-bootstrap'
 import { Search as SearchIcon } from 'react-bootstrap-icons'
 import { useFetch } from '../hooks/useFetch';
+import { urlBuilder } from '../js/helper';
 
 import SearchBtnList from './SearchBtnList';
 import TitleList from './TitleList';
@@ -11,10 +12,18 @@ import TitleList from './TitleList';
 const Search = () => {
 
   const [query, setQuery] = useState('')
+  const [activeTag, setActiveTag] = useState('')
+
+  // TODO: reset tag on query string
   // query && stops fetching on first render
-  const url = query && `${process.env.REACT_APP_API_URL}/api/search?_q=${query}`
+  const url = (query || activeTag) && urlBuilder({
+    type: 'article',
+    query: query,
+    tags: activeTag,
+    items: 5
+  })
   const { status, data, error } = useFetch(url)
-  const articles = data
+  const nodes = data
 
   const inputRef = useRef(null)
 
@@ -38,17 +47,19 @@ const Search = () => {
   const onFormSubmit = (e) => {
     e.preventDefault()
     const query = inputRef.current.value
+    setActiveTag('')
     query !== '' && setQuery(query)
   }
 
   const tagBtnAction = (tag) => {
-    setQuery(tag)
+    setQuery('')
+    setActiveTag(tag)
     inputRef.current.value = tag
   }
 
   return (
     <div id="search">
-
+      .
       <Form onSubmit={e => onFormSubmit(e)} className="">
         <InputGroup className="shadow" size="lg">
 
@@ -83,12 +94,9 @@ const Search = () => {
         </InputGroup>
       </Form>
 
-      {status === 'fetched' && (
-        <>
-          {!articles.length && <div> No articles found! :( </div>}
-          {!!articles.length && TitleList(articles)}
-        </>
-      )}
+      {(status === 'fetched' && !nodes.length) && <div className="pt-3">Nothing there 🙁</div>}
+
+      {!!nodes.length && <TitleList nodes={nodes} />}
 
       <SearchBtnList action={tagBtnAction} className="my-4" />
 
