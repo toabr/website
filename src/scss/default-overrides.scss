@@ -34,6 +34,7 @@ $primary-light:       tint-color($primary, 85%);
 $secondary:         #5e7683;
 $secondary-light:     tint-color($secondary, 58%);
 $secondary-dark:      shade-color($secondary, 35%);
+$accent:            #d63384;
 $success:           #198754;
 $info:              #0dcaf0;
 $warning:           #ffc107;
@@ -50,6 +51,7 @@ $theme-colors: (
   "secondary":        $secondary,
   "secondary-dark":   $secondary-dark,
   "secondary-light":  $secondary-light,
+  "accent":           $accent,
   "success":          $success,
   "info":             $info,
   "warning":          $warning,

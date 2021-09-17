@@ -1,54 +1,64 @@
 export const handleLocalStore = ({ key, value }) => {
   if (typeof (Storage) === "undefined") return;
 
-  if(key && value) localStorage.setItem(key, value);
+  if (key && value) localStorage.setItem(key, value);
   return localStorage.getItem(key);
 }
 
 export const formatUTC = (date) => {
   const formated = new Date(date)
   return formated.toLocaleDateString()
-} 
-
-export const toLocalDate = (timeStamp) => {
-  const date = new Date(timeStamp * 1000);
-  // const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  // return (`${date.getDate()}. ${months[date.getMonth()]} ${date.getFullYear()}`);
-  return date.toLocaleString()
-} 
-
-export const stripTags = string => {
-  return string.split(', ').map(tag => {
-      return {
-          tid: tag.split(':')[0],
-          title: tag.split(':')[1],
-      }
-  });
 }
+
 
 export const orderByTitle = arr => {
   return arr.sort(function (a, b) {
-      var nameA = a.title.toUpperCase(); // ignore upper and lowercase
-      var nameB = b.title.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) return -1;
-      if (nameA > nameB) return 1;
-      return 0;
+    var nameA = a.title.toUpperCase(); // ignore upper and lowercase
+    var nameB = b.title.toUpperCase(); // ignore upper and lowercase
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    return 0;
   });
 }
 
-// add tag titles to node element
-export const addTagTitles = (fieldTags, tagList) => fieldTags.map(tag => {
-  // find corresponding id in tag list
-  const match = tagList.find(ele => ele.tid == tag.target_id)
-  return {...tag, title: match.title}
-})
 
-export const urlBuilder = ({type, query = '', tags, id, page, items}) => {
-  let output = `${process.env.REACT_APP_API_URL}/rest/v2/node?_q=${query}`
-  if(type) output += `&_type=${type}`
-  if(tags) output += `&_tags=${tags}`
-  if(id) output += `&_id=${id}`
-  if(items) output += `&items_per_page=${items}`
-  if(page) output += `&page=${page}`
-  return output
+/**
+   * find corresponding tag id in tagList and add the title
+   * @param {array} fieldTags - node.field_tags from node
+   * @param {array} tagList - separate title/id pair from server
+   */
+ export function addTagTitles(fieldTags, tagList) {
+  return fieldTags.map(nodeTag => {
+    const match = tagList.find(ele => ele.tid == nodeTag.target_id) // == because ele.tid is a String
+    return (match) ? { ...nodeTag, title: match.title } : nodeTag // there could be corrupted empty tags
+  })
 }
+
+
+/**
+ * builds main fetching url depending on environment
+ * @param {obj} param0 
+ * @returns url
+ */
+export const urlBuilder = ({
+  nid    = '', // just one unfortunately
+  type   = 'All', // article, work
+  tags   = [], // array of strings
+  query  = '', //string
+  by     = 'changed', // no choise
+  order  = 'DESC', // DESC, ASC
+  items  = 10, // 5, 10, 25, 50
+  page,
+}) => {
+  let url = `${process.env.REACT_APP_API_URL}/rest/v2/node?`
+  if (nid)    url += `_nid=${nid}&`
+  if (type)   url += `_type=${type}&`
+  if (tags)   url += `_tags=${tags.toString()}&`
+  if (query)  url += `_q=${query}&`
+  if (by)     url += `sort_by=${by}&`
+  if (order)  url += `sort_order=${order}&`
+  if (items)  url += `items_per_page=${items}&`
+  if (page)   url += `page=${page}&`
+  return url
+}
+

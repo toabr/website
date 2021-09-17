@@ -1,30 +1,44 @@
-import { Button, Card, Col, Container } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+
+import { Button, Col, Container } from 'react-bootstrap'
 import PageTitle from '../components/PageTitle'
 import Meta from '../components/Meta'
-import { useFetch } from '../hooks/useFetch'
-import { urlBuilder } from '../js/helper'
+import useFetch from '../hooks/useFetch'
+import { urlBuilder, addTagTitles } from '../js/helper'
 
-// TODO: build posts array in state
-// TODO: add tags buttons...
-// TODO: use MDX
+import './post.scss'
 
+/**
+ * fetch one Post and spit it out
+ * and do stuff to the tagBtns
+ * @param {array} tagList
+ * @returns Post
+ */
 const Post = (props) => {
 
-  const url = urlBuilder({ id: props.match.params.nid })
+  const nid = props.match.params.nid
+  const tagList = props.tagList
+  const title = `Post ${nid}`
+  let description = ''
+  let isLoading = true // state of PageTitle
+
+
+  const url = urlBuilder({ nid })
   const { status, data, error } = useFetch(url)
   const node = data[0]
-
-  const title = `Post ${props.match.params.nid}`
-  let description = ''
-  let isLoading = true
 
   if (status === 'error') {
     console.error(error)
   }
 
   if (status === 'fetched') {
-    console.log('post', node)
-    description = (!!data.length) ? node.title[0].value : 'nothing here'
+    if (!!data.length) {
+      description = node.title[0].value
+      // add tag titles
+      node.field_tags = addTagTitles(node.field_tags, tagList)
+    } else {
+      description = 'nothing here'
+    }
     isLoading = false
   }
 
@@ -32,23 +46,22 @@ const Post = (props) => {
   return (
     <>
       <Meta title={title} />
-      <PageTitle head={title} description={description} isLoading={isLoading} />
-
+      <PageTitle head={description} description={title} isLoading={isLoading} />
 
       {status === 'fetched' && !!data.length &&
-        <Container>
-          <Col md={8} className="mx-auto">
-            <Card>
-              <Card.Body>
-                {node.field_tags.map((tag) => <Button variant="brand-primary">#{tag.target_id}</Button>)}
-              </Card.Body>
-              <Card.Body>
-                <div dangerouslySetInnerHTML={{ __html: node.body[0].value }} />
-              </Card.Body>
-            </Card>
+        <div id={`post-${nid}`} style={{ maxWidth: 685 }} className="post mx-auto px-2">
 
-          </Col>
-        </Container>
+          {/* TODO: check dangerouslySetInnerHTML */}
+          <div dangerouslySetInnerHTML={{ __html: node.body[0].value }} />
+
+          <div className="my-3">
+            {node.field_tags.map(nodeTag => (
+              <LinkContainer to={{ pathname: "/wiki", state: { fromPost: nodeTag } }} >
+                <Button variant="brand-primary"> #{nodeTag.title}</Button>
+              </LinkContainer>
+            ))}
+          </div>
+        </div>
       }
     </>
   )

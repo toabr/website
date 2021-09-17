@@ -1,32 +1,41 @@
-// 
+//
 pre {
-    background: aliceblue;
-    padding: 0.3rem 1rem;
+  @extend .shadow, .shadow-drop;
 }
 
 .card {
-    .card-text {
-        font-family: var(--font-family-serif);
-        // @extend .bg-white;
-    }
+  .card-text {
+    font-family: var(--font-family-serif);
+    // @extend .bg-white;
+  }
+}
+
+
+.shadow-drop {
+  // cursor: pointer;
+  transition: box-shadow 0.3s ease-in-out;
+  &:hover {
+    box-shadow: 0 6px 24px -5px var(--bs-secondary),
+      0 0 5px -3px var(--bs-primary) !important;
+  }
 }
 
 // { toabr.de } < braces
 .braces {
-    &::before {
-        content: '{';
-        // font-weight: 800;
-        color: $gray-300;
-        padding-right: 1rem;
-    }
-    &::after {
-        content: '}';
-        color: $gray-300;
-        padding-left: 1rem;
-    }
+  &::before {
+    content: "{";
+    // font-weight: 800;
+    color: $gray-300;
+    padding-right: 1rem;
+  }
+  &::after {
+    content: "}";
+    color: $gray-300;
+    padding-left: 1rem;
+  }
 }
 
-// .navbar-brand, 
+// .navbar-brand,
 #home h1 {
-    @extend .braces;
+  @extend .braces;
 }

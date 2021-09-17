@@ -5,23 +5,23 @@ import './hero.scss'
 const Hero = () => {
   const heroRef = useRef(null)
   const [pos, setPos] = useState({})
-  
+
   useEffect(() => {
     const win = { width: window.innerWidth, height: window.innerHeight }
     const mouseMoveHandler = (e) => {
       // console.log('move')
       setPos({
-        xVal: -1/(win.height/2)*e.clientY + 1,
-        yVal: 1/(win.width/2)*e.clientX - 1,
-        transX: 16/(win.width)*e.clientX - 8,
-        transY: 10/(win.height)*e.clientY - 3,
-        transZ: 60/(win.height)*e.clientY - 35
+        xVal: -1 / (win.height / 2) * e.clientY + 1,
+        yVal: 1 / (win.width / 2) * e.clientX - 1,
+        transX: 16 / (win.width) * e.clientX - 8,
+        transY: 10 / (win.height) * e.clientY - 3,
+        transZ: 60 / (win.height) * e.clientY - 35
       })
     }
 
     const mouseMove = throttle(mouseMoveHandler, 300)
 
-    window.addEventListener('mousemove', mouseMove) 
+    window.addEventListener('mousemove', mouseMove)
     return function cleanup() {
       window.removeEventListener('mousemove', mouseMove)
     }
@@ -48,18 +48,13 @@ const Hero = () => {
     }
   }
 
-  
-  
-  return (
-    <>
-      <div className="hero rounded-circle mx-auto mb-3">
-        <div className="hero__back hero__back--static"></div>
-        <div ref={heroRef} className="hero__back hero__back--mover" ></div>
-      </div>
-      <h1 className="display-5 text-secondary"><span className="text-primary">to</span>abr.de</h1>
-      <p className="mb-5">Explore a bunch of code snippets you may find helpful.</p>
 
-    </>
+
+  return (
+    <div className="hero rounded-circle mx-auto my-3">
+      <div className="hero__back hero__back--static"></div>
+      <div ref={heroRef} className="hero__back hero__back--mover" ></div>
+    </div>
   )
 }
 

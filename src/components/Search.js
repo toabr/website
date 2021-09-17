@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Button, Form, InputGroup, Spinner } from 'react-bootstrap'
 import { Search as SearchIcon } from 'react-bootstrap-icons'
-import { useFetch } from '../hooks/useFetch';
+import useFetch from '../hooks/useFetch';
 import { urlBuilder } from '../js/helper';
 
 import SearchBtnList from './SearchBtnList';
@@ -59,7 +59,6 @@ const Search = () => {
 
   return (
     <div id="search">
-      .
       <Form onSubmit={e => onFormSubmit(e)} className="">
         <InputGroup className="shadow" size="lg">
 

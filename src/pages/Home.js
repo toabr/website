@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import usePersistedState from '../hooks/usePersistedState'
-import { useFetch } from '../hooks/useFetch'
+import useFetch from '../hooks/useFetch'
 import { formatUTC, urlBuilder } from '../js/helper'
 
 import Meta from '../components/Meta'
@@ -8,38 +8,56 @@ import Hero from '../components/Hero'
 import Search from '../components/Search'
 import Showcase from '../components/Showcase'
 
+
 const Home = () => {
 
+  /**
+   * use the store or fetch and save to the store
+   */
+  const ids = [87, 86, 85, 84] // exact ids to fetch in order
   const [showcaseStore, setShowcaseStore] = usePersistedState('showcaseData', [])
   let showcaseData = showcaseStore
 
-  const url = !showcaseData.length && urlBuilder({ type: 'work' })
+  const url = !showcaseData.length &&
+    `${process.env.REACT_APP_API_URL}/rest/v2/node/work/${ids.toString()}`
+
   const { status, data: showcaseFetched, error } = useFetch(url)
 
   if (status === 'fetched') {
-    showcaseData = addStuff(showcaseFetched)
-    localStorage.setItem('showcaseData', JSON.stringify(showcaseFetched))
+    let output = addStuff(showcaseFetched)
+    output = reorderNodes(output, ids)
+    showcaseData = [...output]
+
+    // not setShowcaseStore because of infinit rerender
+    localStorage.setItem('showcaseData', JSON.stringify(output))
   }
 
-  // TODO: refactor ...
+
+  /**
+   * reorder server output
+   */
+  function reorderNodes(nodes, ids) {
+    return nodes.map((node, index) => nodes.find(node => node.nid[0].value == ids[index]))
+  }
+
+
+  /**
+   * process server output
+   */
   function addStuff(nodes) {
     const output = nodes.map(node => {
 
-      // fomat dates
-      node.created[0].locale = formatUTC(node.created[0].value)
-      node.changed[0].locale = formatUTC(node.created[0].value)
+      node.created[0].locale = formatUTC(node.created[0].value) // format created dates
+      node.changed[0].locale = formatUTC(node.changed[0].value) // format changed date
 
-      // TODO: get real tag names
-      // node.field_tags = node.field_tags.map(tag => {
-      //   const match = tagList.find(ele => ele.tid == tag.target_id)
-      //   if(!match) return {} // ignore deletet tags
-      //   return { ...tag, value: match.title }
-      // })
+      // TODO: insert tag titles
 
       return node
     })
     return output
   }
+
+
 
   return (
     <>
@@ -49,7 +67,8 @@ const Home = () => {
         <Row style={{ maxWidth: '1040px' }} className="mx-auto justify-content-center">
           <Col sm={11} md={10} lg={9} xl={8}>
             <header className="text-center mb-5 py-3">
-              <Hero />
+              <h1 className="display-5 text-secondary"><span className="text-primary">to</span>abr.de</h1>
+              <p className="mb-5">Explore a bunch of code snippets you may find helpful.</p>
               <Search />
             </header>
           </Col>
