@@ -9,7 +9,8 @@
     opacity: 1;
   }
   p, li {
-    font: 1rem/1.65 var(--font-serif);
+    font: 1rem var(--font-serif);
+    line-height: 1.65;
   }
   a {
     text-decoration: none;
@@ -19,8 +20,6 @@
   }
   code {
     color: var(--bs-accent);
-    background: rgba(255, 255, 255, 0.35);
-    padding: .15rem .55rem;
   }
   pre {
     background: var(--body-color);
@@ -38,13 +37,25 @@
     border-left: 3px solid var(--bs-accent);
     font-size: 1.08rem;
   }
+  kbd {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.875em;
+    color: #fff;
+    background-color: #212529;
+  }
   abbr {
-    text-decoration: underline dotted;
-    text-underline-position: under;
+    text-decoration: underline dotted 1px;
+    text-underline-offset: .135rem;
     font-weight: bolder;
     &:hover {
       cursor: help;
     }
   }
-  
+  em {
+    font-style: italic;
+    font-weight: bolder;
+  }
+  small {
+    font-weight: 200;
+  }
 }
