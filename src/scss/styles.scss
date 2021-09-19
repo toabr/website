@@ -3,6 +3,10 @@ pre {
   @extend .shadow, .shadow-drop;
 }
 
+blockquote {
+  @extend .blockquote;
+}
+
 .card {
   .card-text {
     font-family: var(--font-family-serif);

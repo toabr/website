@@ -1,8 +1,50 @@
 .post {
+  h2 {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: .5rem;
+    margin-bottom: .8rem;
+  }
+  hr {
+    color: #dee2e6;
+    opacity: 1;
+  }
+  p, li {
+    font: 1rem/1.65 var(--font-serif);
+  }
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  code {
+    color: var(--bs-accent);
+    background: rgba(255, 255, 255, 0.35);
+    padding: .15rem .55rem;
+  }
   pre {
     background: var(--body-color);
     color: var(--body-bg);
     padding: 1rem;
-    border-left: 5px solid var(--bs-accent);
+    border-left: 6px solid var(--bs-accent);
+    code {
+      color: var(--bs-accent);
+      background: none;
+    }
   }
+  blockquote {
+    padding: 1.25em 1.5em;
+    background: rgba(255, 255, 255, 0.35);
+    border-left: 3px solid var(--bs-accent);
+    font-size: 1.08rem;
+  }
+  abbr {
+    text-decoration: underline dotted;
+    text-underline-position: under;
+    font-weight: bolder;
+    &:hover {
+      cursor: help;
+    }
+  }
+  
 }

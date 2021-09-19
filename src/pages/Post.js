@@ -49,7 +49,7 @@ const Post = (props) => {
       <PageTitle head={description} description={title} isLoading={isLoading} />
 
       {status === 'fetched' && !!data.length &&
-        <div id={`post-${nid}`} style={{ maxWidth: 685 }} className="post mx-auto px-2">
+        <div id={`post-${nid}`} style={{ maxWidth: 685 }} className="post mx-auto px-3">
 
           {/* TODO: check dangerouslySetInnerHTML */}
           <div dangerouslySetInnerHTML={{ __html: node.body[0].value }} />
