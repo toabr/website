@@ -30,7 +30,7 @@ const TitleList = ({ nodes = [] }) => {
 
     return (
       <LinkContainer to={`node/${node.nid[0].value}`} key={index}>
-        <ListGroup.Item action="true" className="" >
+        <ListGroup.Item action="true" className="shadow" >
 
           <div className="d-sm-flex justify-content-between flex-wrap align-items-center border-1 mt-1">
             <small className="date d-sm-block pe-2 fs-6">{formatUTC(node.changed[0].value)}</small>

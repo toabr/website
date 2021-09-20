@@ -13,6 +13,7 @@ $enable-gradients: true;
   --body-color:       #343a40;
   --font-serif:       'Martel', serif;
   --font-sans-serif:  'Comfortaa', sans-serif;
+  --box-shadow:       0 6px 8px rgb(85 102 119 / 3%), 0 1px 1px rgb(85 102 119 / 40%);
 }
 
 $body-bg:                 var(--body-bg);
@@ -73,7 +74,7 @@ $h6-font-size:                $font-size-base * .8;
 // scss-docs-end font-variables
 
 
-$box-shadow: 0 6px 8px rgb(85 102 119 / 3%), 0 1px 1px rgb(85 102 119 / 40%);
+$box-shadow: var(--box-shadow);
 
 $input-color:         $body-color;
 $input-border-color:  #e9ecef;
