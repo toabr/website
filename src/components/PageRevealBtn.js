@@ -6,7 +6,7 @@ import { faReply } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-const RevealBtn = () => {
+const PageRevealBtn = () => {
   const [isOpen, _setIsOpen] = useState(false)
   const isOpenRef = useRef(isOpen)
   const btnRef = useRef(null)
@@ -52,4 +52,4 @@ const RevealBtn = () => {
   )
 }
 
-export default RevealBtn
+export default PageRevealBtn

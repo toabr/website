@@ -1,0 +1,30 @@
+// title-list
+
+.title-list {
+  .list-group-item {
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    &:hover {
+      background: var(--bs-primary);
+      background-image: var(--bs-gradient);
+      color: white;
+      font-weight: bolder;
+      .date {
+        color: var(--bs-primary-light);
+      }
+    }
+  }
+  .title {
+    // color: var(--bs-white);
+    // font-weight: bolder;
+  }
+  .date {
+    color: #6c757d;
+    font-weight: lighter;
+  }
+  .badge {
+    background: var(--bs-accent);
+  }
+  
+}

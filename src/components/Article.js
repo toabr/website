@@ -6,7 +6,7 @@ import './article.scss'
 
 const Article = ({ variant, node }) => {
 
-  const link = (!!node.field_resource.length) ? node.field_resource[0].uri : `node/${node.nid[0].value}`
+  const link = (!!node.field_resource?.length) ? node.field_resource[0].uri : `node/${node.nid[0].value}`
 
   const FieldTags = node.field_tags.map((tag) => {
     return (

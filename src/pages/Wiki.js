@@ -6,6 +6,7 @@ import useFetch from '../hooks/useFetch'
 import PageTitle from '../components/PageTitle'
 import Meta from '../components/Meta'
 import { urlBuilder } from '../js/helper'
+import TitleList from '../components/TitleList'
 
 
 /**
@@ -38,10 +39,10 @@ const Wiki = (props) => {
   /**
    * fetch articles respective to pressed buttons
    * @param {string} url
-   * @param {array} posts - fetched and rendered in content
+   * @param {array} nodes - fetched and rendered in content
    */
-  const url = urlBuilder({ tags: encodeURI(activeTags) })
-  const { status, data: posts, error } = useFetch(url)
+  const url = urlBuilder({ tags: encodeURI(activeTags), items: 10 })
+  const { status, data: nodes, error } = useFetch(url)
 
   if (status === 'fetched') {
     isLoading = false
@@ -103,18 +104,7 @@ const Wiki = (props) => {
           </h2>
         }
 
-
-        <ListGroup>
-          {posts.map(post => ( // print posts out
-            <ListGroup.Item
-              as="a"
-              action="true"
-              href={`/node/${post.nid[0].value}`}
-            >
-              {post.title[0].value}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
+        <TitleList nodes={nodes} />
 
       </Container>
 

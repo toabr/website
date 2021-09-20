@@ -44,6 +44,11 @@ const Search = () => {
     isLoading = false
   }
 
+  /**
+   * sets the query string
+   * and triggers the useFetch 
+   * @param {object} e - dom event
+   */
   const onFormSubmit = (e) => {
     e.preventDefault()
     const query = inputRef.current.value
@@ -51,6 +56,11 @@ const Search = () => {
     query !== '' && setQuery(query)
   }
 
+  /**
+   * set the active tag
+   * and triggers the useFetch
+   * @param {String} tag
+   */
   const tagBtnAction = (tag) => {
     setQuery('')
     setActiveTag(tag)

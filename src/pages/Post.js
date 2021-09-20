@@ -57,7 +57,7 @@ const Post = (props) => {
           <div className="my-3">
             {node.field_tags.map(nodeTag => (
               <LinkContainer to={{ pathname: "/wiki", state: { fromPost: nodeTag } }} >
-                <Button variant="brand-primary"> #{nodeTag.title}</Button>
+                <Button variant="brand-primary" className="me-2" > #{nodeTag.title}</Button>
               </LinkContainer>
             ))}
           </div>

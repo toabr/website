@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 
 import Contact from './Contact'
-import RevealBtn from './RevealBtn'
+import PageRevealBtn from './PageRevealBtn'
 
 
 const Navi = () => {
@@ -29,7 +29,7 @@ const Navi = () => {
     <>
       <Navbar expand variant >
         <Container className="border-bottom">
-          <RevealBtn />
+          <PageRevealBtn />
           <Nav className="">
             <LinkContainer to="/" >
               <Nav.Link className="">Home</Nav.Link>

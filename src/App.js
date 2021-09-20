@@ -19,6 +19,12 @@ const App = () => {
   // TODO: context provider!
   const [tagList, setTagList] = usePersistedState('tagList', [])
 
+  /**
+   * pre loads a list of published tags from the server
+   * and saves them to the local cache
+   * (nodes may carrie unpublished tags)
+   * TODO: switch to api_v2
+   */
   useEffect(() => {
     !tagList.length && ApiService.getTags()
       .then(data => setTagList(data))
