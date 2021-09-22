@@ -30,7 +30,7 @@ export const orderByTitle = arr => {
    * @param {array} fieldTags - node.field_tags from node
    * @param {array} tagList - separate title/id pair from server
    */
- export function addTagTitles(fieldTags, tagList) {
+ export function addTagTitles(fieldTags = [], tagList = []) {
 
   return fieldTags.reduce((prev, curr) => {
     const match = tagList.find(ele => ele.tid == curr.target_id) // == because ele.tid is a String
