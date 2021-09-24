@@ -24,13 +24,52 @@
     color: var(--bs-accent);
   }
   pre {
+    position: relative;
     background: var(--body-color);
     color: var(--body-bg);
     padding: 1rem;
-    border-left: 6px solid var(--bs-accent);
+    border-left: 3px solid var(--bs-accent);
+    
     code {
       color: var(--bs-accent);
       background: none;
+    }
+    span.file-name {
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      padding: .2rem .5rem .1rem .5rem;
+      background: #d63384;
+      font-size: small;
+      font-weight: 700;
+      color: white;
+    }
+    &.term {
+      padding-top: 2rem;
+      border: none;
+      &::before {
+        content: 'Terminal';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.3rem 0 0.1rem 1rem;
+        color: var(--bs-white);
+        background: var(--bs-primary);
+        font-size: smaller;
+        font-weight: 700;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: .8rem;
+        right: 0.5rem;
+        width: 13px;
+        height: 3px;
+        background: var(--bs-white);
+      }
     }
   }
   blockquote {

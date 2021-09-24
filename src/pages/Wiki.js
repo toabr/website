@@ -7,6 +7,7 @@ import PageTitle from '../components/PageTitle'
 import Meta from '../components/Meta'
 import { urlBuilder } from '../js/helper'
 import TitleList from '../components/TitleList'
+import useTagList from '../hooks/useTagList'
 
 
 /**
@@ -18,6 +19,7 @@ import TitleList from '../components/TitleList'
  */
 const Wiki = (props) => {
   const [activeTags, setActiveTags] = useState([])
+  const tagList = useTagList()
   let isLoading = true
 
 
@@ -81,7 +83,7 @@ const Wiki = (props) => {
       <Container style={{ maxWidth: 685 }} className="">
 
         <div className="d-flex flex-wrap gap-2 mb-5">
-          {props.tagList.map(tag => ( // print tags out
+          {tagList.map(tag => ( // print tags out
             <Button
               variant="brand-primary"
               size="sm"
