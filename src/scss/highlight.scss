@@ -1,0 +1,64 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+code.hljs {
+  padding: 3px 5px;
+}
+.hljs {
+  background: $body-color;
+  color: $body-bg;
+}
+.hljs-doctag,
+.hljs-keyword,
+.hljs-name,
+.hljs-section,
+.hljs-selector-tag,
+.hljs-strong,
+.hljs-title {
+  font-weight: 700;
+}
+.hljs-comment {
+  color: #738191;
+}
+.hljs-addition,
+.hljs-built_in,
+.hljs-literal,
+.hljs-name,
+.hljs-quote,
+.hljs-section,
+.hljs-selector-class,
+.hljs-selector-id,
+.hljs-string,
+.hljs-tag,
+.hljs-title,
+.hljs-number,
+.hljs-type {
+  color: $primary;
+  font-style: italic;
+}
+.hljs-attribute,
+.hljs-bullet,
+.hljs-deletion,
+.hljs-link,
+.hljs-meta,
+.hljs-regexp,
+.hljs-subst,
+.hljs-symbol,
+.hljs-template-variable,
+.hljs-variable {
+  color: $accent;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+
+/**
+ * toabr
+ */
+.hljs-attr,
+.hljs-params {
+  color: $primary-light;
+  font-style: italic;
+}
