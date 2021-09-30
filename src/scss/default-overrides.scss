@@ -9,22 +9,27 @@ $enable-gradients: true;
 
 // scss-docs-start root variables
 :root {
-  --body-bg:          #f1f3f5;
-  --body-color:       #343a40;
+  --theme-bg:         #f1f3f5;
+  --theme-text:       #343a40;
+  --theme-accent-1:   #fefefe;
+  --theme-accent-2:   #dee2e6;
+  --theme-accent-3:   #343a40;
   --font-serif:       'Martel', serif;
   --font-sans-serif:  'Comfortaa', sans-serif;
   --box-shadow:       0 6px 8px rgb(85 102 119 / 3%), 0 1px 1px rgb(85 102 119 / 40%);
 }
 
-$body-bg:                 var(--body-bg);
-$body-color:              var(--body-color);
+$body-bg:                 var(--theme-bg);
+$body-color:              var(--theme-text);
 $font-family-serif:       var(--font-serif);
 $font-family-sans-serif:  var(--font-sans-serif);
 $font-family-base:        $font-family-sans-serif;
+// $text-muted:              var(--theme-accent-2);
+$border-color:            var(--theme-accent-2);
 
 @media (prefers-color-scheme: dark) {
-  $body-bg: var(--body-color);
-  $body-color: var(--body-bg);
+  $body-bg: var(--theme-text);
+  $body-color: var(--theme-bg);
 }
 // scss-docs-end root variables
 

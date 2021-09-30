@@ -2,7 +2,7 @@
 
 .title-list {
   .list-group-item {
-    // background: rgba(255, 255, 255, 1);
+    background: var(--theme-accent-1);
     border: none;
     font-weight: 600;
     &:not(:first-child) {
@@ -22,7 +22,7 @@
     }
   }
   .title {
-    // color: var(--bs-white);
+    color: var(--theme-text);
     // font-weight: bolder;
   }
   .date {
@@ -30,7 +30,7 @@
     font-weight: lighter;
   }
   .badge {
-    background: var(--body-bg);
+    background: var(--theme-bg);
     color: var(--bs-accent);
   }
   

@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { LinkContainer } from 'react-router-bootstrap'
-
 import { Navbar, Nav, Container } from 'react-bootstrap'
-
 import Contact from './Contact'
 import PageRevealBtn from './PageRevealBtn'
+import ThemeSwitch from './ThemeSwitch';
 
 
 const Navi = () => {
@@ -27,7 +26,7 @@ const Navi = () => {
 
   return (
     <>
-      <Navbar expand variant >
+      <Navbar expand variant style={{ background: 'unset' }}>
         <Container className="border-bottom">
           <PageRevealBtn />
           <Nav className="">
@@ -38,6 +37,7 @@ const Navi = () => {
               <Nav.Link className="">Wiki</Nav.Link>
             </LinkContainer>
             <Nav.Link eventKey="contact" onClick={handleModalShow}>Contact</Nav.Link>
+            <ThemeSwitch />
           </Nav>
         </Container>
       </Navbar>

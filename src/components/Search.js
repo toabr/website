@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { Button, Form, InputGroup, Spinner } from 'react-bootstrap'
 import { Search as SearchIcon } from 'react-bootstrap-icons'
-import useFetch from '../hooks/useFetch';
-import { urlBuilder } from '../js/helper';
+import useFetch from '../hooks/useFetch'
+import { urlBuilder } from '../js/helper'
 
-import SearchBtnList from './SearchBtnList';
-import TitleList from './TitleList';
+import SearchBtnList from './SearchBtnList'
+import TitleList from './TitleList'
+import './search.scss'
 
 
 
@@ -72,7 +73,7 @@ const Search = () => {
       <Form onSubmit={e => onFormSubmit(e)} className="">
         <InputGroup className="shadow" size="lg">
 
-          <InputGroup.Text className="bg-white text-muted ps-2 pe-0">
+          <InputGroup.Text className="text-muted ps-2 pe-0">
             <Button size="sm" variant="" className="pe-0" disabled>toabr.de /</Button>
           </InputGroup.Text>
 

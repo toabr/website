@@ -1,4 +1,14 @@
 //
+
+html[data-theme=dark] {
+  --theme-bg:         var(--bs-gray-dark);
+  --theme-text:       var(--bs-light);
+  --theme-accent-1:   var(--bs-dark);
+  --theme-accent-2:   #414850;
+  --theme-accent-3:   #343a40;
+}
+
+
 pre {
   @extend .shadow, .shadow-drop;
 }
