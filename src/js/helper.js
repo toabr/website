@@ -55,7 +55,7 @@ export const urlBuilder = ({
   type   = 'All', // article, work
   tags   = [], // array of strings
   query  = '', //string
-  by     = 'changed', // no choise
+  by     = 'created', // created, changed
   order  = 'DESC', // DESC, ASC
   items  = 10, // 5, 10, 25, 50
   page,

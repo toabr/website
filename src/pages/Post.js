@@ -62,7 +62,7 @@ const Post = (props) => {
   
     for(const pre of wrapper.getElementsByTagName('pre')) {
       const lighted = hljs.highlightAuto(pre.innerText, languages)
-      console.log('hljs', lighted)
+      // console.log('hljs', lighted)
       pre.classList.add('hljs', `lang-${lighted.language}`)
       pre.innerHTML = lighted.value
     }

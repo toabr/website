@@ -17,6 +17,7 @@ code.hljs {
 .hljs-selector-tag,
 .hljs-strong,
 .hljs-title {
+  // color: $white;
   font-weight: 700;
 }
 .hljs-comment {
@@ -57,7 +58,7 @@ code.hljs {
 /**
  * toabr
  */
-.hljs-attr,
+// .hljs-attr,
 .hljs-params {
   color: $primary-light;
   font-style: italic;
