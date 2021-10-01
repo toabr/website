@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container } from 'react-bootstrap'
-import Contact from './Contact'
+import { Container } from 'react-bootstrap';
 import PageRevealBtn from './PageRevealBtn'
 import ThemeSwitch from './ThemeSwitch';
 
@@ -25,24 +23,30 @@ const Navi = () => {
   }
 
   return (
-    <>
-      <Navbar expand variant style={{ background: 'unset' }}>
-        <Container className="border-bottom">
-          <PageRevealBtn />
-          <Nav className="">
-            <LinkContainer to="/" >
+    <Container fluid className="pt-2">
+      <div className="d-flex justify-content-between align-items-center">
+        <PageRevealBtn />
+        <ThemeSwitch />
+      </div>
+      {/* <Navbar expand variant style={{ background: 'unset' }}>
+        <Container fluid className="">
+          <Col sm={11} md={10} lg={9} xl={8}>
+            <Nav className="">
+              <LinkContainer to="/" >
               <Nav.Link className="">Home</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/wiki">
               <Nav.Link className="">Wiki</Nav.Link>
             </LinkContainer>
-            <Nav.Link eventKey="contact" onClick={handleModalShow}>Contact</Nav.Link>
-            <ThemeSwitch />
-          </Nav>
+            <Nav.Link eventKey="contact" onClick={handleModalShow}>
+              Contact
+            </Nav.Link>
+            </Nav>
+          </Col>
         </Container>
       </Navbar>
-      <Contact show={modalShow} handleClose={handleModalClose} handleSubmit={handleFormSubmit} />
-    </>
+      <Contact show={modalShow} handleClose={handleModalClose} handleSubmit={handleFormSubmit} /> */}
+    </Container>
   )
 }
 

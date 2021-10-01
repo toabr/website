@@ -23,10 +23,10 @@ const SearchBtnList = ({ action, className }) => {
     <div className={`d-flex flex-wrap gap-2 ${className}`}>
 
       {data.map((item, index) =>
-        <TagBtn {...item} onClick={() => action(item.term[0])} variant="brand-primary" key={index} />
+        <TagBtn {...item} onClick={() => action(item.term[0])} variant="outline-primary" key={index} />
       )}
       <LinkContainer to="/wiki">
-        {TagBtn({ title: "...", variant: "brand-secondary", as: "a", href: "wiki" })}
+        {TagBtn({ title: "...", variant: "outline-secondary", as: "a", href: "wiki" })}
       </LinkContainer>
 
     </div>

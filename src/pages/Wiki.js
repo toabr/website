@@ -8,6 +8,7 @@ import Meta from '../components/Meta'
 import { urlBuilder } from '../js/helper'
 import TitleList from '../components/TitleList'
 import useTagList from '../hooks/useTagList'
+import Breadcrumbs from '../components/Breadcrumbs'
 
 
 /**
@@ -72,12 +73,13 @@ const Wiki = (props) => {
    * content stuff
    */
   const pageTitle = 'Code Snippets Wiki'
-  const pageDescription = 'explore'
+  const pageDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
 
 
   return (
     <div>
       <Meta title={pageTitle} />
+      <Breadcrumbs crumbs={[ { name: 'Home', href: '/' }, { name: 'Wiki' } ]} />
       <PageTitle head={pageTitle} description={pageDescription} />
 
       <Container style={{ maxWidth: 685 }} className="">
@@ -85,7 +87,7 @@ const Wiki = (props) => {
         <div className="d-flex flex-wrap gap-2 mb-5">
           {tagList.map(tag => ( // print tags out
             <Button
-              variant="brand-primary"
+              variant="outline-primary"
               size="sm"
               className="flex-fill"
               data-title={tag.title}
@@ -97,7 +99,14 @@ const Wiki = (props) => {
           ))}
         </div>
 
-        {isLoading && <Spinner className="d-flex m-auto" animation="grow" variant="" size="sm" />}
+        {isLoading &&
+          <Spinner
+            className="d-flex m-auto"
+            animation="grow"
+            variant="highlight"
+            size="sm"
+          />
+        }
 
         {!isLoading &&
           <h2 className="lead text-center text-capitalize">

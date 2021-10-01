@@ -7,8 +7,10 @@ code.hljs {
   padding: 3px 5px;
 }
 .hljs {
-  background: $body-color;
-  color: $body-bg;
+  background: var(--#{$variable-prefix}body-color);
+  color: var(--#{$variable-prefix}body-bg);
+  padding: 1rem;
+  border-left: 5px solid $pink;
 }
 .hljs-doctag,
 .hljs-keyword,
@@ -49,7 +51,7 @@ code.hljs {
 .hljs-symbol,
 .hljs-template-variable,
 .hljs-variable {
-  color: $accent;
+  color: $pink;
 }
 .hljs-emphasis {
   font-style: italic;
@@ -60,6 +62,6 @@ code.hljs {
  */
 // .hljs-attr,
 .hljs-params {
-  color: $primary-light;
+  color: $pink;
   font-style: italic;
 }

@@ -5,7 +5,8 @@
 @import "../../node_modules/bootstrap/scss/functions";
 
 // 2. Include any default variable overrides here
-@import "./default-overrides";
+// @import "./default-overrides";
+@import "./variables-override";
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../../node_modules/bootstrap/scss/variables";
@@ -13,7 +14,7 @@
 @import "../../node_modules/bootstrap/scss/root";
 
 // DARK MODE PATCH
-// @import "./dark-mode";
+@import "./dark-mode";
 
 // 4. Include any optional Bootstrap CSS as needed
 @import "../../node_modules/bootstrap/scss/utilities";
@@ -46,6 +47,7 @@
 // @import "../../node_modules/bootstrap/scss/carousel";
 @import "../../node_modules/bootstrap/scss/spinners";
 // @import "../../node_modules/bootstrap/scss/offcanvas";
+@import "../../node_modules/bootstrap/scss/placeholders";
 
 // Helpers
 @import "../../node_modules/bootstrap/scss/helpers";
@@ -56,17 +58,5 @@
 
 // custom styles
 @import "./styles";
-@import "./btn-brand";
+// @import "./btn-brand";
 @import "./highlight";
-
-$utilities: map-merge(
-  $utilities,
-  (
-    "cursor": (
-      property: cursor,
-      class: cursor,
-      responsive: true,
-      values: auto pointer grab,
-    )
-  )
-);

@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <>
       <footer id="footer" className="container">
-        <section className="d-flex flex-wrap justify-content-between align-items-center py-3 my-5 border-top">
+        <section className="d-flex flex-wrap justify-content-between align-items-center py-3 my-5">
           <p className="mb-0">
             <span className="text-muted">&copy; {year} </span>
             <span className="text-secondary">to</span>abr.de

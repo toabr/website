@@ -6,7 +6,7 @@ html, body, #root, #about {
 }
 
 body {
-    background-color: var(--bs-dark);
+    background-color: var(--bs-body-bg);
     background-image: url('https://unsplash.com/photos/hnysCJrPpkc/download?force=true&w=1920');
     background-size: contain;
 
@@ -27,7 +27,7 @@ body {
                 position: absolute;
                 height: 100%;
                 width: 100%;
-                background-color: rgb(0 0 0 / 35%);
+                background-color: rgba(var(--bs-body-bg-rgb), 35%);
                 background-image: url('https://www.dreamhome.berlin/themes/custom/dreamhome/img/overlays/02.png');
                 z-index: 1100;
             }
@@ -36,7 +36,7 @@ body {
     
 }
 #page {
-    background: var(--theme-bg);
+    background: rgba(var(--bs-body-bg-rgb), 91%);
     transition: transform .3s ease-out;
 }
 #about {
@@ -45,7 +45,7 @@ body {
     z-index: -1;
     width: $about-width;
     opacity: 0;
-    transition: all 1.8s ease-out;
+    // transition: all 1.8s ease-out;
     .title {
         transform: translateX(-25px);
         transition: all 1.8s ease-out;

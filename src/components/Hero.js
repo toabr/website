@@ -51,7 +51,7 @@ const Hero = () => {
 
 
   return (
-    <div className="hero rounded-circle mx-auto my-3">
+    <div className="hero rounded-circle mx-auto mt-0">
       <div className="hero__back hero__back--static"></div>
       <div ref={heroRef} className="hero__back hero__back--mover" ></div>
     </div>

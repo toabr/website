@@ -6,7 +6,7 @@ import { urlBuilder } from '../js/helper'
 
 import SearchBtnList from './SearchBtnList'
 import TitleList from './TitleList'
-import './search.scss'
+// import './search.scss'
 
 
 
@@ -73,14 +73,14 @@ const Search = () => {
       <Form onSubmit={e => onFormSubmit(e)} className="">
         <InputGroup className="shadow" size="lg">
 
-          <InputGroup.Text className="text-muted ps-2 pe-0">
-            <Button size="sm" variant="" className="pe-0" disabled>toabr.de /</Button>
+          <InputGroup.Text className="bg-accent-1 ps-2 pe-0">
+            <Button size="sm" variant="" className="text-body pe-0" disabled>toabr.de /</Button>
           </InputGroup.Text>
 
           <Form.Control
             ref={inputRef}
             type="text"
-            className="ps-1 shadow-none fs-4"
+            className="ps-1 shadow-none"
             placeholder="search ..."
             aria-label="search"
             aria-describedby="basic-addon1"

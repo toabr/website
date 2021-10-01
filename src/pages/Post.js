@@ -5,7 +5,8 @@ import Meta from '../components/Meta'
 import useFetch from '../hooks/useFetch'
 import { urlBuilder, addTagTitles } from '../js/helper'
 import hljs from 'highlight.js'
-import './post.scss'
+import Breadcrumbs from '../components/Breadcrumbs'
+// import './post.scss'
 
 
 /**
@@ -19,7 +20,7 @@ const Post = (props) => {
   const nid = props.match.params.nid
   const tagList = props.tagList
   const title = `Post ${nid}`
-  let description = ''
+  let headline = ''
   let isLoading = true // state of PageTitle
   let body = ''
 
@@ -34,19 +35,19 @@ const Post = (props) => {
 
   if (status === 'fetched') {
     if (!!data.length) {
-      description = node.title[0].value
+      headline = node.title[0].value
       // add tag titles
       node.field_tags = addTagTitles(node.field_tags, tagList)
-      
+
       body = highLight(node.body[0].value)
-      
+
     } else {
-      description = 'nothing here'
+      headline = 'nothing here'
     }
     isLoading = false
   }
 
-  
+
   /**
    * Add syntax highlighting to the pre elements of the body
    * @param {string} body - html of the body tag as a string
@@ -55,12 +56,12 @@ const Post = (props) => {
    * to determin the language to use
    */
   function highLight(body) {
-    const languages = ['sh','js','json','css','scss','docker','php','yml']
-    
+    const languages = ['sh', 'js', 'json', 'css', 'scss', 'docker', 'php', 'yml']
+
     const wrapper = document.createElement('div')
     wrapper.innerHTML = body
-  
-    for(const pre of wrapper.getElementsByTagName('pre')) {
+
+    for (const pre of wrapper.getElementsByTagName('pre')) {
       const lighted = hljs.highlightAuto(pre.innerText, languages)
       // console.log('hljs', lighted)
       pre.classList.add('hljs', `lang-${lighted.language}`)
@@ -73,7 +74,17 @@ const Post = (props) => {
   return (
     <>
       <Meta title={title} />
-      <PageTitle head={description} description={title} isLoading={isLoading} />
+
+      <Breadcrumbs
+        crumbs={[
+          { name: 'Home', href: '/' },
+          { name: 'Wiki', href: '/wiki' },
+          { name: `Post ${nid}` }
+        ]} 
+        className=""
+        />
+
+      <PageTitle head={headline} isLoading={isLoading} />
 
       {status === 'fetched' && !!data.length &&
         <div id={`post-${nid}`} style={{ maxWidth: 685 }} className="post mx-auto px-3">
@@ -84,7 +95,7 @@ const Post = (props) => {
           <div className="my-3">
             {node.field_tags.map(nodeTag => (
               <LinkContainer to={{ pathname: "/wiki", state: { fromPost: nodeTag } }} >
-                <Button variant="brand-primary" className="me-2" > #{nodeTag.title}</Button>
+                <Button variant="outline-primary" className="me-2" > #{nodeTag.title}</Button>
               </LinkContainer>
             ))}
           </div>

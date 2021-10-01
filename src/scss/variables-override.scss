@@ -1,0 +1,47 @@
+// Default variable overrides
+
+// Typography
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Martel:wght@200;300;400;600;700;800;900&display=swap');
+
+$font-family-sans-serif:      'Comfortaa', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-serif:           'Martel', serif;
+:root { --font-serif: #{inspect($font-family-serif)}; }
+
+// Options
+$enable-rounded:     false;
+$enable-shadows:     true;
+$enable-gradients:   true;
+
+// colors
+$primary:       #20c997;
+$secondary:     #5e7683;
+$highlight:     #d63384;
+$accent-1:      #fefefe;
+$accent-2:      #dee2e6;
+$accent-3:      #495057;
+$light:         #f8f9fa;
+$dark:          #212529;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "highlight":  $highlight,
+  "accent-1":   $accent-1,
+  "accent-2":   $accent-2,
+  "accent-3":   $accent-3,
+  "light":      $light,
+  "dark":       $dark
+);
+  
+$body-bg:       #f1f3f5;
+$body-color:    #343a40;
+
+$input-color:   var(--bs-body);
+$input-bg:      var(--bs-accent-1);
+$input-border-color:  var(--bs-accent-2);
+$input-border-width:  0;
+
+$border-color: var(--bs-accent-2);
+
+$min-contrast-ratio:   2;

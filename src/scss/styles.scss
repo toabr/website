@@ -1,14 +1,5 @@
 //
 
-html[data-theme=dark] {
-  --theme-bg:         var(--bs-gray-dark);
-  --theme-text:       var(--bs-light);
-  --theme-accent-1:   var(--bs-dark);
-  --theme-accent-2:   #414850;
-  --theme-accent-3:   #343a40;
-}
-
-
 pre {
   @extend .shadow, .shadow-drop;
 }
@@ -17,13 +8,10 @@ blockquote {
   @extend .blockquote;
 }
 
-.card {
-  .card-text {
-    font-family: var(--font-family-serif);
-    // @extend .bg-white;
-  }
+.font-serif {
+  font-family: var(--font-serif);
+  line-height: 1.8rem;
 }
-
 
 .shadow-drop {
   // cursor: pointer;
@@ -47,9 +35,4 @@ blockquote {
     color: $gray-300;
     padding-left: 1rem;
   }
-}
-
-// .navbar-brand,
-#home h1 {
-  @extend .braces;
 }

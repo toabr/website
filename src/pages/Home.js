@@ -66,8 +66,11 @@ const Home = () => {
       <Container fluid as="section" id="header" className="p-0">
         <Row style={{ maxWidth: '1040px' }} className="mx-auto justify-content-center">
           <Col sm={11} md={10} lg={9} xl={8}>
-            <header className="text-center mb-5 py-3">
-              <h1 className="display-5 text-secondary"><span className="text-primary">to</span>abr.de</h1>
+            <header className="text-center mt-3 mb-4 py-3">
+              <h1 className="display-5 text-secondary">
+                <span className="text-primary">to</span>
+                <span className="">abr.de</span>
+              </h1>
               <p className="mb-5">Explore a bunch of code snippets you may find helpful.</p>
               <Search />
             </header>
