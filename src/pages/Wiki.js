@@ -1,81 +1,84 @@
 import { useEffect, useState } from 'react'
-import { Button, Container, ListGroup, Spinner, } from 'react-bootstrap'
+import { Container, Spinner, } from 'react-bootstrap'
 
+import useTagList from '../hooks/useTagList'
 import useFetch from '../hooks/useFetch'
+import useQuery from '../hooks/useQuery'
 
 import PageTitle from '../components/PageTitle'
 import Meta from '../components/Meta'
-import { urlBuilder } from '../js/helper'
 import TitleList from '../components/TitleList'
-import useTagList from '../hooks/useTagList'
 import Breadcrumbs from '../components/Breadcrumbs'
 import BtnList from '../components/BtnList'
+
+import { urlBuilder } from '../js/helper'
 
 
 /**
  * - a button list of all tags, the user can choose and combine 
  * - underneath a fetched list of respective node titles
- * @param {array} props.tagList - fetched list of tags from App.js
- * @param {array} activeTags - list of tag id Numbers
- * @param {string} starterTag - starter tag from linked content
+ * @param {array} tagList - fetched list of tags from App.js
+ * @param {string} query - starter tag from linked content
  */
-const Wiki = (props) => {
-  const [activeTags, setActiveTags] = useState([])
+const Wiki = () => {
+  const [query, setQuery] = useQuery('q')
   const tagList = useTagList()
   let isLoading = true
-
-
+  // console.log('dingding', query)
+  
   /**
-   * set starterTag on mount
-   * @param {object} fromPost - title & tid
-   * FIXME: document.querySelector... could be more "reacty"
+   * read query from url and toggle respective btn
    */
   useEffect(() => {
-    const tag = props.location?.state?.fromPost // for development
-    if (typeof tag !== 'undefined') {
-      // console.log('starterTag', tag)
-      const btn = document.querySelector(`[data-id='${tag.target_id}']`)
-      btn && toggleTag(btn)
+    if (query) {
+      const target = document.querySelector(`[data-title='${query}']`)
+      target && tagBtnToggle(target)
     }
   }, [])
 
-
   /**
    * fetch articles respective to pressed buttons
-   * @param {string} url
-   * @param {array} nodes - fetched and rendered in content
    */
-  const url = urlBuilder({ tags: encodeURI(activeTags), items: 10 })
+  const url = urlBuilder({ tags: encodeURI(query), items: 10 })
   const { status, data: nodes, error } = useFetch(url)
 
   if (status === 'fetched') {
     isLoading = false
   }
 
+  /**
+   * tag btn was clicked
+   */
+  const tagBtnClick = (btn) => {
+    setQuery(btn.dataset.title)
+    tagBtnToggle(btn)
+  }
 
   /**
    * toggle active tag/button state
-   * @param {string} tagTitle - tag title
-   * FIXME: btn... could be more "reacty"
+   * TODO: clear other btns
    */
-  const toggleTag = (btn) => {
-    const tagTitle = btn.getAttribute("data-title")
+  const tagBtnToggle = (btn) => {
+    tagBtnClearAll()
     btn.classList.toggle('active')
+  }
 
-    if (activeTags.includes(tagTitle)) {
-      setActiveTags(prev => prev.filter((item) => item !== tagTitle))
-    } else {
-      setActiveTags(prev => [...prev, tagTitle])
+  /**
+   * BAD AS FUCK BUT WORKS
+   */
+  const tagBtnClearAll = () => {
+    const btnList = document.querySelectorAll('button[data-title]')
+    for(const i in btnList) {
+      btnList[i].classList?.remove('active')
     }
   }
 
-
+  /**
+   * prepare data array for <BtnList />
+   */
   const buttonList = tagList.map(tag => (
     { title: tag.title, id: tag.tid }
   ))
-
-  console.log(buttonList)
-
 
   /**
    * content stuff
@@ -94,7 +97,7 @@ const Wiki = (props) => {
 
         <BtnList data={buttonList} options={{
           size: 'sm',
-          onClick: (e) => toggleTag(e.target), // e.target to specific
+          onClick: (e) => tagBtnClick(e.target), // e.target to specific
           className: "mb-5"
         }} />
 
@@ -109,8 +112,7 @@ const Wiki = (props) => {
 
         {!isLoading &&
           <h2 className="lead text-center text-capitalize">
-            {!activeTags.length && 'Recent Posts'}
-            {activeTags.toString()}
+            {query}
           </h2>
         }
 

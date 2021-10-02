@@ -80,9 +80,9 @@ const Post = (props) => {
           { name: 'Home', href: '/' },
           { name: 'Wiki', href: '/wiki' },
           { name: `Post ${nid}` }
-        ]} 
+        ]}
         className=""
-        />
+      />
 
       <PageTitle head={headline} isLoading={isLoading} />
 
@@ -94,8 +94,11 @@ const Post = (props) => {
 
           <div className="my-3">
             {node.field_tags.map(nodeTag => (
-              <LinkContainer to={{ pathname: "/wiki", state: { fromPost: nodeTag } }} >
-                <Button variant="outline-primary" className="me-2" > #{nodeTag.title}</Button>
+              <LinkContainer to={{ pathname: "/wiki", search: `?q=${nodeTag.title}` }} >
+                <Button
+                  variant="outline-primary"
+                  className="me-2"
+                > #{nodeTag.title}</Button>
               </LinkContainer>
             ))}
           </div>
