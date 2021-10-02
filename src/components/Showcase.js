@@ -1,5 +1,5 @@
 import { Col, Container, Row } from 'react-bootstrap'
-import Article from './Article'
+import Article from './ShowcaseArticle'
 
 const Showcase = ({ data: showcaseData = [] }) => {
   // console.log('SHOWCASE RENDERS', showcaseData)
@@ -7,7 +7,7 @@ const Showcase = ({ data: showcaseData = [] }) => {
     <Container as="section" id="showcase" fluid className="p-0">
       <Row sm={12} className="mx-auto mb-4" style={{ maxWidth: '1040px' }}>
         <Col className="mb-4">
-          <h2 className="text-center pb-3 mb-4">Showcase</h2>
+          <h2 className="text-center pb-3">Showcase</h2>
           {showcaseData.length > 0 && <Article variant="teaser" node={showcaseData[0]} />}
         </Col>
       </Row>
