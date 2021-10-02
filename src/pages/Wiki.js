@@ -9,6 +9,7 @@ import { urlBuilder } from '../js/helper'
 import TitleList from '../components/TitleList'
 import useTagList from '../hooks/useTagList'
 import Breadcrumbs from '../components/Breadcrumbs'
+import BtnList from '../components/BtnList'
 
 
 /**
@@ -33,7 +34,7 @@ const Wiki = (props) => {
     const tag = props.location?.state?.fromPost // for development
     if (typeof tag !== 'undefined') {
       // console.log('starterTag', tag)
-      const btn = document.querySelector(`[data-tid='${tag.target_id}']`)
+      const btn = document.querySelector(`[data-id='${tag.target_id}']`)
       btn && toggleTag(btn)
     }
   }, [])
@@ -69,6 +70,13 @@ const Wiki = (props) => {
   }
 
 
+  const buttonList = tagList.map(tag => (
+    { title: tag.title, id: tag.tid }
+  ))
+
+  console.log(buttonList)
+
+
   /**
    * content stuff
    */
@@ -79,25 +87,16 @@ const Wiki = (props) => {
   return (
     <div>
       <Meta title={pageTitle} />
-      <Breadcrumbs crumbs={[ { name: 'Home', href: '/' }, { name: 'Wiki' } ]} />
+      <Breadcrumbs crumbs={[{ name: 'Home', href: '/' }, { name: 'Wiki' }]} />
       <PageTitle head={pageTitle} description={pageDescription} />
 
       <Container style={{ maxWidth: 685 }} className="">
 
-        <div className="d-flex flex-wrap gap-2 mb-5">
-          {tagList.map(tag => ( // print tags out
-            <Button
-              variant="outline-primary"
-              size="sm"
-              className="flex-fill"
-              data-title={tag.title}
-              data-tid={tag.tid}
-              onClick={(e) => toggleTag(e.target)}
-            >
-              {tag.title}
-            </Button>
-          ))}
-        </div>
+        <BtnList data={buttonList} options={{
+          size: 'sm',
+          onClick: (e) => toggleTag(e.target), // e.target to specific
+          className: "mb-5"
+        }} />
 
         {isLoading &&
           <Spinner

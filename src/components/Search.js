@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { Button, Form, InputGroup, Spinner } from 'react-bootstrap'
 import { Search as SearchIcon } from 'react-bootstrap-icons'
+import { LinkContainer } from 'react-router-bootstrap';
 import useFetch from '../hooks/useFetch'
 import { urlBuilder } from '../js/helper'
+import BtnList from './BtnList';
 
-import SearchBtnList from './SearchBtnList'
 import TitleList from './TitleList'
 // import './search.scss'
 
@@ -71,7 +72,7 @@ const Search = () => {
   return (
     <div id="search">
       <Form onSubmit={e => onFormSubmit(e)} className="">
-        <InputGroup className="shadow" size="lg">
+        <InputGroup className="shadow-slim" size="lg">
 
           <InputGroup.Text className="bg-accent-1 ps-2 pe-0">
             <Button size="sm" variant="" className="text-body pe-0" disabled>toabr.de /</Button>
@@ -108,7 +109,16 @@ const Search = () => {
 
       {!!nodes.length && <TitleList nodes={nodes} />}
 
-      <SearchBtnList action={tagBtnAction} className="my-4" />
+      <BtnList options={{
+        onClick: (e) => tagBtnAction(e.target.dataset.id),
+        className: 'my-4'
+      }}>
+        <LinkContainer to="/wiki">
+          <Button variant={`outline-secondary`} className="font-monospace flex-fill">
+            ...
+          </Button>
+        </LinkContainer>
+      </BtnList>
 
     </div>
   )

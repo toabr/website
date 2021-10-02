@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react"
-import usePersistedState from "../hooks/usePersistedState"
+import { useThemeContext } from "../hooks/useThemeContext"
 
 export default function ThemeSwitch() {
-  const [style, setStyle] = usePersistedState('theme', 'light')
+  const [style, setStyle] = useThemeContext()
   const themeSwitch = useRef(null)
 
   function toggleStyle() {
-    setStyle(prev => (prev === 'light') ? 'dark' : 'light')
+    setStyle((style === 'light') ? 'dark' : 'light')
   }
 
   useEffect(() => {

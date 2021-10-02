@@ -19,7 +19,7 @@ const Article = ({ variant, node }) => {
   if (variant === 'teaser') {
     return (
       <LinkContainer to={link}>
-        <Card as="article" bg="accent-1" className="border-0 shadow shadow-drop">
+        <Card as="article" bg="accent-1" className="border-0 shadow-slim shadow-drop">
           <Row className="row g-0">
             <Col md={8}>
               <a href={link} target="_blank" rel="nofollow">
@@ -59,7 +59,7 @@ const Article = ({ variant, node }) => {
 
   return (
     <LinkContainer to={link}>
-      <Card as="article" bg="accent-1" className="h-100 border-0 shadow shadow-drop">
+      <Card as="article" bg="accent-1" className="h-100 border-0 shadow-slim shadow-drop">
         <a href={link} target="_blank" rel="nofollow">
           <Card.Img
             variant="top"

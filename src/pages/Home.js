@@ -67,7 +67,7 @@ const Home = () => {
         <Row style={{ maxWidth: '1040px' }} className="mx-auto justify-content-center">
           <Col sm={11} md={10} lg={9} xl={8}>
             <header className="text-center mt-3 mb-4 py-3">
-              <h1 className="display-5 text-secondary">
+              <h1 className="braces display-5 text-secondary">
                 <span className="text-primary">to</span>
                 <span className="">abr.de</span>
               </h1>

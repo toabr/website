@@ -1,6 +1,6 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap'
-import { Badge, ListGroup } from "react-bootstrap"
+import { ListGroup } from "react-bootstrap"
 import usePersistedState from '../hooks/usePersistedState';
 import { addTagTitles, formatUTC } from '../js/helper';
 
@@ -40,9 +40,13 @@ const TitleList = ({ nodes = [] }) => {
 
             <div className="">
               {tags.map(tag =>
-                <Badge className="ms-1 bg-body text-highlight rounded-pill" key={tag.target_id}>
+                <small 
+                style={{fontSize: '.75rem'}}
+                className="bg-accent-2 fw-lighter ms-1 p-1 rounded-pill text-highlight" 
+                key={tag.target_id}
+                >
                   #{tag.title}
-                </Badge>
+                </small>
               )}
             </div>
           </div>
@@ -62,7 +66,7 @@ const TitleList = ({ nodes = [] }) => {
 
         {/* TODO: nedds to lift up */}
         {nodes.length > 5 &&
-          <ListGroup.Item action className="text-body bg-accent-1 text-center" >more...</ListGroup.Item>
+          <ListGroup.Item action className="text-body bg-body text-center" >more...</ListGroup.Item>
         }
 
       </ListGroup>

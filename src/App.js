@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import ApiService from './js/ApiService'
 import usePersistedState from './hooks/usePersistedState'
 import Hero from './components/Hero'
+import { ThemeProvider } from './hooks/useThemeContext'
 
 
 const App = () => {
@@ -32,15 +33,17 @@ const App = () => {
 
   return (
     <Router>
-      <Layout>
-        <Hero />
-        <Switch>
-          <Route path='/' render={(props) => (<Home {...props} tagList={tagList} />)} exact />
-          <Route path='/wiki' render={(props) => (<Wiki {...props} tagList={tagList} />)} />
-          <Route path='/node/:nid' render={(props) => (<Post {...props} tagList={tagList} />)} />
-          <Route component={NotFound} />
-        </Switch>
-      </Layout>
+      <ThemeProvider>
+        <Layout>
+          <Hero />
+          <Switch>
+            <Route path='/' render={(props) => (<Home {...props} tagList={tagList} />)} exact />
+            <Route path='/wiki' render={(props) => (<Wiki {...props} tagList={tagList} />)} />
+            <Route path='/node/:nid' render={(props) => (<Post {...props} tagList={tagList} />)} />
+            <Route component={NotFound} />
+          </Switch>
+        </Layout>
+      </ThemeProvider>
     </Router>
   )
 }
