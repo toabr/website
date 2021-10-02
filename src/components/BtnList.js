@@ -7,6 +7,7 @@ import { faDocker, faDrupal, faJs, faLinux, faReact, faSass } from '@fortawesome
 
 import { useThemeContext } from '../hooks/useThemeContext';
 import { Button } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 
 const defaultData = [
@@ -44,7 +45,7 @@ const BtnList = ({ data = defaultData, options = {}, children }) => {
   const [themeMode] = useThemeContext()
   let variant = (themeMode === 'light') ? "" : "outline-"
 
-  
+
   return (
     <div className={`d-flex flex-wrap gap-2 ${options.className}`}>
 
@@ -66,7 +67,13 @@ const BtnList = ({ data = defaultData, options = {}, children }) => {
         </Button>)
       })}
 
-      {children}
+      {options.more &&
+        <LinkContainer to={options.more}>
+          <Button variant={`${variant}secondary`} className="font-monospace flex-fill">
+            ...
+          </Button>
+        </LinkContainer>
+      }
 
     </div>
   )

@@ -111,14 +111,9 @@ const Search = () => {
 
       <BtnList options={{
         onClick: (e) => tagBtnAction(e.target.dataset.id),
-        className: 'my-4'
-      }}>
-        <LinkContainer to="/wiki">
-          <Button variant={`outline-secondary`} className="font-monospace flex-fill">
-            ...
-          </Button>
-        </LinkContainer>
-      </BtnList>
+        className: 'my-4',
+        more: '/wiki'
+      }}/>
 
     </div>
   )
