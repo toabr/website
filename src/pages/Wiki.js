@@ -12,6 +12,7 @@ import BtnList from '../components/BtnList'
 
 import { urlBuilder } from '../js/helper'
 import { useRef } from 'react'
+import ScrollTo from '../components/ScrollTo'
 
 
 /**
@@ -43,6 +44,7 @@ const Wiki = () => {
   if (status === 'fetched') {
     nodes.current = data
     isLoading = false
+    if(window.scrollY < 300) window.scrollTo(0,300)
   }
 
   /**
