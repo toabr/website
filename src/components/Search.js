@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
+
 import { Button, Form, InputGroup, Spinner } from 'react-bootstrap'
 import { Search as SearchIcon } from 'react-bootstrap-icons'
-import { LinkContainer } from 'react-router-bootstrap';
+
 import useFetch from '../hooks/useFetch'
-import { urlBuilder } from '../js/helper'
-import BtnList from './BtnList';
+
 import SearchDefault from './SearchDefault';
-
 import TitleList from './TitleList'
-// import './search.scss'
 
+import { urlBuilder } from '../js/helper'
+// import './search.scss'
 
 
 const Search = () => {

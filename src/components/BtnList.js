@@ -1,7 +1,5 @@
 // button icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHashtag } from '@fortawesome/free-solid-svg-icons'
-import { faDocker, faDrupal, faJs, faLinux, faReact, faSass } from '@fortawesome/free-brands-svg-icons'
 
 import { useThemeContext } from '../hooks/useThemeContext';
 import { Button } from 'react-bootstrap';
