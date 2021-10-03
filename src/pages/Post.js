@@ -1,21 +1,29 @@
 import { LinkContainer } from 'react-router-bootstrap'
-import { Button, Col, Container } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+
+import { useThemeContext } from '../hooks/useThemeContext';
+import useFetch from '../hooks/useFetch'
+
 import PageTitle from '../components/PageTitle'
 import Meta from '../components/Meta'
-import useFetch from '../hooks/useFetch'
+import Breadcrumbs from '../components/Breadcrumbs'
+
 import { urlBuilder, addTagTitles } from '../js/helper'
 import hljs from 'highlight.js'
-import Breadcrumbs from '../components/Breadcrumbs'
 // import './post.scss'
 
 
 /**
- * fetch one Post and spit it out
- * and do stuff to the tagBtns
+ * fetch and show one Post
+ * and do stuff to the tagBtns ...
  * @param {array} tagList
  * @returns Post
  */
 const Post = (props) => {
+
+  const [themeMode] = useThemeContext()
+  // to define button style by theme light/dark
+  const variant = (themeMode === 'light') ? "" : "outline-"
 
   const nid = props.match.params.nid
   const tagList = props.tagList
@@ -92,11 +100,11 @@ const Post = (props) => {
           {/* TODO: check dangerouslySetInnerHTML */}
           <div dangerouslySetInnerHTML={{ __html: body }} />
 
-          <div className="my-3">
+          <div className="tags my-5">
             {node.field_tags.map(nodeTag => (
               <LinkContainer to={{ pathname: "/wiki", search: `?q=${nodeTag.title}` }} >
                 <Button
-                  variant="outline-primary"
+                  variant={`${variant}primary`}
                   className="me-2 mb-2"
                 > #{nodeTag.title}</Button>
               </LinkContainer>

@@ -67,7 +67,7 @@ const TitleList = ({ nodes = [], more }) => {
         {more &&
           <LinkContainer to={more} >
             <ListGroup.Item action className="text-body bg-body text-center" >
-              more...
+            <div className="title">more ...</div>
             </ListGroup.Item>
           </LinkContainer >
         }

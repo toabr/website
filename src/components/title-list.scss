@@ -4,13 +4,23 @@
   .list-group-item {
     &:hover {
       border-top-color: var(--bs-primary);
-      box-shadow: 0 5px 18px -5px var(--bs-secondary), 0 0 5px -3px var(--bs-primary) !important;
+      box-shadow: 0 5px 18px -5px var(--bs-secondary),
+        0 0 5px -3px var(--bs-primary) !important;
       background: var(--bs-primary) !important;
       background-image: var(--bs-gradient);
       color: white;
+      .title {
+        color: var(--bs-white);
+      }
       .date {
         color: var(--bs-light) !important;
       }
     }
+  }
+}
+
+html[data-theme="dark"] {
+  .title-list .title {
+    color: var(--bs-primary);
   }
 }

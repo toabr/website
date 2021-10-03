@@ -21,8 +21,8 @@ $highlight:     #d63384;
 $accent-1:      #fefefe;
 $accent-2:      #dee2e6;
 $accent-3:      #495057;
-$light:         #f8f9fa;
-$dark:          #212529;
+$light:         #f1f3f5;
+$dark:          #343a40;
 
 $theme-colors: (
   "primary":    $primary,
@@ -35,8 +35,8 @@ $theme-colors: (
   "dark":       $dark
 );
   
-$body-bg:       #f1f3f5;
-$body-color:    #343a40;
+$body-bg:       $light;
+$body-color:    $dark;
 
 $box-shadow-slim: 0 6px 8px rgb(85 102 119 / 3%), 0 1px 1px rgb(85 102 119 / 40%);
 

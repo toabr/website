@@ -7,8 +7,8 @@ code.hljs {
   padding: 3px 5px;
 }
 .hljs {
-  background: var(--#{$variable-prefix}body-color);
-  color: var(--#{$variable-prefix}body-bg);
+  background: var(--#{$variable-prefix}dark);
+  color: var(--#{$variable-prefix}light);
   padding: 1rem;
   border-left: 5px solid $pink;
 }
