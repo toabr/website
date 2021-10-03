@@ -18,70 +18,82 @@ import { urlBuilder } from '../js/helper'
  * list of results between
  */
 const Search = () => {
-
   const [query, setQuery] = useState('')
   const [activeTag, setActiveTag] = useState('')
-
-  // TODO: reset tag on query string
-  // query && stops fetching on first render
-  const url = (query || activeTag) && urlBuilder({
-    type: 'article',
-    query: query,
-    tags: activeTag,
-    items: 5
-  })
-  const { status, data, error } = useFetch(url)
-  const nodes = data
-
   const inputRef = useRef(null)
-
   let isLoading = false
+  const nodes = useRef([]) // saves nodes between fetches
+
+  /**
+   * fetching when query || activeTag changes
+   */
+  const url = (query || activeTag) && urlBuilder(
+    { type: 'article', query: query, tags: activeTag, items: 5 })
+
+  const { status, data, error } = useFetch(url)
 
   if (status === 'error') {
     console.error(error)
   }
-
   if (status === 'fetching') {
     inputRef.current.readOnly = true
     isLoading = true
   }
-
   if (status === 'fetched') {
     // inputRef.current.focus()
+    nodes.current = [...data]
     inputRef.current.readOnly = false
     isLoading = false
   }
 
   /**
+   * trigger url rebuild > fetch
+   * @param {string} type - who is triggering
+   * @param {string} tag - needed from btn
+   * FIXME: to hacky
+   */
+  const triggerFetch = (type, tag) => {
+    if (type === 'BUTTON') {
+      setQuery('')
+      setActiveTag(tag)
+      inputRef.current.value = tag
+    } else if (type === 'FORM') {
+      const query = inputRef.current.value
+      query !== '' && setQuery(query)
+      setActiveTag('')
+    }
+  }
+
+  /**
    * sets the query string
-   * and triggers the useFetch 
    * @param {object} e - dom event
    */
   const onFormSubmit = (e) => {
     e.preventDefault()
-    const query = inputRef.current.value
-    setActiveTag('')
-    query !== '' && setQuery(query)
+    triggerFetch('FORM')
   }
 
   /**
-   * set the active tag
-   * and triggers the useFetch
+   * tag btn was clicked set the active tag
    * @param {String} tag
    */
-  const tagBtnAction = (tag) => {
-    setQuery('')
-    setActiveTag(tag)
-    inputRef.current.value = tag
+  const tagBtnClick = (tag) => {
+    triggerFetch('BUTTON', tag)
   }
 
   return (
     <div id="search">
+      {console.log('nodes', nodes.current?.length)}
       <Form onSubmit={e => onFormSubmit(e)} className="">
         <InputGroup className="shadow-slim" size="lg">
 
           <InputGroup.Text className="bg-accent-1 ps-2 pe-0">
-            <Button size="sm" variant="" className="text-body pe-0" disabled>toabr.de /</Button>
+            <Button
+              size="sm"
+              variant=""
+              className="text-body pe-0"
+              disabled
+            >toabr.de /</Button>
           </InputGroup.Text>
 
           <Form.Control
@@ -111,11 +123,20 @@ const Search = () => {
         </InputGroup>
       </Form>
 
-      {(status === 'fetched' && !nodes.length) && <div className="pt-3">Nothing there 🙁</div>}
+      {(status === 'fetched' && !nodes.current?.length) &&
+        <div className="pt-3">Nothing there 🙁</div>
+      }
 
-      {!!nodes.length && <TitleList nodes={nodes} />}
+      {!!nodes.current?.length &&
+        <TitleList
+          nodes={nodes.current}
+          more={(nodes.current?.length > 4) && '/wiki?q='}
+        />}
 
-      <SearchDefault onClick={tagBtnAction} activeTag={activeTag} />
+      <SearchDefault
+        onClick={tagBtnClick}
+        activeTag={activeTag}
+      />
 
     </div>
   )

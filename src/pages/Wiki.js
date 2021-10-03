@@ -11,6 +11,7 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import BtnList from '../components/BtnList'
 
 import { urlBuilder } from '../js/helper'
+import { useRef } from 'react'
 
 
 /**
@@ -25,14 +26,16 @@ const Wiki = () => {
   let isLoading = true
   const pageTitle = 'Code Snippets Wiki'
   const pageDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+  const nodes = useRef() // cure against bouncyness @ fetch
 
   /**
    * fetch articles respective to pressed buttons
    */
   const url = urlBuilder({ tags: encodeURI(query || ''), items: 10 })
-  const { status, data: nodes, error } = useFetch(url)
+  const { status, data, error } = useFetch(url)
 
   if (status === 'fetched') {
+    nodes.current = data
     isLoading = false
   }
 
@@ -41,7 +44,7 @@ const Wiki = () => {
    */
   const tagBtnClick = (btn) => {
     const searchTerm = btn.dataset.title
-    if( searchTerm.localeCompare(query, undefined, { sensitivity: 'accent' }) === 0 ) {
+    if (searchTerm.localeCompare(query, undefined, { sensitivity: 'accent' }) === 0) {
       setQuery('') // active btn was clicked
     } else {
       setQuery(btn.dataset.title.toLowerCase())
@@ -72,25 +75,26 @@ const Wiki = () => {
           className: "mb-5"
         }} />
 
-        {isLoading &&
-          <Spinner
-            className="d-flex m-auto"
-            animation="grow"
-            variant="highlight"
-            size="sm"
-          />
-        }
+        <div className="mb-3" style={{minHeight: '2rem'}}>
+          {isLoading &&
+            <Spinner
+              className="d-flex m-auto"
+              animation="grow"
+              variant="highlight"
+              size="sm"
+            />
+          }
 
-        {(!isLoading) &&
-          <>
-            <h2 className="lead text-center text-capitalize">
+          {(!isLoading) &&
+            <h2 className="lead text-center text-capitalize m-0">
               {(!query) && 'Recent Posts'}
-              {(query && !!nodes.length) && query}
-              {(query && !nodes.length) && 'No Results'}
+              {(query && !!nodes.current.length) && query}
+              {(query && !nodes.current.length) && 'No Results'}
             </h2>
-            {!!nodes.length && <TitleList nodes={nodes} />}
-          </>
-        }
+          }
+        </div>
+
+        {!!nodes.current?.length && <TitleList nodes={nodes.current} />}
 
       </Container>
 

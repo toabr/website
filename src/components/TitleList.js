@@ -12,7 +12,7 @@ import './title-list.scss'
  * @param {object} nodes - array of node objects
  * @returns 
  */
-const TitleList = ({ nodes = [] }) => {
+const TitleList = ({ nodes = [], more }) => {
 
   /**
    * look into the localstore for "tagList"
@@ -40,10 +40,10 @@ const TitleList = ({ nodes = [] }) => {
 
             <div className="">
               {tags.map(tag =>
-                <small 
-                style={{fontSize: '.75rem'}}
-                className="bg-accent-2 fw-lighter ms-1 p-1 rounded-pill text-highlight" 
-                key={tag.target_id}
+                <small
+                  style={{ fontSize: '.75rem' }}
+                  className="bg-accent-2 fw-lighter ms-1 p-1 rounded-pill text-highlight"
+                  key={tag.target_id}
                 >
                   #{tag.title}
                 </small>
@@ -62,11 +62,14 @@ const TitleList = ({ nodes = [] }) => {
     <div className="title-list">
       <ListGroup variant="flush" className="text-start">
 
-        {!nodes.length || Titles}
+        {!!nodes.length && Titles}
 
-        {/* TODO: nedds to lift up */}
-        {nodes.length > 5 &&
-          <ListGroup.Item action className="text-body bg-body text-center" >more...</ListGroup.Item>
+        {more &&
+          <LinkContainer to={more} >
+            <ListGroup.Item action className="text-body bg-body text-center" >
+              more...
+            </ListGroup.Item>
+          </LinkContainer >
         }
 
       </ListGroup>
