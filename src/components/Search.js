@@ -5,6 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import useFetch from '../hooks/useFetch'
 import { urlBuilder } from '../js/helper'
 import BtnList from './BtnList';
+import SearchDefault from './SearchDefault';
 
 import TitleList from './TitleList'
 // import './search.scss'
@@ -109,13 +110,7 @@ const Search = () => {
 
       {!!nodes.length && <TitleList nodes={nodes} />}
 
-      <BtnList
-        options={{
-          onClick: (e) => tagBtnAction(e.target.dataset.id),
-          className: 'my-4',
-        }}
-        more={{link: '/wiki'}}
-      />
+      <SearchDefault onClick={tagBtnAction} activeTag={activeTag} />
 
     </div>
   )

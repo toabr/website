@@ -8,17 +8,6 @@ import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 
-const defaultData = [
-  { title: "linux", id: ["linux"], faIcon: faLinux },
-  { title: "drupal", id: ["drupal"], faIcon: faDrupal },
-  { title: "es6", id: ["javascript"], faIcon: faJs },
-  { title: "scss", id: ["scss"], faIcon: faSass },
-  { title: "react", id: ["react"], faIcon: faReact },
-  { title: "bash", id: ["bash"], faIcon: faHashtag },
-  { title: "docker", id: ["docker"], faIcon: faDocker },
-]
-
-
 /**
  * 
  * @param {object} param0
@@ -37,7 +26,7 @@ const defaultData = [
  * @param {function} options.onClick - 
  * @returns 
  */
-const BtnList = ({ data = defaultData, options = {}, more, children }) => {
+const BtnList = ({ data = [], options = {}, more, children }) => {
 
   // define button style by themeMode light/dark
   const [themeMode] = useThemeContext()

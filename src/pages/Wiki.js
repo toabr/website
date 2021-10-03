@@ -45,8 +45,8 @@ const Wiki = () => {
   }
 
   /**
-     * prepare data array for <BtnList />
-     */
+   * prepare data array for <BtnList />
+   */
   const btnListData = tagList.map(tag => {
     // console.log('render')
     const active = (tag.title === query)
