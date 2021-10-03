@@ -9,9 +9,14 @@ import SearchDefault from './SearchDefault';
 import TitleList from './TitleList'
 
 import { urlBuilder } from '../js/helper'
-// import './search.scss'
 
 
+/**
+ * SITE SEARCH
+ * input field & button for keyword search
+ * default buttons for tag search
+ * list of results between
+ */
 const Search = () => {
 
   const [query, setQuery] = useState('')

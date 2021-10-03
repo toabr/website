@@ -25,7 +25,6 @@ const Wiki = () => {
   let isLoading = true
   const pageTitle = 'Code Snippets Wiki'
   const pageDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-  // let btnListData = []
 
   /**
    * fetch articles respective to pressed buttons
@@ -41,7 +40,7 @@ const Wiki = () => {
    * tag btn was clicked
    */
   const tagBtnClick = (btn) => {
-    setQuery(btn.dataset.title)
+    setQuery(btn.dataset.title.toLowerCase())
   }
 
   /**
@@ -49,7 +48,7 @@ const Wiki = () => {
    */
   const btnListData = tagList.map(tag => {
     // console.log('render')
-    const active = (tag.title === query)
+    const active = (tag.title.toLowerCase() === query.toLowerCase())
     return { title: tag.title, id: tag.tid, active }
   })
 
