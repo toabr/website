@@ -9,7 +9,6 @@ import SearchDefault from './SearchDefault';
 import TitleList from './TitleList'
 
 import { urlBuilder } from '../js/helper'
-import ScrollTo from './ScrollTo';
 
 
 /**
@@ -84,7 +83,6 @@ const Search = () => {
 
   return (
     <div id="search">
-      <ScrollTo />
       {console.log('nodes', nodes.current?.length)}
       <Form onSubmit={e => onFormSubmit(e)} className="">
         <InputGroup className="shadow-slim" size="lg">

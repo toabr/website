@@ -12,7 +12,7 @@ import BtnList from '../components/BtnList'
 
 import { urlBuilder } from '../js/helper'
 import { useRef } from 'react'
-import ScrollTo from '../components/ScrollTo'
+import ScrollOnMount from '../components/ScrollOnMount'
 
 
 /**
@@ -44,7 +44,7 @@ const Wiki = () => {
   if (status === 'fetched') {
     nodes.current = data
     isLoading = false
-    if(window.scrollY < 300) window.scrollTo(0,300)
+    // if(window.scrollY < 300) window.scrollTo(0,300)
   }
 
   /**
@@ -72,6 +72,8 @@ const Wiki = () => {
   return (
     <div>
       <Meta title={pageTitle} />
+      <ScrollOnMount top />
+
       <Breadcrumbs crumbs={[{ name: 'Home', href: '/' }, { name: 'Wiki' }]} />
       <PageTitle head={pageTitle} description={pageDescription} />
 
