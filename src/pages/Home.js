@@ -71,7 +71,7 @@ const Home = () => {
                 <span className="text-primary">to</span>
                 <span className="">abr.de</span>
               </h1>
-              <p className="mb-5">Explore a bunch of code snippets you may find helpful.</p>
+              <p className="py-2 mb-4">Explore a bunch of code snippets you may find helpful.</p>
               <Search />
             </header>
           </Col>

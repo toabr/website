@@ -97,7 +97,7 @@ const Post = (props) => {
               <LinkContainer to={{ pathname: "/wiki", search: `?q=${nodeTag.title}` }} >
                 <Button
                   variant="outline-primary"
-                  className="me-2"
+                  className="me-2 mb-2"
                 > #{nodeTag.title}</Button>
               </LinkContainer>
             ))}

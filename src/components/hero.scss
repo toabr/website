@@ -28,3 +28,7 @@
   transition: transform 0.4s, opacity 0s 0.5s;
 }
 
+.hero__back--static {
+  filter: sepia(100%) saturate(200%) brightness(70%) hue-rotate(330deg);
+}
+

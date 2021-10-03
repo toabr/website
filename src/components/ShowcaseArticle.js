@@ -1,9 +1,14 @@
 import { LinkContainer } from 'react-router-bootstrap'
 import { Card, Col, Row } from 'react-bootstrap'
 
-// import './article.scss'
 
-
+/**
+ * teaser cards (on frontpage)
+ * @param {string} variant - big format
+ * @param {object} node - content data
+ * @returns one card
+ * TODO: not agile
+ */
 const Article = ({ variant, node }) => {
 
   const link = (!!node.field_resource?.length) ? node.field_resource[0].uri : `node/${node.nid[0].value}`
