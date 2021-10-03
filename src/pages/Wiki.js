@@ -23,10 +23,10 @@ import { useRef } from 'react'
 const Wiki = () => {
   const [query, setQuery] = useQuery('q')
   const tagList = useTagList()
-  let isLoading = true
   const pageTitle = 'Code Snippets Wiki'
   const pageDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   const nodes = useRef() // cure against bouncyness @ fetch
+  let isLoading = true
 
   /**
    * fetch articles respective to pressed buttons
@@ -34,6 +34,12 @@ const Wiki = () => {
   const url = urlBuilder({ tags: encodeURI(query || ''), items: 10 })
   const { status, data, error } = useFetch(url)
 
+  if (status === 'error') {
+    console.error(error)
+  }
+  if (status === 'fetching') {
+    isLoading = true
+  }
   if (status === 'fetched') {
     nodes.current = data
     isLoading = false
@@ -75,7 +81,7 @@ const Wiki = () => {
           className: "mb-5"
         }} />
 
-        <div className="mb-3" style={{minHeight: '2rem'}}>
+        <div className="mb-3" style={{ minHeight: '2rem' }}>
           {isLoading &&
             <Spinner
               className="d-flex m-auto"
