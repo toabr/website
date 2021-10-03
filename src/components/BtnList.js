@@ -1,5 +1,3 @@
-import React from 'react';
-
 // button icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHashtag } from '@fortawesome/free-solid-svg-icons'
@@ -51,12 +49,15 @@ const BtnList = ({ data = defaultData, options = {}, more, children }) => {
 
       {data.map((item, index) => {
         const style = (item.style) ? item.style : 'primary'
+        const active = item.active ? 'active' : ''
+        const classes = item.className ? item.className : ''
+
         return (<Button
           as={options.as}
           size={options.size}
           onClick={options.onClick}
           variant={variant + style}
-          className={`${item.className} font-monospace flex-fill`}
+          className={`${active} ${classes} text-capitalize font-monospace flex-fill`}
           data-title={item.title}
           data-id={item.id}
           href={item.href}

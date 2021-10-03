@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { Container, Spinner, } from 'react-bootstrap'
 
 import useTagList from '../hooks/useTagList'
@@ -24,17 +23,9 @@ const Wiki = () => {
   const [query, setQuery] = useQuery('q')
   const tagList = useTagList()
   let isLoading = true
-  console.log('dingding', query)
-  
-  /**
-   * read query from url and toggle respective btn
-   */
-  useEffect(() => {
-    if (query) {
-      const target = document.querySelector(`[data-title='${query}']`)
-      target && tagBtnToggle(target)
-    }
-  }, [query])
+  const pageTitle = 'Code Snippets Wiki'
+  const pageDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+  // let btnListData = []
 
   /**
    * fetch articles respective to pressed buttons
@@ -51,40 +42,16 @@ const Wiki = () => {
    */
   const tagBtnClick = (btn) => {
     setQuery(btn.dataset.title)
-    tagBtnToggle(btn)
   }
 
   /**
-   * toggle active tag/button state
-   * TODO: clear other btns
-   */
-  const tagBtnToggle = (btn) => {
-    tagBtnClearAll()
-    btn.classList.toggle('active')
-  }
-
-  /**
-   * BAD AS FUCK BUT WORKS
-   */
-  const tagBtnClearAll = () => {
-    const btnList = document.querySelectorAll('button[data-title]')
-    for(const i in btnList) {
-      btnList[i].classList?.remove('active')
-    }
-  }
-
-  /**
-   * prepare data array for <BtnList />
-   */
-  const buttonList = tagList.map(tag => (
-    { title: tag.title, id: tag.tid }
-  ))
-
-  /**
-   * content stuff
-   */
-  const pageTitle = 'Code Snippets Wiki'
-  const pageDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+     * prepare data array for <BtnList />
+     */
+  const btnListData = tagList.map(tag => {
+    // console.log('render')
+    const active = (tag.title === query)
+    return { title: tag.title, id: tag.tid, active }
+  })
 
 
   return (
@@ -95,7 +62,7 @@ const Wiki = () => {
 
       <Container style={{ maxWidth: 685 }} className="">
 
-        <BtnList data={buttonList} options={{
+        <BtnList data={btnListData} options={{
           size: 'sm',
           onClick: (e) => tagBtnClick(e.target), // e.target to specific
           className: "mb-5"
@@ -110,13 +77,14 @@ const Wiki = () => {
           />
         }
 
-        {!isLoading &&
-          <h2 className="lead text-center text-capitalize">
-            {query}
-          </h2>
+        {(!isLoading) &&
+          <>
+            <h2 className="lead text-center text-capitalize">
+              {!!nodes.length ? query : 'No Results'}
+            </h2>
+            {!!nodes.length && <TitleList nodes={nodes} />}
+          </>
         }
-
-        <TitleList nodes={nodes} />
 
       </Container>
 
