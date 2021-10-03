@@ -29,7 +29,7 @@ const Wiki = () => {
   /**
    * fetch articles respective to pressed buttons
    */
-  const url = urlBuilder({ tags: encodeURI(query), items: 10 })
+  const url = urlBuilder({ tags: encodeURI(query || ''), items: 10 })
   const { status, data: nodes, error } = useFetch(url)
 
   if (status === 'fetched') {
@@ -40,7 +40,12 @@ const Wiki = () => {
    * tag btn was clicked
    */
   const tagBtnClick = (btn) => {
-    setQuery(btn.dataset.title.toLowerCase())
+    const searchTerm = btn.dataset.title
+    if( searchTerm.localeCompare(query, undefined, { sensitivity: 'accent' }) === 0 ) {
+      setQuery('') // active btn was clicked
+    } else {
+      setQuery(btn.dataset.title.toLowerCase())
+    }
   }
 
   /**
@@ -48,7 +53,7 @@ const Wiki = () => {
    */
   const btnListData = tagList.map(tag => {
     // console.log('render')
-    const active = (tag.title.toLowerCase() === query.toLowerCase())
+    const active = (tag.title.toLowerCase() === query?.toLowerCase())
     return { title: tag.title, id: tag.tid, active }
   })
 
@@ -79,7 +84,9 @@ const Wiki = () => {
         {(!isLoading) &&
           <>
             <h2 className="lead text-center text-capitalize">
-              {!!nodes.length ? query : 'No Results'}
+              {(!query) && 'Recent Posts'}
+              {(query && !!nodes.length) && query}
+              {(query && !nodes.length) && 'No Results'}
             </h2>
             {!!nodes.length && <TitleList nodes={nodes} />}
           </>
