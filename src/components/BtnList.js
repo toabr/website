@@ -39,7 +39,7 @@ const defaultData = [
  * @param {function} options.onClick - 
  * @returns 
  */
-const BtnList = ({ data = defaultData, options = {}, children }) => {
+const BtnList = ({ data = defaultData, options = {}, more, children }) => {
 
   // define button style by themeMode light/dark
   const [themeMode] = useThemeContext()
@@ -67,13 +67,15 @@ const BtnList = ({ data = defaultData, options = {}, children }) => {
         </Button>)
       })}
 
-      {options.more &&
-        <LinkContainer to={options.more}>
+      {more &&
+        <LinkContainer to={more.link || '#'}>
           <Button variant={`${variant}secondary`} className="font-monospace flex-fill">
-            ...
+            {more.title || '...'}
           </Button>
         </LinkContainer>
       }
+
+      {children}
 
     </div>
   )

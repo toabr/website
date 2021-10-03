@@ -24,7 +24,7 @@ const Wiki = () => {
   const [query, setQuery] = useQuery('q')
   const tagList = useTagList()
   let isLoading = true
-  // console.log('dingding', query)
+  console.log('dingding', query)
   
   /**
    * read query from url and toggle respective btn
@@ -34,7 +34,7 @@ const Wiki = () => {
       const target = document.querySelector(`[data-title='${query}']`)
       target && tagBtnToggle(target)
     }
-  }, [])
+  }, [query])
 
   /**
    * fetch articles respective to pressed buttons

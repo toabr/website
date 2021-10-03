@@ -109,11 +109,13 @@ const Search = () => {
 
       {!!nodes.length && <TitleList nodes={nodes} />}
 
-      <BtnList options={{
-        onClick: (e) => tagBtnAction(e.target.dataset.id),
-        className: 'my-4',
-        more: '/wiki'
-      }}/>
+      <BtnList
+        options={{
+          onClick: (e) => tagBtnAction(e.target.dataset.id),
+          className: 'my-4',
+        }}
+        more={{link: '/wiki'}}
+      />
 
     </div>
   )
