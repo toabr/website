@@ -5,13 +5,34 @@ html, body, #root, #about {
   min-height: 100vh;
 }
 
+#page {
+    background: rgba(var(--bs-body-bg-rgb), 91%);
+    transition: transform .3s ease-out;
+}
+#about {
+    position: absolute;
+    top: 0;
+    // left: -$about-width;
+    z-index: -1;
+    width: $about-width;
+    opacity: 0;
+    transition: opacity .8s ease-out;
+    .title {
+        transform: translateX(-25px);
+        transition: all 1.8s ease-out;
+    }
+}
+
 body {
     background-color: var(--bs-body-bg);
-    background-image: url('https://unsplash.com/photos/hnysCJrPpkc/download?force=true&w=1920');
+    background-image: url(../img/kendal-hnysCJrPpkc-unsplash_sm.jpg);
     background-size: contain;
 
-    &.open {
+    &[open] {
+        overflow: hidden;
         #about {
+            left: 0;
+            z-index: 1;
             opacity: 1;
             .title {
                 transform: translateX(0);
@@ -28,26 +49,10 @@ body {
                 height: 100%;
                 width: 100%;
                 background-color: rgba(var(--bs-body-bg-rgb), 35%);
-                background-image: url('https://www.dreamhome.berlin/themes/custom/dreamhome/img/overlays/02.png');
+                background-image: url(../img/overlay_02.png);
                 z-index: 1100;
             }
         }
     }
     
-}
-#page {
-    background: rgba(var(--bs-body-bg-rgb), 91%);
-    transition: transform .3s ease-out;
-}
-#about {
-    position: absolute;
-    top: 0;
-    z-index: -1;
-    width: $about-width;
-    opacity: 0;
-    // transition: all 1.8s ease-out;
-    .title {
-        transform: translateX(-25px);
-        transition: all 1.8s ease-out;
-    }
 }

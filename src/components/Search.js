@@ -83,7 +83,6 @@ const Search = () => {
 
   return (
     <div id="search">
-      {console.log('nodes', nodes.current?.length)}
       <Form onSubmit={e => onFormSubmit(e)} className="">
         <InputGroup className="shadow-slim" size="lg">
 

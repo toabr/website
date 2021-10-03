@@ -12,7 +12,6 @@ import BtnList from '../components/BtnList'
 
 import { urlBuilder } from '../js/helper'
 import { useRef } from 'react'
-import ScrollOnMount from '../components/ScrollOnMount'
 
 
 /**
@@ -72,7 +71,6 @@ const Wiki = () => {
   return (
     <div>
       <Meta title={pageTitle} />
-      <ScrollOnMount top />
 
       <Breadcrumbs crumbs={[{ name: 'Home', href: '/' }, { name: 'Wiki' }]} />
       <PageTitle head={pageTitle} description={pageDescription} />

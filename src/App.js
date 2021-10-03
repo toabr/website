@@ -13,6 +13,7 @@ import ApiService from './js/ApiService'
 import usePersistedState from './hooks/usePersistedState'
 import Hero from './components/Hero'
 import { ThemeProvider } from './hooks/useThemeContext'
+import ScrollToTop from './components/ScrollToTop'
 
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
       <ThemeProvider>
         <Layout>
           <Hero />
+          <ScrollToTop />
           <Switch>
             <Route path='/' render={(props) => (<Home {...props} tagList={tagList} />)} exact />
             <Route path='/wiki' render={(props) => (<Wiki {...props} tagList={tagList} />)} />

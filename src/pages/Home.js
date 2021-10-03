@@ -1,13 +1,11 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import usePersistedState from '../hooks/usePersistedState'
 import useFetch from '../hooks/useFetch'
-import { formatUTC, urlBuilder } from '../js/helper'
+import { formatUTC } from '../js/helper'
 
 import Meta from '../components/Meta'
-import Hero from '../components/Hero'
 import Search from '../components/Search'
 import Showcase from '../components/Showcase'
-import ScrollOnMount from '../components/ScrollOnMount'
 
 
 const Home = () => {
@@ -63,7 +61,6 @@ const Home = () => {
   return (
     <>
       <Meta title="Home" />
-      <ScrollOnMount top />
 
       <Container fluid as="section" id="header" className="p-0">
         <Row style={{ maxWidth: '1040px' }}

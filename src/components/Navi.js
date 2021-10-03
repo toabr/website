@@ -24,28 +24,15 @@ const Navi = () => {
 
   return (
     <Container fluid className="pt-2">
+      {/* <Nav.Link eventKey="contact" onClick={handleModalShow}>
+        Contact
+        </Nav.Link>
+      <Contact show={modalShow} handleClose={handleModalClose} handleSubmit={handleFormSubmit} /> */}
+      
       <div className="d-flex justify-content-between align-items-center">
         <PageRevealBtn />
         <ThemeSwitch />
       </div>
-      {/* <Navbar expand variant style={{ background: 'unset' }}>
-        <Container fluid className="">
-          <Col sm={11} md={10} lg={9} xl={8}>
-            <Nav className="">
-              <LinkContainer to="/" >
-              <Nav.Link className="">Home</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/wiki">
-              <Nav.Link className="">Wiki</Nav.Link>
-            </LinkContainer>
-            <Nav.Link eventKey="contact" onClick={handleModalShow}>
-              Contact
-            </Nav.Link>
-            </Nav>
-          </Col>
-        </Container>
-      </Navbar>
-      <Contact show={modalShow} handleClose={handleModalClose} handleSubmit={handleFormSubmit} /> */}
     </Container>
   )
 }

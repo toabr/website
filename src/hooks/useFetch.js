@@ -29,12 +29,12 @@ export default function useFetch(url) {
 		const fetchData = async () => {
 			dispatch({ type: 'FETCHING' });
 			if (cache.current[url]) {
-				console.log('cached', url)
+				// console.log('cached', url)
 				const data = cache.current[url];
 				dispatch({ type: 'FETCHED', payload: data });
 			} else {
 				try {
-					console.log('fetching', url)
+					// console.log('fetching', url)
 					const response = await fetch(url);
 					const data = await response.json();
 					cache.current[url] = data;

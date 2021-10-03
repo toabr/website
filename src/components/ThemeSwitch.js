@@ -1,6 +1,10 @@
 import { useEffect, useRef } from "react"
 import { useThemeContext } from "../hooks/useThemeContext"
 
+
+/**
+ * toggle attribute on "html" element for theme switch
+ */
 export default function ThemeSwitch() {
   const [style, setStyle] = useThemeContext()
   const themeSwitch = useRef(null)

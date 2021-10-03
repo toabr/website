@@ -1,4 +1,5 @@
-import { LinkContainer } from 'react-router-bootstrap'
+
+import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
 import { useThemeContext } from '../hooks/useThemeContext';
@@ -8,7 +9,7 @@ import PageTitle from '../components/PageTitle'
 import Meta from '../components/Meta'
 import Breadcrumbs from '../components/Breadcrumbs'
 
-import { urlBuilder, addTagTitles } from '../js/helper'
+import { urlBuilder, addTagTitles, formatUTC } from '../js/helper'
 import hljs from 'highlight.js'
 // import './post.scss'
 
@@ -95,19 +96,27 @@ const Post = (props) => {
       <PageTitle head={headline} isLoading={isLoading} />
 
       {status === 'fetched' && !!data.length &&
-        <div id={`post-${nid}`} style={{ maxWidth: 685 }} className="post mx-auto px-3">
+
+        <div id={`post-${nid}`}
+          style={{ maxWidth: 685 }}
+          className="post mx-auto px-3">
+
+          <div className="date text-center text-muted my-3">
+            {formatUTC(node.created[0].value)}
+          </div>
 
           {/* TODO: check dangerouslySetInnerHTML */}
           <div dangerouslySetInnerHTML={{ __html: body }} />
 
-          <div className="tags my-5">
+          <div className="footer my-5">
             {node.field_tags.map(nodeTag => (
-              <LinkContainer to={{ pathname: "/wiki", search: `?q=${nodeTag.title}` }} >
+              <Link to={`/wiki?q=${nodeTag.title}`} >
                 <Button
                   variant={`${variant}primary`}
-                  className="me-2 mb-2"
-                > #{nodeTag.title}</Button>
-              </LinkContainer>
+                  className="me-2 mb-2" >
+                  #{nodeTag.title}
+                </Button>
+              </Link>
             ))}
           </div>
         </div>

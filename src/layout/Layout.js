@@ -9,7 +9,7 @@ import Navi from '../components/Navi'
 const Layout = ({ children }) => {
   return (
     <Router>
-      <div id="page" className="min-vh-100 d-flex flex-column" >
+      <div id="page" className="min-vh-100 overflow-hidden d-flex flex-column" >
         <Navi />
         <main>{children}</main>
         <Footer />

@@ -1,21 +1,22 @@
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
 
 const NotFound = () => {
   return (
     <Container fluid='md' className='mt-5'>
       <Row>
         <Col>
-          <Card className=''>
-            <Card.Header className=''>404</Card.Header>
+          <Card className='bg-accent-1'>
+            <Card.Header className='bg-body'>404</Card.Header>
             <Card.Body className=''>
-              <Card.Title className=''>Custom Error Page</Card.Title>
+              <Card.Title className=''>Page not found</Card.Title>
               <Card.Text className=''>
-                Edit Custom 404 error page <code>src/pages/NotFound.js</code>
+                <p>Error code 404</p>
+                <code>dont contact the admin</code>
               </Card.Text>
-              <LinkContainer to='/'>
+              <Link to='/'>
                 <Button className=''>Home Page</Button>
-              </LinkContainer>
+              </Link>
             </Card.Body>
           </Card>
         </Col>
