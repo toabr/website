@@ -29,7 +29,7 @@ const Wiki = () => {
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   const nodes = useRef([]) // cure against bouncyness @ fetch
   let isLoading = true
-  const itemsPerPage = 50
+  const itemsPerPage = 10
 
   /**
    * fetch articles respective to pressed buttons
@@ -113,7 +113,7 @@ const Wiki = () => {
 
         {!!nodes.current?.length &&
           <TitleList nodes={nodes.current}>
-            {(nodes.current?.length === itemsPerPage) &&
+            {(nodes.current?.length === itemsPerPage && false) &&
               <Button
                 variant="outline-primary"
                 className="text-body bg-body text-center"
