@@ -88,7 +88,7 @@ const Wiki = () => {
 
         <BtnList data={btnListData} options={{
           size: 'sm',
-          onClick: tagBtnClick, // e.target to specific
+          onClick: tagBtnClick,
           className: "mb-5"
         }} />
 
