@@ -39,7 +39,7 @@ const Article = ({ variant, node }) => {
                 <div className="text-primary mb-2">
                   <small>development</small>
                 </div>
-                <Card.Title className="fw-bold mb-0">
+                <Card.Title className="fw-bold">
                   <a href={link} className="text-body text-decoration-none">
                     {node.title[0].value}
                   </a>
@@ -77,7 +77,7 @@ const Article = ({ variant, node }) => {
           <div className="text-primary fw-bolder my-2">
             <small>development</small>
           </div>
-          <Card.Title className="fw-bold mb-0">
+          <Card.Title className="fw-bold">
             <a href={link} className="text-body text-decoration-none">
               {node.title[0].value}
             </a>
