@@ -28,7 +28,7 @@ const Search = () => {
    * fetching when query || activeTag changes
    */
   const url = (query || activeTag) && urlBuilder(
-    { type: 'article', query: query, tags: activeTag, items: 5 })
+    { type: 'article', query: query, tags: activeTag, items: 10 })
 
   const { status, data, error } = useFetch(url)
 
@@ -129,8 +129,8 @@ const Search = () => {
 
       {!!nodes.current?.length &&
         <TitleList
-          nodes={nodes.current}
-          more={(nodes.current?.length > 4) && '/wiki?q='}
+          nodes={nodes.current.slice(0,5)}
+          more={(nodes.current?.length > 5) && `/wiki?q=${activeTag || query}`}
         />}
 
       <SearchDefault
