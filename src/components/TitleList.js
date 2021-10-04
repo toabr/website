@@ -1,9 +1,8 @@
-import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap'
 import { ListGroup } from "react-bootstrap"
+
 import usePersistedState from '../hooks/usePersistedState';
 import { addTagTitles, formatUTC } from '../js/helper';
-
 import './title-list.scss'
 
 
@@ -12,7 +11,7 @@ import './title-list.scss'
  * @param {object} nodes - array of node objects
  * @returns 
  */
-const TitleList = ({ nodes = [], more }) => {
+const TitleList = ({ nodes = [], children }) => {
 
   /**
    * look into the localstore for "tagList"
@@ -32,8 +31,11 @@ const TitleList = ({ nodes = [], more }) => {
       <LinkContainer to={`node/${node.nid[0].value}`} key={index}>
         <ListGroup.Item action="true" className="text-body bg-body fw-bolder shadow pe-2" >
 
-          <div className="d-sm-flex justify-content-between flex-wrap align-items-center border-1 mt-1">
-            <small className="date d-sm-block pe-2 text-muted fw-light">{formatUTC(node.changed[0].value)}</small>
+          <div className="d-sm-flex justify-content-between flex-wrap
+            align-items-center border-1 mt-1">
+            <small className="date d-sm-block pe-2 text-muted fw-light">
+              {formatUTC(node.changed[0].value)}
+            </small>
             <div className="title flex-fill">
               {node.title[0].value}
             </div>
@@ -51,8 +53,6 @@ const TitleList = ({ nodes = [], more }) => {
             </div>
           </div>
 
-
-
         </ListGroup.Item>
       </LinkContainer >
     )
@@ -62,15 +62,9 @@ const TitleList = ({ nodes = [], more }) => {
     <div className="title-list">
       <ListGroup variant="flush" className="text-start">
 
-        {!!nodes.length && Titles}
+        {Titles}
 
-        {more &&
-          <LinkContainer to={more} >
-            <ListGroup.Item action className="text-body bg-body text-center" >
-            <div className="title">more ...</div>
-            </ListGroup.Item>
-          </LinkContainer >
-        }
+        {children}
 
       </ListGroup>
     </div>

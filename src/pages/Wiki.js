@@ -1,4 +1,4 @@
-import { Container, Spinner, } from 'react-bootstrap'
+import { Container, Spinner, Button } from 'react-bootstrap'
 
 import useTagList from '../hooks/useTagList'
 import useFetch from '../hooks/useFetch'
@@ -11,7 +11,7 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import BtnList from '../components/BtnList'
 
 import { urlBuilder } from '../js/helper'
-import { useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 
 
 /**
@@ -19,19 +19,27 @@ import { useRef } from 'react'
  * - underneath a fetched list of respective node titles
  * @param {array} tagList - fetched list of tags from App.js
  * @param {string} query - starter tag from linked content
+ * TODO: pager
  */
 const Wiki = () => {
   const [query, setQuery] = useQuery('q')
   const tagList = useTagList()
   const pageTitle = 'Code Snippets Wiki'
-  const pageDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-  const nodes = useRef() // cure against bouncyness @ fetch
+  const pageDescription = 
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+  const nodes = useRef([]) // cure against bouncyness @ fetch
   let isLoading = true
+  const itemsPerPage = 50
 
   /**
    * fetch articles respective to pressed buttons
    */
-  const url = urlBuilder({ tags: encodeURI(query || ''), items: 10 })
+  const url = urlBuilder({
+    tags: encodeURI(query || ''),
+    items: itemsPerPage,
+    // page: resultsPage // abandoned
+  })
+  
   const { status, data, error } = useFetch(url)
 
   if (status === 'error') {
@@ -51,8 +59,9 @@ const Wiki = () => {
    */
   const tagBtnClick = (btn) => {
     const searchTerm = btn.dataset.title
+    // test if active btn was clicked
     if (searchTerm.localeCompare(query, undefined, { sensitivity: 'accent' }) === 0) {
-      setQuery('') // active btn was clicked
+      setQuery('')
     } else {
       setQuery(btn.dataset.title.toLowerCase())
     }
@@ -102,7 +111,19 @@ const Wiki = () => {
           }
         </div>
 
-        {!!nodes.current?.length && <TitleList nodes={nodes.current} />}
+        {!!nodes.current?.length &&
+          <TitleList nodes={nodes.current}>
+            {(nodes.current?.length === itemsPerPage) &&
+              <Button
+                variant="outline-primary"
+                className="text-body bg-body text-center"
+                // onClick={() => setResultsPage(prev => prev + 1)} 
+                >
+                <div className="title">more ...</div>
+              </Button>
+            }
+          </TitleList>
+        }
 
       </Container>
 

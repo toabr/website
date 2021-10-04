@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import { Button, Form, InputGroup, Spinner } from 'react-bootstrap'
+import { Button, Form, InputGroup, Spinner, ListGroup } from 'react-bootstrap'
 import { Search as SearchIcon } from 'react-bootstrap-icons'
 
 import useFetch from '../hooks/useFetch'
@@ -9,6 +9,7 @@ import SearchDefault from './SearchDefault';
 import TitleList from './TitleList'
 
 import { urlBuilder } from '../js/helper'
+import { Link } from 'react-router-dom';
 
 
 /**
@@ -105,7 +106,7 @@ const Search = () => {
             // onChange={(e) => handleOnChange(e)}
             // value={searchTerm}
             readOnly={false}
-            onFocus={(e) => window.scrollTo(0,198)}
+            onFocus={(e) => window.scrollTo(0, 198)}
           />
 
           <Button
@@ -128,10 +129,16 @@ const Search = () => {
       }
 
       {!!nodes.current?.length &&
-        <TitleList
-          nodes={nodes.current.slice(0,5)}
-          more={(nodes.current?.length > 5) && `/wiki?q=${activeTag || query}`}
-        />}
+        <TitleList nodes={nodes.current.slice(0, 5)} >
+          {(nodes.current?.length > 5) &&
+            <Link to={`/wiki?q=${activeTag || query}`} >
+              <ListGroup.Item action className="text-body bg-body text-center" >
+                <div className="title">more ...</div>
+              </ListGroup.Item>
+            </Link >
+          }
+        </TitleList>
+      }
 
       <SearchDefault
         onClick={tagBtnClick}
