@@ -42,7 +42,7 @@ const BtnList = ({ data = [], options = {}, more, children }) => {
         return (<Button
           as={options.as}
           size={options.size}
-          onClick={options.onClick}
+          onClick={() => options.onClick(item.title)} // stops propagation otherwise
           variant={variant + style}
           className={`${active} ${classes} text-capitalize font-monospace flex-fill`}
           data-title={item.title}

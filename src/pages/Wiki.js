@@ -56,14 +56,14 @@ const Wiki = () => {
 
   /**
    * tag btn was clicked
+   * @param {string} tag
    */
-  const tagBtnClick = (btn) => {
-    const searchTerm = btn.dataset.title
+  const tagBtnClick = (tag) => {
     // test if active btn was clicked
-    if (searchTerm.localeCompare(query, undefined, { sensitivity: 'accent' }) === 0) {
+    if (tag.localeCompare(query, undefined, { sensitivity: 'accent' }) === 0) {
       setQuery('')
     } else {
-      setQuery(btn.dataset.title.toLowerCase())
+      setQuery(tag.toLowerCase())
     }
   }
 
@@ -88,7 +88,7 @@ const Wiki = () => {
 
         <BtnList data={btnListData} options={{
           size: 'sm',
-          onClick: (e) => tagBtnClick(e.target), // e.target to specific
+          onClick: tagBtnClick, // e.target to specific
           className: "mb-5"
         }} />
 

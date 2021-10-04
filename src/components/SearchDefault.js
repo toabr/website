@@ -27,7 +27,7 @@ function SearchDefault({ onClick, activeTag }) {
     <BtnList
       data={btnList}
       options={{
-        onClick: (e) => onClick(e.target.dataset.id),
+        onClick: onClick,
         className: 'my-4',
       }}
       more={{ link: '/wiki' }}

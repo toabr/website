@@ -79,6 +79,7 @@ const Search = () => {
    * @param {String} tag
    */
   const tagBtnClick = (tag) => {
+    console.log('tagBtnClick', tag)
     triggerFetch('BUTTON', tag)
   }
 
