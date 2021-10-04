@@ -1,19 +1,24 @@
+import { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 // Layout
 import Layout from './layout/Layout'
+import Hero from './components/Hero'
+import ScrollToTop from './components/ScrollToTop'
 
 // pages
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Wiki from './pages/Wiki'
 import Post from './pages/Post'
-import { useEffect } from 'react'
-import ApiService from './js/ApiService'
+
+// hooks
 import usePersistedState from './hooks/usePersistedState'
-import Hero from './components/Hero'
 import { ThemeProvider } from './hooks/useThemeContext'
-import ScrollToTop from './components/ScrollToTop'
+import { DataProvider } from './hooks/useDataContext'
+
+import ApiService from './js/ApiService'
+
 
 
 const App = () => {
@@ -35,16 +40,18 @@ const App = () => {
   return (
     <Router>
       <ThemeProvider>
-        <Layout>
-          <Hero />
-          <ScrollToTop />
-          <Switch>
-            <Route path='/' render={(props) => (<Home {...props} tagList={tagList} />)} exact />
-            <Route path='/wiki' render={(props) => (<Wiki {...props} tagList={tagList} />)} />
-            <Route path='/node/:nid' render={(props) => (<Post {...props} tagList={tagList} />)} />
-            <Route component={NotFound} />
-          </Switch>
-        </Layout>
+        <DataProvider>
+          <Layout>
+            <Hero />
+            <ScrollToTop smooth />
+            <Switch>
+              <Route path='/' render={(props) => (<Home {...props} tagList={tagList} />)} exact />
+              <Route path='/wiki' render={(props) => (<Wiki {...props} tagList={tagList} />)} />
+              <Route path='/node/:nid' render={(props) => (<Post {...props} tagList={tagList} />)} />
+              <Route component={NotFound} />
+            </Switch>
+          </Layout>
+        </DataProvider>
       </ThemeProvider>
     </Router>
   )

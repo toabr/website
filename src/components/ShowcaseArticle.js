@@ -1,5 +1,7 @@
 import { LinkContainer } from 'react-router-bootstrap'
 import { Card, Col, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import useTagTitles from '../hooks/useTagTitles'
 
 
 /**
@@ -11,15 +13,18 @@ import { Card, Col, Row } from 'react-bootstrap'
  */
 const Article = ({ variant, node }) => {
 
+  // external || internal link
   const link = (!!node.field_resource?.length) ? node.field_resource[0].uri : `node/${node.nid[0].value}`
 
-  const FieldTags = node.field_tags.map((tag) => {
-    return (
-      <a key={tag.target_id} className="ps-1 text-secondary text-decoration-none" href={`/tag/${tag.target_id}`}>
-        <small>#{tag.target_id}</small>
-      </a>
-    )
-  })
+  // add titles to field_tags
+  const field_tags = useTagTitles(node.field_tags).map((tag) => (
+    <Link
+      to={`/wiki?q=${tag.title.toLowerCase()}`}
+      key={tag.target_id}
+      className="ps-2 text-secondary text-decoration-none text-capitalize">
+      <small>#{tag.title}</small>
+    </Link>
+  ))
 
   if (variant === 'teaser') {
     return (
@@ -51,7 +56,7 @@ const Article = ({ variant, node }) => {
                   <span dangerouslySetInnerHTML={{ __html: node.body[0].processed }} />
                 </Card.Text>
                 <div className="text-end">
-                  {FieldTags}
+                  {field_tags}
                 </div>
               </Card.Body>
             </Col>
@@ -89,7 +94,7 @@ const Article = ({ variant, node }) => {
             Monitor and filter the logs of multiple remote Drupal installations from your localhost.
           </Card.Text>
           <div className="text-end">
-            {FieldTags}
+            {field_tags}
           </div>
         </Card.Body>
       </Card >

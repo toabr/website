@@ -20,7 +20,12 @@
 }
 
 html[data-theme="dark"] {
-  .title-list .title {
-    color: var(--bs-primary);
+  .title-list {
+    .title {
+      color: var(--bs-primary);
+    }
+    .tag small{
+      background: var(--bs-accent-1) !important;
+    }
   }
 }

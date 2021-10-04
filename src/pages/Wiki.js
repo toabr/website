@@ -1,6 +1,5 @@
 import { Container, Spinner, Button } from 'react-bootstrap'
 
-import useTagList from '../hooks/useTagList'
 import useFetch from '../hooks/useFetch'
 import useQuery from '../hooks/useQuery'
 
@@ -11,7 +10,8 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import BtnList from '../components/BtnList'
 
 import { urlBuilder } from '../js/helper'
-import { useLayoutEffect, useRef } from 'react'
+import { useRef } from 'react'
+import { useDataContext } from '../hooks/useDataContext'
 
 
 /**
@@ -23,7 +23,7 @@ import { useLayoutEffect, useRef } from 'react'
  */
 const Wiki = () => {
   const [query, setQuery] = useQuery('q')
-  const tagList = useTagList()
+  const tagList = useDataContext()
   const pageTitle = 'Code Snippets Wiki'
   const pageDescription = 
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'

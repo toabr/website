@@ -2,14 +2,15 @@
 import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
-import { useThemeContext } from '../hooks/useThemeContext';
 import useFetch from '../hooks/useFetch'
+import useTagTitles from '../hooks/useTagTitles';
+import { useThemeContext } from '../hooks/useThemeContext';
 
-import PageTitle from '../components/PageTitle'
 import Meta from '../components/Meta'
+import PageTitle from '../components/PageTitle'
 import Breadcrumbs from '../components/Breadcrumbs'
 
-import { urlBuilder, addTagTitles, formatUTC } from '../js/helper'
+import { urlBuilder, formatUTC } from '../js/helper'
 import hljs from 'highlight.js'
 // import './post.scss'
 
@@ -22,37 +23,31 @@ import hljs from 'highlight.js'
  */
 const Post = (props) => {
 
-  const [themeMode] = useThemeContext()
   // to define button style by theme light/dark
+  const [themeMode] = useThemeContext()
   const variant = (themeMode === 'light') ? "" : "outline-"
 
+  // initial values
   const nid = props.match.params.nid
-  const tagList = props.tagList
   const title = `Post ${nid}`
-  let headline = ''
   let isLoading = true // state of PageTitle
-  let body = ''
-
-
+  
+  // fetch node
   const url = urlBuilder({ nid })
   const { status, data, error } = useFetch(url)
-  const node = data[0]
+  // set node data
+  const node = data[0] || []
+  const headline = node?.title ? node.title[0].value : ''
+  const body = node?.body ? highLight(node.body[0].value) : ''
+  const field_tags = useTagTitles(node.field_tags)
 
   if (status === 'error') {
     console.error(error)
   }
-
+  if (status === 'fetching') {
+    isLoading = true
+  }
   if (status === 'fetched') {
-    if (!!data.length) {
-      headline = node.title[0].value
-      // add tag titles
-      node.field_tags = addTagTitles(node.field_tags, tagList)
-
-      body = highLight(node.body[0].value)
-
-    } else {
-      headline = 'nothing here'
-    }
     isLoading = false
   }
 
@@ -109,7 +104,7 @@ const Post = (props) => {
           <div dangerouslySetInnerHTML={{ __html: body }} />
 
           <div className="footer my-5">
-            {node.field_tags.map(nodeTag => (
+            {field_tags.map(nodeTag => (
               <Link to={`/wiki?q=${nodeTag.title}`} >
                 <Button
                   variant={`${variant}primary`}
