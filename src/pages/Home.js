@@ -1,40 +1,23 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import usePersistedState from '../hooks/usePersistedState'
 import useFetch from '../hooks/useFetch'
-import { formatUTC } from '../js/helper'
 
 import Meta from '../components/Meta'
 import Search from '../components/Search'
 import Showcase from '../components/Showcase'
+import { reorderNodes } from '../js/helper'
 
 
 const Home = () => {
-  const ids = [120, 86, 85, 84, 87] // exact ids to fetch in order
-
-  /**
-   * look up local store
-   */
-  // const [showcase, setShowcase] = usePersistedState('showcase', [])
-
+  const ids = [85, 120, 86, 84, 87] // exact ids to fetch in order
 
   /**
    * FETCH
    */
   const url = `${process.env.REACT_APP_API_URL}/rest/v2/node/work/${ids.toString()}`
-
   const { status, data, error } = useFetch(url)
 
   if (status === 'fetched') {
-    // not setShowcaseStore because of infinit rerender
-    // localStorage.setItem('showcase', JSON.stringify(data))
-  }
-
-
-  /**
-   * reorder server output
-   */
-  function reorderNodes(nodes, ids) {
-    return nodes.map((node, index) => nodes.find(node => node.nid[0].value == ids[index]))
+    // ...
   }
 
 
@@ -60,7 +43,7 @@ const Home = () => {
         </Row>
       </Container>
 
-      <Showcase nodes={data || []} />
+      <Showcase nodes={reorderNodes(data, ids) || []} />
     </>
   )
 }

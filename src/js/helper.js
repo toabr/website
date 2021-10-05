@@ -21,6 +21,13 @@ export const orderByTitle = arr => {
   });
 }
 
+/**
+   * reorder server output
+   */
+export function reorderNodes(nodes, list) {
+  return nodes.map((node, index) => nodes.find(node => node.nid[0].value == list[index]))
+}
+
 
 /**
    * - traverse array of tag objects
