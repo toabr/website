@@ -9,26 +9,24 @@ import Showcase from '../components/Showcase'
 
 
 const Home = () => {
+  const ids = [120, 86, 85, 84, 87] // exact ids to fetch in order
 
   /**
-   * use the store or fetch and save to the store
+   * look up local store
    */
-  const ids = [87, 86, 85, 84] // exact ids to fetch in order
-  const [showcaseStore, setShowcaseStore] = usePersistedState('showcaseData', [])
-  let showcaseData = showcaseStore
+  // const [showcase, setShowcase] = usePersistedState('showcase', [])
 
-  const url = !showcaseData.length &&
-    `${process.env.REACT_APP_API_URL}/rest/v2/node/work/${ids.toString()}`
 
-  const { status, data: showcaseFetched, error } = useFetch(url)
+  /**
+   * FETCH
+   */
+  const url = `${process.env.REACT_APP_API_URL}/rest/v2/node/work/${ids.toString()}`
+
+  const { status, data, error } = useFetch(url)
 
   if (status === 'fetched') {
-    let output = addStuff(showcaseFetched)
-    output = reorderNodes(output, ids)
-    showcaseData = [...output]
-
     // not setShowcaseStore because of infinit rerender
-    localStorage.setItem('showcaseData', JSON.stringify(output))
+    // localStorage.setItem('showcase', JSON.stringify(data))
   }
 
 
@@ -38,24 +36,6 @@ const Home = () => {
   function reorderNodes(nodes, ids) {
     return nodes.map((node, index) => nodes.find(node => node.nid[0].value == ids[index]))
   }
-
-
-  /**
-   * process server output
-   */
-  function addStuff(nodes) {
-    const output = nodes.map(node => {
-
-      node.created[0].locale = formatUTC(node.created[0].value) // format created dates
-      node.changed[0].locale = formatUTC(node.changed[0].value) // format changed date
-
-      // TODO: insert tag titles
-
-      return node
-    })
-    return output
-  }
-
 
 
   return (
@@ -80,7 +60,7 @@ const Home = () => {
         </Row>
       </Container>
 
-      <Showcase data={showcaseData} />
+      <Showcase nodes={data || []} />
     </>
   )
 }

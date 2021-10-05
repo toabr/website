@@ -12,7 +12,8 @@ import Breadcrumbs from '../components/Breadcrumbs'
 
 import { urlBuilder, formatUTC } from '../js/helper'
 import hljs from 'highlight.js'
-// import './post.scss'
+
+import './post.scss'
 
 
 /**
@@ -71,7 +72,7 @@ const Post = (props) => {
       pre.classList.add('hljs', `lang-${lighted.language}`)
       pre.innerHTML = lighted.value
     }
-    return wrapper.outerHTML
+    return wrapper.innerHTML
   }
 
 
@@ -92,8 +93,8 @@ const Post = (props) => {
 
       {status === 'fetched' && !!data.length &&
 
-        <div id={`post-${nid}`}
-          style={{ maxWidth: 685 }}
+        <div id={`Post-${nid}`}
+          style={{ maxWidth: 1040 }}
           className="post mx-auto px-3">
 
           <div className="date text-center text-muted my-3">
@@ -101,19 +102,19 @@ const Post = (props) => {
           </div>
 
           {/* TODO: check dangerouslySetInnerHTML */}
-          <div dangerouslySetInnerHTML={{ __html: body }} />
+          <div className="body" dangerouslySetInnerHTML={{ __html: body }} />
 
-          <div className="footer my-5">
+          <footer className="footer my-5">
             {field_tags.map(nodeTag => (
               <Link to={`/wiki?q=${nodeTag.title}`} >
                 <Button
                   variant={`${variant}primary`}
-                  className="me-2 mb-2" >
+                  className="text-capitalize me-2 mb-2" >
                   #{nodeTag.title}
                 </Button>
               </Link>
             ))}
-          </div>
+          </footer>
         </div>
       }
     </>

@@ -1,14 +1,37 @@
-.post {
+$shrink: h1, h2, h3, h4, h5, h6, p, pre, blockquote, ul, ol, main, footer;
+$width: 685px;
+
+[id^="Post"] {
+  @each $item in $shrink {
+    .body > #{$item},
+    footer {
+      max-width: $width;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  .overflow {
+    width: 100vw;
+    position: relative;
+    left: calc(-50vw + 50%);
+    padding: 0 1rem 0;
+    & > * {
+      display: block;
+      max-width: 1040px;
+      margin: auto !important;
+    }
+  }
   h2 {
-    border-bottom: 1px solid #dee2e6;
-    padding-bottom: .5rem;
-    margin-bottom: .8rem;
+    border-bottom: 1px solid var(--bs-accent-2);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
   }
   hr {
     color: #dee2e6;
     opacity: 1;
   }
-  p, li {
+  p,
+  li {
     font: 1rem var(--font-serif);
     line-height: 1.65;
   }
@@ -21,35 +44,20 @@
     }
   }
   code {
-    color: var(--bs-accent);
+    color: var(--bs-highlight);
   }
   pre {
     position: relative;
-    background: var(--theme-text);
-    color: var(--theme-bg);
+    background: var(--bs-dark);
+    color: var(--bs-light);
     padding: 1rem;
-    border-left: 5px solid var(--bs-accent);
-    
-    code {
-      color: var(--bs-accent);
-      background: none;
-    }
-    span.file-name {
-      position: absolute;
-      display: block;
-      top: 0;
-      left: 0;
-      padding: .2rem .5rem .1rem .5rem;
-      background: #d63384;
-      font-size: small;
-      font-weight: 700;
-      color: white;
-    }
+    border-left: 5px solid var(--bs-highlight);
+
     &.term {
       padding-top: 2rem;
       border: none;
       &::before {
-        content: 'Terminal';
+        content: "terminal";
         position: absolute;
         top: 0;
         left: 0;
@@ -64,7 +72,7 @@
       &::after {
         content: "";
         position: absolute;
-        top: .8rem;
+        top: 0.8rem;
         right: 0.5rem;
         width: 13px;
         height: 3px;
@@ -74,8 +82,8 @@
   }
   blockquote {
     padding: 1.25em 1.5em;
-    background: rgba(255, 255, 255, 0.35);
-    border-left: 3px solid var(--bs-accent);
+    background: rgba(var(--bs-accent-1-rgb), 0.35);
+    // border-left: 3px solid var(--bs-highlight);
     font-size: 1.08rem;
   }
   kbd {
@@ -86,7 +94,7 @@
   }
   abbr {
     text-decoration: underline dotted 1px;
-    text-underline-offset: .135rem;
+    text-underline-offset: 0.135rem;
     font-weight: bolder;
     &:hover {
       cursor: help;
