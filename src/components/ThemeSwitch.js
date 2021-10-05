@@ -6,15 +6,17 @@ import { useThemeContext } from "../hooks/useThemeContext"
  * toggle attribute on "html" element for theme switch
  */
 export default function ThemeSwitch() {
-  const [style, setStyle] = useThemeContext()
+  const {darkMode, setDarkMode} = useThemeContext()
 
-  function toggleStyle() {
-    setStyle((style === 'light') ? 'dark' : 'light')
-  }
+  const handleChange = () => setDarkMode((prev) => !prev);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', style)
-  }, [style])
+    darkMode ?
+      document.documentElement.setAttribute('darkMode', '')
+      :
+      document.documentElement.removeAttribute('darkMode', '')
+
+  },[darkMode])
 
   return (
     <div className="form-switch">
@@ -22,8 +24,8 @@ export default function ThemeSwitch() {
         id="theme-switch"
         type="checkbox"
         className="form-check form-check-input rounded-pill"
-        checked={(style === 'dark') ? true : false}
-        onClick={toggleStyle}
+        checked={darkMode}
+        onClick={handleChange}
       />
     </div>
   )

@@ -27,8 +27,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 const BtnList = ({ data = [], options = {}, more, children }) => {
 
   // define button style by themeMode light/dark
-  const [themeMode] = useThemeContext()
-  let variant = (themeMode === 'light') ? "" : "outline-"
+  const { darkMode } = useThemeContext()
+  let variant = (darkMode) ? "outline-" : ""
 
 
   return (

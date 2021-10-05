@@ -24,14 +24,14 @@ import hljs from 'highlight.js'
 const Post = (props) => {
 
   // to define button style by theme light/dark
-  const [themeMode] = useThemeContext()
-  const variant = (themeMode === 'light') ? "" : "outline-"
+  const { darkMode } = useThemeContext()
+  const variant = (darkMode) ? "outline-" : ""
 
   // initial values
   const nid = props.match.params.nid
   const title = `Post ${nid}`
   let isLoading = true // state of PageTitle
-  
+
   // fetch node
   const url = urlBuilder({ nid })
   const { status, data, error } = useFetch(url)
