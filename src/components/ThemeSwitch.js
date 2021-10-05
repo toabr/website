@@ -6,7 +6,7 @@ import { useThemeContext } from "../hooks/useThemeContext"
  * toggle attribute on "html" element for theme switch
  */
 export default function ThemeSwitch() {
-  const {darkMode, setDarkMode} = useThemeContext()
+  const { darkMode, setDarkMode } = useThemeContext()
 
   const handleChange = () => setDarkMode((prev) => !prev);
 
@@ -16,17 +16,15 @@ export default function ThemeSwitch() {
       :
       document.documentElement.removeAttribute('darkMode', '')
 
-  },[darkMode])
+  }, [darkMode])
 
   return (
-    <div className="form-switch">
+    <div id="theme-switch" className="form-switch">
       <input
-        id="theme-switch"
-        type="checkbox"
         className="form-check form-check-input rounded-pill"
+        type="checkbox"
         checked={darkMode}
-        onClick={handleChange}
-      />
+        onChange={handleChange} />
     </div>
   )
 }
