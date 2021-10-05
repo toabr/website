@@ -9,7 +9,7 @@ const About = () => {
       </p>
       <footer className="position-fixed bottom-0">
         <p className="">
-          <p>Photo by <a rel="nofollow" target="_blank" href="https://unsplash.com/@hikendal?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kendal</a> on <a rel="nofollow" target="_blank" href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+          <p>Photo by <a rel="noreferrer" target="_blank" href="https://unsplash.com/@hikendal?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kendal</a> on <a rel="noreferrer" target="_blank" href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
           </p>
         </p>
       </footer>

@@ -35,14 +35,14 @@ const Article = ({ variant, node }) => {
     </Link>
   ))
 
-  const resource = () => (
+  const resource = (
     <Button
-      href={node.field_resource[0].uri}
+      href={node.field_resource[0]?.uri}
       target="_blank"
-      rel="nofollow"
+      rel="noreferrer"
       variant={`${btnVariant}primary`}
       size="sm">
-      {node.field_resource[0].title}
+      {node.field_resource[0]?.title}
     </Button>
   )
 
@@ -76,7 +76,7 @@ const Article = ({ variant, node }) => {
                 {summary}
               </Card.Text>
               <div className="text-end">
-                {node && resource()}
+                {node.field_resource[0] && resource}
               </div>
             </Card.Body>
           </Col>
@@ -112,7 +112,7 @@ const Article = ({ variant, node }) => {
           {summary}
         </Card.Text>
         <div className="text-end">
-          {node.field_resource[0] && resource()}
+          {node.field_resource[0] && resource}
         </div>
       </Card.Body>
     </Card >
