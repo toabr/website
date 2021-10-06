@@ -106,7 +106,7 @@ const Post = (props) => {
 
           <footer className="footer my-5">
             {field_tags.map(nodeTag => (
-              <Link to={`/wiki?q=${nodeTag.title}`} >
+              <Link to={`/wiki?q=${nodeTag.title}`} key={nodeTag.title} >
                 <Button
                   variant={`${variant}primary`}
                   className="text-capitalize me-2 mb-2" >

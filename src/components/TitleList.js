@@ -45,7 +45,7 @@ const TitleListItem = ({ node }) => {
  * @returns 
  */
 const TitleList = ({ nodes = [], children }) => {
-  const Titles = nodes ? nodes.map((node, index) => <TitleListItem node={node} />) : []
+  const Titles = nodes ? nodes.map(node => <TitleListItem node={node} key={node.nid[0].value} />) : []
   return (
     <div className="title-list">
       <ListGroup variant="flush" className="text-start">
