@@ -50,8 +50,7 @@ $input-border-width:  0;
 $input-box-shadow: $box-shadow-slim;
 $input-disabled-bg: var(--bs-accent-2);
 
-$border-color: var(--bs-accent-2);
-
+$border-color: rgba(var(--bs-body-color-rgb), .15);
 
 // scss-docs-start font-variables
 // $font-size-base:              1rem;

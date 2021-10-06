@@ -84,7 +84,7 @@ const Wiki = () => {
       <Breadcrumbs crumbs={[{ name: 'Home', href: '/' }, { name: 'Wiki' }]} />
       <PageTitle head={pageTitle} description={pageDescription} />
 
-      <Container style={{ maxWidth: 685 }} className="">
+      <Container style={{ maxWidth: 685 }} className="mb-5">
 
         <BtnList data={btnListData} options={{
           size: 'sm',

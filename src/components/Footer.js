@@ -1,5 +1,6 @@
 import { Nav } from "react-bootstrap"
 import { LinkContainer } from 'react-router-bootstrap'
+import PageBreak from "./PageBreak"
 
 
 const Footer = () => {
@@ -7,6 +8,9 @@ const Footer = () => {
   return (
     <>
       <footer id="footer" className="container mx-auto" style={{ maxWidth: '1040px' }}>
+
+        <PageBreak />
+
         <section className="d-flex flex-wrap justify-content-center 
         justify-content-sm-between flex-row-reverse align-items-center 
         py-3 my-3">
