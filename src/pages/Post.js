@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap'
 import useFetch from '../hooks/useFetch'
 import useTagTitles from '../hooks/useTagTitles';
 import { useThemeContext } from '../hooks/useThemeContext';
+import useFetchImages from '../hooks/useFetchImages';
 
 import Meta from '../components/Meta'
 import PageTitle from '../components/PageTitle'
@@ -41,6 +42,8 @@ const Post = (props) => {
   const headline = node?.title ? node.title[0].value : ''
   const body = node?.body ? highLight(node.body[0].value) : ''
   const field_tags = useTagTitles(node.field_tags)
+
+  const field_image = useFetchImages(nid)
 
   if (status === 'error') {
     console.error(error)
@@ -98,11 +101,17 @@ const Post = (props) => {
           className="post mx-auto px-3">
 
           <div className="date text-center text-muted my-3">
-            {formatUTC(node.created[0].value)}
+            {formatUTC(node.created[0]?.value)}
           </div>
 
           {/* TODO: check dangerouslySetInnerHTML */}
           <div className="body" dangerouslySetInnerHTML={{ __html: body }} />
+
+          <div className="field_images d-sm-flex justify-content-center mt-5">
+            {!!field_image.length && field_image.map(image => (
+              <div className="image px-2" dangerouslySetInnerHTML={{ __html: image }} />
+            ))}
+          </div>
 
           <footer className="footer my-5">
             {field_tags.map(nodeTag => (

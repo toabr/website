@@ -6,6 +6,7 @@ export const handleLocalStore = ({ key, value }) => {
 }
 
 export const formatUTC = (date) => {
+  if(!date) return
   const formated = new Date(date)
   return formated.toLocaleDateString()
 }

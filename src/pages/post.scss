@@ -2,6 +2,9 @@ $shrink: h1, h2, h3, h4, h5, h6, p, pre, blockquote, ul, ol, main, footer;
 $width: 685px;
 
 [id^="Post"] {
+
+  // shrink content width
+  // 
   @each $item in $shrink {
     .body > #{$item},
     footer {
@@ -21,6 +24,10 @@ $width: 685px;
       margin: auto !important;
     }
   }
+  
+  
+  // style base elements
+  // 
   h2 {
     border-bottom: 1px solid var(--bs-accent-2);
     padding-bottom: 0.5rem;
@@ -106,5 +113,14 @@ $width: 685px;
   }
   small {
     font-weight: 200;
+  }
+
+
+  // images
+  // 
+  img {
+    max-width: 100%;
+    height: auto;
+    max-height: 18rem;
   }
 }
