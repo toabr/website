@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 
-import { LinkContainer } from 'react-router-bootstrap'
 import { Button, Card, Col, Row } from 'react-bootstrap'
 
 import useTagTitles from '../hooks/useTagTitles'
 import { useThemeContext } from '../hooks/useThemeContext'
 import { formatUTC } from '../js/helper'
+import FaIcon from './FaIcon'
 
 
 /**
@@ -31,7 +31,7 @@ const Article = ({ variant, node }) => {
       to={`/wiki?q=${tag.title.toLowerCase()}`}
       key={tag.target_id}
       className="pe-2 text-decoration-none text-capitalize">
-      <small>#{tag.title}💅</small>
+      <FaIcon className="me-1" />{tag.title}
     </Link>
   ))
 
@@ -40,9 +40,12 @@ const Article = ({ variant, node }) => {
       href={node.field_resource[0]?.uri}
       target="_blank"
       rel="noreferrer"
-      variant={`${btnVariant}primary`}
-      size="sm">
-      {node.field_resource[0]?.title}
+      className="rounded-circle"
+      variant={'highlight'}
+      title={node.field_resource[0]?.title}
+      alt={node.field_resource[0]?.title}
+      size="">
+      <FaIcon name={node.field_resource[0]?.title} className="" />
     </Button>
   )
 
@@ -60,7 +63,7 @@ const Article = ({ variant, node }) => {
             </Link>
           </Col>
           <Col md={4}>
-            <Card.Body className="">
+            <Card.Body className="" style={{ fontSize: '0.85rem' }}>
               <div className="text-primary mb-2">
                 {field_tags}
               </div>
@@ -72,7 +75,7 @@ const Article = ({ variant, node }) => {
               <Card.Subtitle as="small" className="mb-2 text-muted">
                 {formatUTC(node.changed[0].value)}
               </Card.Subtitle>
-              <Card.Text className="font-serif text-accent-3">
+              <Card.Text className="font-serif text-accent-3 m-0">
                 {summary}
               </Card.Text>
               <div className="text-end">
@@ -89,16 +92,21 @@ const Article = ({ variant, node }) => {
 
   return (
     <Card as="article" bg="accent-1" className="h-100 border-0 shadow-slim shadow-drop">
-      <Link to={link}>
+      <Link to={link} className="d-flex justify-content-center bg-primary bg-gradient p-3" style={{ height: '15rem' }}>
         <Card.Img
           variant="top"
-          className="img-fluid"
-          style={{ width: '100%', height: '15rem', objectFit: 'cover' }}
+          className="align-self-center img-fluid shadow-slim"
+          style={{ width: 'auto', maxHeight: '100%', objectFit: 'contain' }}
           src={node.field_image[0].url} />
       </Link>
-      <Card.Body className="pt-1">
-        <div className="text-primary fw-bolder my-2">
-          {field_tags}
+      <Card.Body className="pt-1" style={{ fontSize: '0.85rem' }}>
+        <div className="d-flex justify-content-between position-relative">
+          <div className="text-primary fw-bolder my-2">
+            {field_tags}
+          </div>
+          <div className="position-absolute" style={{ top: '-23px', right: '-8px' }} >
+            {node.field_resource[0] && resource}
+          </div>
         </div>
         <Card.Title className="fw-bold">
           <Link to={link} className="text-body text-decoration-none">
@@ -108,11 +116,11 @@ const Article = ({ variant, node }) => {
         <Card.Subtitle as="small" className="mb-2 text-muted">
           {formatUTC(node.changed[0].value)}
         </Card.Subtitle>
-        <Card.Text className="font-serif text-accent-3 py-1">
+        <Card.Text className="font-serif text-accent-3 py-1 m-0">
           {summary}
         </Card.Text>
         <div className="text-end">
-          {node.field_resource[0] && resource}
+
         </div>
       </Card.Body>
     </Card >

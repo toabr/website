@@ -15,6 +15,7 @@ $variable-prefix:    bs- !default;
 $min-contrast-ratio:   2;
 
 // colors
+$white:         #fff;
 $primary:       #20c997;
 $secondary:     #5e7683;
 $highlight:     #d63384;
@@ -40,7 +41,7 @@ $body-color:    $dark;
 
 $box-shadow-slim: 0 6px 8px rgb(85 102 119 / 3%), 0 1px 1px rgb(85 102 119 / 40%);
 
-
+$gradient: linear-gradient(168deg, rgba($white, .23), rgba($white, 0)) !default;
 
 $input-color:   var(--bs-body);
 $input-bg:      var(--bs-accent-1);
