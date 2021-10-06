@@ -13,13 +13,13 @@ const Showcase = ({ nodes = [] }) => {
       </Row>
       {nodes.length > 0 &&
         <Row xs={1} md={2} lg={3} className="mx-auto pb-3 mb-4" style={{ maxWidth: '1040px' }}>
-          <Col className="mb-4">
+          <Col className="mb-5">
             {nodes[1] && <Article node={nodes[1]} />}
           </Col>
-          <Col className="mb-4">
+          <Col className="mb-5">
             {nodes[2] && <Article node={nodes[2]} />}
           </Col>
-          <Col className="mb-4">
+          <Col className="mb-5">
             {nodes[3] && <Article node={nodes[3]} />}
           </Col>
         </Row>

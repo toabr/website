@@ -1,12 +1,12 @@
 import { faHashtag } from '@fortawesome/free-solid-svg-icons'
-import { faDocker, faDrupal, faJs, faLinux, faReact, faSass } from '@fortawesome/free-brands-svg-icons'
+import { faDocker, faDrupal, faJs, faLinux, faReact, faSass, faNodeJs } from '@fortawesome/free-brands-svg-icons'
 
 import BtnList from "./BtnList"
 
 const btnData = [
   { title: "linux", id: ["linux"], faIcon: faLinux },
   { title: "drupal", id: ["drupal"], faIcon: faDrupal },
-  { title: "es6", id: ["javascript"], faIcon: faJs },
+  { title: "javaScript", id: ["javascript"], faIcon: faNodeJs },
   { title: "scss", id: ["scss"], faIcon: faSass },
   { title: "react", id: ["react"], faIcon: faReact },
   { title: "bash", id: ["bash"], faIcon: faHashtag },
