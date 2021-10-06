@@ -37,13 +37,6 @@ const Post = (props) => {
   // fetch node
   const url = urlBuilder({ nid })
   const { status, data, error } = useFetch(url)
-  // set node data
-  const node = data[0] || []
-  const headline = node?.title ? node.title[0].value : ''
-  const body = node?.body ? highLight(node.body[0].value) : ''
-  const field_tags = useTagTitles(node.field_tags)
-
-  const field_image = useFetchImages(nid)
 
   if (status === 'error') {
     console.error(error)
@@ -54,6 +47,13 @@ const Post = (props) => {
   if (status === 'fetched') {
     isLoading = false
   }
+
+  // set node data
+  const node = data[0] || []
+  const headline = node?.title ? node.title[0].value : ''
+  const body = node?.body ? highLight(node.body[0].value) : ''
+  const field_tags = useTagTitles(node.field_tags)
+  const field_image = useFetchImages(nid) // fetchimg images
 
 
   /**
@@ -109,7 +109,7 @@ const Post = (props) => {
 
           <div className="field_images d-sm-flex justify-content-center mt-5">
             {!!field_image.length && field_image.map(image => (
-              <div className="image px-2" dangerouslySetInnerHTML={{ __html: image }} />
+              <div className="image px-sm-2 mb-3" dangerouslySetInnerHTML={{ __html: image }} />
             ))}
           </div>
 
