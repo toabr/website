@@ -17,13 +17,13 @@ function useQuery() {
    * but only the post tag buttons uses it for now
    * @param {string} param - query selector
    * @returns {array} - param0 function1
-   * TODO: clear up for multi pupose !!
+   * TODO: clean up for multi purpose !!
    */
 function useLocationSearch(param) {
   const query = useQuery().get(param)
   const history = useHistory()
 
-  console.log(query)
+  // console.log(query)
 
   /**
    * @param {string} param 

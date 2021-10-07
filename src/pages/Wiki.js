@@ -11,6 +11,31 @@ import BtnList from '../components/BtnList'
 import { useDataContext } from '../hooks/useDataContext'
 import useFetchNodes from '../hooks/useFetchNodes'
 import { LinkContainer } from 'react-router-bootstrap'
+import { useRef } from 'react'
+import FaIcon from '../components/FaIcon'
+
+
+function PageNavigation({ next, prev }) {
+  if (!next && !prev) return null
+  return (
+    <div className="d-flex gap-0 justify-content-center pt-0 px-0">
+      {prev &&
+        <LinkContainer to={prev}>
+          <Button variant="secondary" size="sm" className="flex-fill">
+            <FaIcon name="arrowleft" />
+          </Button>
+        </LinkContainer>
+      }
+      {next &&
+        <LinkContainer to={next}>
+          <Button variant="secondary" size="sm" className="flex-fill">
+            <FaIcon name="arrowright" />
+          </Button>
+        </LinkContainer>
+      }
+    </div>
+  )
+}
 
 
 /**
@@ -24,10 +49,11 @@ const Wiki = (props) => {
 
   const tagList = useDataContext()
   const [query, setQuery] = useQuery('q') // fetch trigger
-  const [page] = useQuery('page') || 0 // fetch trigger
+  const [page] = useQuery('page') // fetch trigger
   const pageTitle = 'Code Snippets Wiki'
   const pageDescription =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+  const subHead = useRef(null)
 
 
   /**
@@ -36,7 +62,7 @@ const Wiki = (props) => {
   const queryObj = {
     tags: encodeURI(query || ''),
     items: 10,
-    page: page
+    page: page || 0
   }
   const { nodes, isLoading } = useFetchNodes(queryObj)
 
@@ -64,9 +90,24 @@ const Wiki = (props) => {
   })
 
 
+  /**
+   * scroll to loading animation on fetch
+   * TODO: think about it :)
+   */
+  function ScrolyMoly() {
+    const top = subHead.current?.offsetTop - 85
+    console.dir(top)
+    if (top && (query || page) && !isLoading) {
+      window.scrollTo(0, top)
+    }
+  }
+
+
   return (
     <div>
       <Meta title={pageTitle} />
+
+      {ScrolyMoly()}
 
       <Breadcrumbs crumbs={[{ name: 'Home', href: '/' }, { name: 'Wiki' }]} />
       <PageTitle head={pageTitle} description={pageDescription} />
@@ -90,7 +131,7 @@ const Wiki = (props) => {
           }
 
           {(!isLoading) &&
-            <h2 className="lead text-center text-capitalize m-0">
+            <h2 ref={subHead} className="lead text-center text-capitalize m-0">
               {(!query) && 'Recent Posts'}
               {(query && !!nodes?.length) && query}
               {(query && !nodes?.length) && 'No Results'}
@@ -98,17 +139,15 @@ const Wiki = (props) => {
           }
         </div>
 
-        {!!nodes?.length &&
-          <TitleList nodes={nodes}>
-            {(nodes?.length === 10) &&
-              <LinkContainer to={`/wiki?q=${query}&page=${Number(page)+1}`}>
-                <ListGroup.Item action className="text-body bg-body fw-bolder shadow text-center" >
-                  <span className="title">more ...</span>
-                </ListGroup.Item>
-              </LinkContainer >
-            }
-          </TitleList>
+        {!!nodes?.length && <TitleList nodes={nodes} /> }
+
+        {(nodes?.length > 0) &&
+          <PageNavigation
+            next={nodes?.length === 10 && `/wiki?q=${query ?? ''}&page=${Number(page) + 1}`}
+            prev={page > 0 && `/wiki?q=${query ?? ''}&page=${Number(page) - 1}`}
+          />
         }
+
 
       </Container>
 

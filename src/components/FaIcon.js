@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faVimeoV } from "@fortawesome/free-brands-svg-icons";
-import { faBolt, faCube, faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faBolt, faCube, faHashtag } from "@fortawesome/free-solid-svg-icons";
 
 export default function FaIcon({name = '', className}) {
   const icon = {}
@@ -10,6 +10,8 @@ export default function FaIcon({name = '', className}) {
     case 'vimeo': icon.fa =  faVimeoV; break
     case 'sketchfab': icon.fa =  faCube; break
     case 'bolt': icon.fa =  faBolt; break
+    case 'arrowleft': icon.fa =  faArrowLeft; break
+    case 'arrowright': icon.fa =  faArrowRight; break
     default: icon.fa = faHashtag; break
   }
 

@@ -75,7 +75,6 @@ const Search = () => {
 
   return (
     <div id="search">
-      {console.log('render')}
       <Form onSubmit={e => onFormSubmit(e)} className="">
         <InputGroup className="shadow-slim" size="lg">
 
