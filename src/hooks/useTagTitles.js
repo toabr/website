@@ -7,6 +7,7 @@ import { useDataContext } from "./useDataContext"
    * 
    * @param {array} fieldTags - node.field_tags from node
    * @param {array} tagList - separate title/id pair from server
+   * TODO: rename
    */
  export default function useTagTitles(fieldTags = []) {
 

@@ -3,13 +3,11 @@ import React, { useRef, useState } from 'react';
 import { Button, Form, InputGroup, Spinner, ListGroup } from 'react-bootstrap'
 import { Search as SearchIcon } from 'react-bootstrap-icons'
 
-import useFetch from '../hooks/useFetch'
-
 import SearchDefault from './SearchDefault';
 import TitleList from './TitleList'
 
-import { urlBuilder } from '../js/helper'
 import { Link } from 'react-router-dom';
+import useFetchNodes from '../hooks/useFetchNodes';
 
 
 /**
@@ -19,33 +17,23 @@ import { Link } from 'react-router-dom';
  * list of results between
  */
 const Search = () => {
+  
   const [query, setQuery] = useState('')
   const [activeTag, setActiveTag] = useState('')
   const inputRef = useRef(null)
-  let isLoading = false
-  const nodes = useRef([]) // saves nodes between fetches
+
 
   /**
    * fetching when query || activeTag changes
    */
-  const url = (query || activeTag) && urlBuilder(
-    { type: 'article', query: query, tags: activeTag, items: 10 })
-
-  const { status, data, error } = useFetch(url)
-
-  if (status === 'error') {
-    console.error(error)
-  }
-  if (status === 'fetching') {
-    inputRef.current.readOnly = true
-    isLoading = true
-  }
-  if (status === 'fetched') {
-    // inputRef.current.focus()
-    nodes.current = [...data]
-    inputRef.current.readOnly = false
-    isLoading = false
-  }
+  const queryObj = (query || activeTag) ? { 
+    type: 'article', 
+    query: query, 
+    tags: activeTag, 
+    items: 10 
+  } : undefined
+  const { nodes, isLoading } = useFetchNodes(queryObj)
+  
 
   /**
    * trigger url rebuild > fetch
@@ -65,6 +53,7 @@ const Search = () => {
     }
   }
 
+
   /**
    * sets the query string
    * @param {object} e - dom event
@@ -74,6 +63,7 @@ const Search = () => {
     triggerFetch('FORM')
   }
 
+
   /**
    * tag btn was clicked set the active tag
    * @param {String} tag
@@ -82,8 +72,10 @@ const Search = () => {
     triggerFetch('BUTTON', tag)
   }
 
+
   return (
     <div id="search">
+      {console.log('render')}
       <Form onSubmit={e => onFormSubmit(e)} className="">
         <InputGroup className="shadow-slim" size="lg">
 
@@ -105,7 +97,7 @@ const Search = () => {
             aria-describedby="basic-addon1"
             // onChange={(e) => handleOnChange(e)}
             // value={searchTerm}
-            readOnly={false}
+            readOnly={isLoading}
             onFocus={(e) => window.scrollTo(0, 198)}
           />
 
@@ -124,13 +116,13 @@ const Search = () => {
         </InputGroup>
       </Form>
 
-      {(status === 'fetched' && !nodes.current?.length) &&
+      {((nodes !== null) && (!isLoading) && (!nodes.length)) &&
         <div className="pt-3">Nothing there 🙁</div>
       }
 
-      {!!nodes.current?.length &&
-        <TitleList nodes={nodes.current.slice(0, 5)} >
-          {(nodes.current?.length > 5) &&
+      {!!nodes?.length &&
+        <TitleList nodes={nodes.slice(0, 5)} >
+          {(nodes?.length > 5) &&
             <Link to={`/wiki?q=${activeTag || query}`} >
               <ListGroup.Item action className="text-body bg-body text-center" >
                 <div className="title">more ...</div>

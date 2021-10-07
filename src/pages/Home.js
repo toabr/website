@@ -4,8 +4,15 @@ import useFetch from '../hooks/useFetch'
 import Meta from '../components/Meta'
 import Search from '../components/Search'
 import Showcase from '../components/Showcase'
-import { reorderNodes } from '../js/helper'
 import PageBreak from '../components/PageBreak'
+
+
+/**
+   * reorder server output
+   */
+function reorderNodes(nodes, list) {
+  return nodes.map((node, index) => nodes.find(node => node.nid[0].value == list[index]))
+}
 
 
 const Home = () => {
@@ -24,7 +31,7 @@ const Home = () => {
 
   return (
     <>
-      <Meta title="Home" />
+      <Meta title="toabr.de | Home" />
 
       <Container fluid as="section" id="header" className="p-0 mb-5">
         <Row style={{ maxWidth: '1040px' }}

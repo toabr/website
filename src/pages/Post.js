@@ -2,16 +2,15 @@
 import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
-import useFetch from '../hooks/useFetch'
-import useTagTitles from '../hooks/useTagTitles';
 import { useThemeContext } from '../hooks/useThemeContext';
+import useTagTitles from '../hooks/useTagTitles';
+import useFetchNodes from '../hooks/useFetchNodes';
 import useFetchImages from '../hooks/useFetchImages';
 
 import Meta from '../components/Meta'
 import PageTitle from '../components/PageTitle'
 import Breadcrumbs from '../components/Breadcrumbs'
 
-import { urlBuilder, formatUTC } from '../js/helper'
 import hljs from 'highlight.js'
 
 import './post.scss'
@@ -31,28 +30,16 @@ const Post = (props) => {
 
   // initial values
   const nid = props.match.params.nid
-  const title = `Post ${nid}`
-  let isLoading = true // state of PageTitle
+  const title = `toabr.de | Post ${nid}`
 
   // fetch node
-  const url = urlBuilder({ nid })
-  const { status, data, error } = useFetch(url)
-
-  if (status === 'error') {
-    console.error(error)
-  }
-  if (status === 'fetching') {
-    isLoading = true
-  }
-  if (status === 'fetched') {
-    isLoading = false
-  }
+  const { nodes, isLoading } = useFetchNodes({ nid })
 
   // set node data
-  const node = data[0] || []
+  const node = nodes ? nodes[0] : null
   const headline = node?.title ? node.title[0].value : ''
   const body = node?.body ? highLight(node.body[0].value) : ''
-  const field_tags = useTagTitles(node.field_tags)
+  const field_tags = useTagTitles(node?.field_tags)
   const field_image = useFetchImages(nid) // fetchimg images
 
 
@@ -71,7 +58,6 @@ const Post = (props) => {
 
     for (const pre of wrapper.getElementsByTagName('pre')) {
       const lighted = hljs.highlightAuto(pre.innerText, languages)
-      // console.log('hljs', lighted)
       pre.classList.add('hljs', `lang-${lighted.language}`)
       pre.innerHTML = lighted.value
     }
@@ -94,14 +80,14 @@ const Post = (props) => {
 
       <PageTitle head={headline} isLoading={isLoading} />
 
-      {status === 'fetched' && !!data.length &&
+      {node && !isLoading &&
 
         <div id={`Post-${nid}`}
           style={{ maxWidth: 1040 }}
           className="post mx-auto px-3">
 
           <div className="date text-center text-muted my-3">
-            {formatUTC(node.created[0]?.value)}
+            {node.created[0]?.locale}
           </div>
 
           {/* TODO: check dangerouslySetInnerHTML */}

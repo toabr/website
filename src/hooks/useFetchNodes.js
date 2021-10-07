@@ -1,12 +1,13 @@
 import { useRef } from "react"
 import useFetch from "./useFetch"
+import { formatUTC } from "../js/helper"
 
 /**
    * url builder for version API_V2
    * @param {obj} param0 
    * @returns url
    */
-const urlBuilder = ({
+export const urlBuilder = ({
   nid = '', // just one unfortunately
   type = 'All', // article, work
   tags = [], // array of strings
@@ -28,17 +29,30 @@ const urlBuilder = ({
   return url
 }
 
-
 /**
- * FIXME: not working at all
- * @param {*} param0 
+ * add readable time stampes to the nodes
+ * @param {Array} nodes 
  * @returns 
  */
-function useFetchNodes(query = {}) {
+function addLocalDate(nodes = []) {
+  return nodes.map(node => {
+    node.created[0].locale = formatUTC(node.created[0].value)
+    return node
+  })
+}
 
-  const url = urlBuilder(query)
-  const nodes = useRef([])
-  let isLoading = true
+
+/**
+ * builds a query fetches nodes,
+ * and adds two or more things
+ * @param {Object} param0 - query object
+ * @returns {Null || Array}
+ */
+function useFetchNodes(query) {
+
+  const url = query && urlBuilder(query)
+  const nodes = useRef(null)
+  let isLoading = false
 
   /**
    * hit the api
@@ -49,12 +63,18 @@ function useFetchNodes(query = {}) {
     console.error(error)
   }
 
+  if (status === 'idle') {
+  }
+
   if (status === 'fetching') {
     isLoading = true
   }
 
   if (status === 'fetched') {
     nodes.current = data
+    if (!!data.length) {
+      nodes.current = addLocalDate(data)
+    }
     isLoading = false
   }
 

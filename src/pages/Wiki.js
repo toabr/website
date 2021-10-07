@@ -1,6 +1,5 @@
 import { Container, Spinner, Button } from 'react-bootstrap'
 
-import useFetch from '../hooks/useFetch'
 import useQuery from '../hooks/useQuery'
 
 import PageTitle from '../components/PageTitle'
@@ -21,6 +20,7 @@ import useFetchNodes from '../hooks/useFetchNodes'
  * TODO: pager
  */
 const Wiki = () => {
+
   const tagList = useDataContext()
   const [query, setQuery] = useQuery('q') // fetch trigger
   const pageTitle = 'Code Snippets Wiki'
@@ -31,15 +31,13 @@ const Wiki = () => {
   /**
    * url query parameter
    */
-  const urlObj = {
+  const queryObj = {
     tags: encodeURI(query || ''),
     items: 10,
     // page: resultsPage // abandoned xD
   }
+  const { nodes, isLoading } = useFetchNodes(queryObj)
 
-  const { nodes, isLoading } = useFetchNodes(urlObj)
-  // console.log(nodes, isLoading)
-  
 
   /**
    * tag btn was clicked
@@ -54,11 +52,11 @@ const Wiki = () => {
     }
   }
 
+
   /**
    * prepare data array for <BtnList />
    */
   const btnListData = tagList.map(tag => {
-    // console.log('render')
     const active = (tag.title.toLowerCase() === query?.toLowerCase())
     return { title: tag.title, id: tag.tid, active }
   })
@@ -92,15 +90,15 @@ const Wiki = () => {
           {(!isLoading) &&
             <h2 className="lead text-center text-capitalize m-0">
               {(!query) && 'Recent Posts'}
-              {(query && !!nodes.length) && query}
-              {(query && !nodes.length) && 'No Results'}
+              {(query && !!nodes?.length) && query}
+              {(query && !nodes?.length) && 'No Results'}
             </h2>
           }
         </div>
 
-        {!!nodes.length &&
+        {!!nodes?.length &&
           <TitleList nodes={nodes}>
-            {(nodes.length === 10) &&
+            {(nodes?.length === 10) &&
               <Button
                 variant="outline-primary"
                 className="text-body bg-body text-center"
