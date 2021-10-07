@@ -9,59 +9,46 @@ import TitleList from '../components/TitleList'
 import Breadcrumbs from '../components/Breadcrumbs'
 import BtnList from '../components/BtnList'
 
-import { urlBuilder } from '../js/helper'
-import { useRef } from 'react'
 import { useDataContext } from '../hooks/useDataContext'
+import useFetchNodes from '../hooks/useFetchNodes'
 
 
 /**
  * - a button list of all tags, the user can choose and combine 
  * - underneath a fetched list of respective node titles
  * @param {array} tagList - fetched list of tags from App.js
- * @param {string} query - starter tag from linked content
+ * @param {string} query - trigger parameter for new fetch
  * TODO: pager
  */
 const Wiki = () => {
-  const [query, setQuery] = useQuery('q')
   const tagList = useDataContext()
+  const [query, setQuery] = useQuery('q') // fetch trigger
   const pageTitle = 'Code Snippets Wiki'
   const pageDescription = 
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-  const nodes = useRef([]) // cure against bouncyness @ fetch
-  let isLoading = true
-  const itemsPerPage = 10
+
 
   /**
-   * fetch articles respective to pressed buttons
+   * url query parameter
    */
-  const url = urlBuilder({
+  const urlObj = {
     tags: encodeURI(query || ''),
-    items: itemsPerPage,
-    // page: resultsPage // abandoned
-  })
-  
-  const { status, data, error } = useFetch(url)
+    items: 10,
+    // page: resultsPage // abandoned xD
+  }
 
-  if (status === 'error') {
-    console.error(error)
-  }
-  if (status === 'fetching') {
-    isLoading = true
-  }
-  if (status === 'fetched') {
-    nodes.current = data
-    isLoading = false
-    // if(window.scrollY < 300) window.scrollTo(0,300)
-  }
+  const { nodes, isLoading } = useFetchNodes(urlObj)
+  // console.log(nodes, isLoading)
+  
 
   /**
    * tag btn was clicked
    * @param {string} tag
    */
   const tagBtnClick = (tag) => {
-    // test if active btn was clicked
+    // compare clicked and active btn
     if (tag.localeCompare(query, undefined, { sensitivity: 'accent' }) === 0) {
-      setQuery('')
+      setQuery('') // active btn was clicked
     } else {
       setQuery(tag.toLowerCase())
     }
@@ -105,15 +92,15 @@ const Wiki = () => {
           {(!isLoading) &&
             <h2 className="lead text-center text-capitalize m-0">
               {(!query) && 'Recent Posts'}
-              {(query && !!nodes.current.length) && query}
-              {(query && !nodes.current.length) && 'No Results'}
+              {(query && !!nodes.length) && query}
+              {(query && !nodes.length) && 'No Results'}
             </h2>
           }
         </div>
 
-        {!!nodes.current?.length &&
-          <TitleList nodes={nodes.current}>
-            {(nodes.current?.length === itemsPerPage && false) &&
+        {!!nodes.length &&
+          <TitleList nodes={nodes}>
+            {(nodes.length === 10) &&
               <Button
                 variant="outline-primary"
                 className="text-body bg-body text-center"

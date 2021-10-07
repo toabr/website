@@ -1,6 +1,12 @@
-import { useEffect, useState } from "react"
 import useFetch from "./useFetch"
 
+
+/**
+ * adds the correct server address to the HTML
+ * @param {Object} image 
+ * @param {String} image.srcset_narrow - HTML <img ... >
+ * @returns 
+ */
 function addBaseUrl(image) {
   if(!image.srcset_narrow) return image
 
@@ -21,12 +27,13 @@ function addBaseUrl(image) {
   return img.outerHTML
 }
 
+
 /**
  * fetch images per Node
  * @param {Number} nid
  * @returns {Array}
  */
-export default function useFetchImages(nid) {
+function useFetchImages(nid) {
 
   const url = nid && `${process.env.REACT_APP_API_URL}/rest/v2/image?nid=${nid}`
 
@@ -47,3 +54,5 @@ export default function useFetchImages(nid) {
   return images
 
 }
+
+export default useFetchImages
