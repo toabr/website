@@ -11,10 +11,10 @@ const TitleListItem = ({ node }) => {
   const field_tags = useTagTitles(node.field_tags)
   return (
     <LinkContainer to={`node/${node.nid[0].value}`}>
-      <ListGroup.Item action="true" className="text-body bg-body fw-bolder shadow pe-2" >
+      <ListGroup.Item action className="text-body bg-body fw-bolder shadow pe-2" >
 
         <div className="d-sm-flex justify-content-between flex-wrap
-            align-items-center border-1 mt-1">
+            align-items-center mt-1">
           <small className="date d-sm-block pe-2 text-muted fw-light">
             {formatUTC(node.changed[0].value)}
           </small>
@@ -22,11 +22,11 @@ const TitleListItem = ({ node }) => {
             {node.title[0].value}
           </div>
 
-          <div className="tag text-highlight">
+          <div className="tags text-highlight">
             {field_tags.map(tag =>
               <small
                 style={{ fontSize: '.75rem' }}
-                className="bg-accent-2 fw-lighter ms-1 p-1 rounded-pill"
+                className="tag bg-accent-2 fw-lighter ms-1 p-1 rounded-pill"
                 key={tag.target_id} >
                 #{tag.title}
               </small>

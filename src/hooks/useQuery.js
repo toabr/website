@@ -23,6 +23,8 @@ function useLocationSearch(param) {
   const query = useQuery().get(param)
   const history = useHistory()
 
+  console.log(query)
+
   /**
    * @param {string} param 
    */

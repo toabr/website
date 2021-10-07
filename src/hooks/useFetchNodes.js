@@ -6,6 +6,7 @@ import { formatUTC } from "../js/helper"
    * url builder for version API_V2
    * @param {obj} param0 
    * @returns url
+   * TODO: better is better
    */
 export const urlBuilder = ({
   nid = '', // just one unfortunately
@@ -51,7 +52,7 @@ function addLocalDate(nodes = []) {
 function useFetchNodes(query) {
 
   const url = query && urlBuilder(query)
-  const nodes = useRef(null)
+  const nodes = useRef(null) // provide prev between render
   let isLoading = false
 
   /**

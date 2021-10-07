@@ -1,4 +1,4 @@
-import { Container, Spinner, Button } from 'react-bootstrap'
+import { Container, Spinner, Button, ListGroup } from 'react-bootstrap'
 
 import useQuery from '../hooks/useQuery'
 
@@ -10,6 +10,7 @@ import BtnList from '../components/BtnList'
 
 import { useDataContext } from '../hooks/useDataContext'
 import useFetchNodes from '../hooks/useFetchNodes'
+import { LinkContainer } from 'react-router-bootstrap'
 
 
 /**
@@ -19,13 +20,14 @@ import useFetchNodes from '../hooks/useFetchNodes'
  * @param {string} query - trigger parameter for new fetch
  * TODO: pager
  */
-const Wiki = () => {
+const Wiki = (props) => {
 
   const tagList = useDataContext()
   const [query, setQuery] = useQuery('q') // fetch trigger
+  const [page] = useQuery('page') || 0 // fetch trigger
   const pageTitle = 'Code Snippets Wiki'
-  const pageDescription = 
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+  const pageDescription =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
 
 
   /**
@@ -34,7 +36,7 @@ const Wiki = () => {
   const queryObj = {
     tags: encodeURI(query || ''),
     items: 10,
-    // page: resultsPage // abandoned xD
+    page: page
   }
   const { nodes, isLoading } = useFetchNodes(queryObj)
 
@@ -99,13 +101,11 @@ const Wiki = () => {
         {!!nodes?.length &&
           <TitleList nodes={nodes}>
             {(nodes?.length === 10) &&
-              <Button
-                variant="outline-primary"
-                className="text-body bg-body text-center"
-                // onClick={() => setResultsPage(prev => prev + 1)} 
-                >
-                <div className="title">more ...</div>
-              </Button>
+              <LinkContainer to={`/wiki?q=${query}&page=${Number(page)+1}`}>
+                <ListGroup.Item action className="text-body bg-body fw-bolder shadow text-center" >
+                  <span className="title">more ...</span>
+                </ListGroup.Item>
+              </LinkContainer >
             }
           </TitleList>
         }

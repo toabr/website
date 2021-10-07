@@ -6,8 +6,8 @@ import { Search as SearchIcon } from 'react-bootstrap-icons'
 import SearchDefault from './SearchDefault';
 import TitleList from './TitleList'
 
-import { Link } from 'react-router-dom';
 import useFetchNodes from '../hooks/useFetchNodes';
+import { LinkContainer } from 'react-router-bootstrap';
 
 
 /**
@@ -123,11 +123,11 @@ const Search = () => {
       {!!nodes?.length &&
         <TitleList nodes={nodes.slice(0, 5)} >
           {(nodes?.length > 5) &&
-            <Link to={`/wiki?q=${activeTag || query}`} >
-              <ListGroup.Item action className="text-body bg-body text-center" >
-                <div className="title">more ...</div>
+            <LinkContainer to={`/wiki?q=${activeTag || query}`}>
+              <ListGroup.Item action className="text-body bg-body fw-bolder shadow text-center" >
+                <span className="title">more ...</span>
               </ListGroup.Item>
-            </Link >
+            </LinkContainer >
           }
         </TitleList>
       }
