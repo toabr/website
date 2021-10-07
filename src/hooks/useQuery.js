@@ -17,7 +17,7 @@ function useQuery() {
    * but only the post tag buttons uses it for now
    * @param {string} param - query selector
    * @returns {array} - param0 function1
-   * TODO: ...
+   * TODO: clear up for multi pupose !!
    */
 function useLocationSearch(param) {
   const query = useQuery().get(param)
@@ -27,6 +27,7 @@ function useLocationSearch(param) {
 
   /**
    * @param {string} param 
+   * FIXME: only usefull for 'q'
    */
   function setQuery(param) {
     const basePath = history.location.pathname
