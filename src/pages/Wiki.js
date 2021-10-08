@@ -1,34 +1,47 @@
-import { Container, Spinner, Button, ListGroup } from 'react-bootstrap'
-
-import useQuery from '../hooks/useQuery'
-
-import PageTitle from '../components/PageTitle'
-import Meta from '../components/Meta'
-import TitleList from '../components/TitleList'
-import Breadcrumbs from '../components/Breadcrumbs'
-import BtnList from '../components/BtnList'
-
-import { useDataContext } from '../hooks/useDataContext'
-import useFetchNodes from '../hooks/useFetchNodes'
-import { LinkContainer } from 'react-router-bootstrap'
 import { useRef } from 'react'
+
+import { Container, Spinner, Button, } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import FaIcon from '../components/FaIcon'
 
+import useQuery from '../hooks/useQuery'
+import useFetchNodes from '../hooks/useFetchNodes'
+import { useDataContext } from '../hooks/useDataContext'
+import { useThemeContext } from '../hooks/useThemeContext'
 
+import Meta from '../components/Meta'
+import PageTitle from '../components/PageTitle'
+import Breadcrumbs from '../components/Breadcrumbs'
+import TitleList from '../components/TitleList'
+import BtnList from '../components/BtnList'
+
+
+
+/**
+ * wiki navigation buttons
+ * @param {String} next - url
+ * @param {String} prev - url
+ * @returns 
+ */
 function PageNavigation({ next, prev }) {
+  // to define button style by theme light/dark
+  const { darkMode } = useThemeContext()
+  const variant = (darkMode) ? "outline-" : ""
+
   if (!next && !prev) return null
+
   return (
     <div className="d-flex gap-0 justify-content-center pt-0 px-0">
       {prev &&
         <LinkContainer to={prev}>
-          <Button variant="secondary" size="sm" className="flex-fill">
+          <Button variant={`${variant}primary`} size="sm" className="flex-fill">
             <FaIcon name="arrowleft" />
           </Button>
         </LinkContainer>
       }
       {next &&
         <LinkContainer to={next}>
-          <Button variant="secondary" size="sm" className="flex-fill">
+          <Button variant={`${variant}primary`} size="sm" className="flex-fill">
             <FaIcon name="arrowright" />
           </Button>
         </LinkContainer>
@@ -54,6 +67,7 @@ const Wiki = (props) => {
   const pageDescription =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   const subHead = useRef(null)
+  const itemsPerPage = 15
 
 
   /**
@@ -61,7 +75,7 @@ const Wiki = (props) => {
    */
   const queryObj = {
     tags: encodeURI(query || ''),
-    items: 10,
+    items: itemsPerPage,
     page: page || 0
   }
   const { nodes, isLoading } = useFetchNodes(queryObj)
@@ -96,7 +110,6 @@ const Wiki = (props) => {
    */
   function ScrolyMoly() {
     const top = subHead.current?.offsetTop - 85
-    console.dir(top)
     if (top && (query || page) && !isLoading) {
       window.scrollTo(0, top)
     }
@@ -139,12 +152,13 @@ const Wiki = (props) => {
           }
         </div>
 
-        {!!nodes?.length && <TitleList nodes={nodes} /> }
+        {!!nodes?.length && <TitleList nodes={nodes} />}
 
-        {(nodes?.length > 0) &&
+        {/* FIXME: hopping during fetching : State? */}
+        {(nodes?.length > 0 && !isLoading) &&
           <PageNavigation
-            next={nodes?.length === 10 && `/wiki?q=${query ?? ''}&page=${Number(page) + 1}`}
             prev={page > 0 && `/wiki?q=${query ?? ''}&page=${Number(page) - 1}`}
+            next={nodes?.length === itemsPerPage && `/wiki?q=${query ?? ''}&page=${Number(page) + 1}`}
           />
         }
 

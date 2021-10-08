@@ -15,7 +15,7 @@ export const urlBuilder = ({
   query = '', //string
   by = 'created', // created (+ sticky), changed, random (default)
   order = 'DESC', // DESC, ASC
-  items = 10, // 5, 10, 25, 50
+  items = 10, // 5, 10, 15, 20, 25, 50
   page,
 }) => {
   let url = `${process.env.REACT_APP_API_URL}/rest/v2/node?`
