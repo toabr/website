@@ -1,9 +1,7 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 // Layout
 import Layout from './layout/Layout'
-import Hero from './components/Hero'
-import ScrollToTop from './components/ScrollToTop'
 
 // pages
 import Home from './pages/Home'
@@ -19,12 +17,9 @@ import { DataProvider } from './hooks/useDataContext'
 const App = () => {
 
   return (
-    <Router>
       <ThemeProvider>
         <DataProvider>
           <Layout>
-            <Hero />
-            <ScrollToTop smooth />
             <Switch>
               <Route path='/' component={Home} exact />
               <Route path='/wiki' component={Wiki} />
@@ -34,7 +29,6 @@ const App = () => {
           </Layout>
         </DataProvider>
       </ThemeProvider>
-    </Router>
   )
 }
 

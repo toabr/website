@@ -14,6 +14,8 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import hljs from 'highlight.js'
 
 import './post.scss'
+import PageBreak from '../components/PageBreak';
+import FaIcon from '../components/FaIcon';
 
 
 /**
@@ -78,19 +80,18 @@ const Post = (props) => {
         className=""
       />
 
-      <PageTitle head={headline} isLoading={isLoading} />
+      <header>
+        <PageTitle head={headline} isLoading={isLoading} />
+        <PageBreak isLoading={isLoading} />
+        <div className="date text-center text-muted my-3">
+          {node?.created[0]?.locale}
+        </div>
+      </header>
 
-      {node && !isLoading &&
 
-        <div id={`Post-${nid}`}
-          style={{ maxWidth: 1040 }}
-          className="post mx-auto px-3">
+      <div id={`Post-${nid}`} className="post mx-auto min-vh-50">
+        {node && !isLoading && <>
 
-          <div className="date text-center text-muted my-3">
-            {node.created[0]?.locale}
-          </div>
-
-          {/* TODO: check dangerouslySetInnerHTML */}
           <div className="body" dangerouslySetInnerHTML={{ __html: body }} />
 
           <div className="field_images d-sm-flex justify-content-center mt-5">
@@ -105,13 +106,16 @@ const Post = (props) => {
                 <Button
                   variant={`${variant}primary`}
                   className="text-capitalize me-2 mb-2" >
-                  #{nodeTag.title}
+                  <FaIcon /> {nodeTag.title}
                 </Button>
               </Link>
             ))}
           </footer>
-        </div>
-      }
+        </>}
+      </div>
+
+
+
     </>
   )
 }

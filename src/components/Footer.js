@@ -7,13 +7,13 @@ const Footer = () => {
   const year = new Date().getFullYear()
   return (
     <>
-      <footer id="footer" className="container mx-auto" style={{ maxWidth: '1040px' }}>
+      <footer id="footer">
 
         <PageBreak />
 
         <section className="d-flex flex-wrap justify-content-center 
         justify-content-sm-between flex-row-reverse align-items-center 
-        py-3 my-3">
+        pb-3 mb-3">
 
           <Nav className="justify-content-end my-3">
             <LinkContainer to='/'>

@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 
-import { Container, Spinner, Button, } from 'react-bootstrap'
+import { Button, } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import FaIcon from '../components/FaIcon'
 
@@ -14,6 +14,8 @@ import PageTitle from '../components/PageTitle'
 import Breadcrumbs from '../components/Breadcrumbs'
 import TitleList from '../components/TitleList'
 import BtnList from '../components/BtnList'
+import PageBreak from '../components/PageBreak'
+import SmallContainer from '../layout/SmallContainer'
 
 
 
@@ -66,7 +68,7 @@ const Wiki = (props) => {
   const pageTitle = 'Code Snippets Wiki'
   const pageDescription =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-  const subHead = useRef(null)
+  const pageBreak = useRef(null)
   const itemsPerPage = 15
 
 
@@ -79,8 +81,6 @@ const Wiki = (props) => {
     page: page || 0
   }
   const { nodes, isLoading } = useFetchNodes(queryObj)
-
-  console.log(nodes)
 
 
   /**
@@ -111,7 +111,7 @@ const Wiki = (props) => {
    * TODO: think about it :)
    */
   function ScrolyMoly() {
-    const top = subHead.current?.offsetTop - 85
+    const top = pageBreak.current?.offsetTop - 85
     if (top && (query || page) && !isLoading) {
       window.scrollTo(0, top)
     }
@@ -119,7 +119,7 @@ const Wiki = (props) => {
 
 
   return (
-    <div>
+    <SmallContainer className="mb-5">
       <Meta title={pageTitle} />
 
       {ScrolyMoly()}
@@ -127,47 +127,31 @@ const Wiki = (props) => {
       <Breadcrumbs crumbs={[{ name: 'Home', href: '/' }, { name: 'Wiki' }]} />
       <PageTitle head={pageTitle} description={pageDescription} />
 
-      <Container style={{ maxWidth: 685 }} className="mb-5">
 
-        <BtnList data={btnListData} options={{
-          size: 'sm',
-          onClick: tagBtnClick,
-          className: "mb-5"
-        }} />
+      <BtnList data={btnListData} options={{
+        size: 'sm',
+        onClick: tagBtnClick,
+        className: ""
+      }} />
 
-        <div className="mb-3" style={{ minHeight: '2rem' }}>
-          {isLoading &&
-            <Spinner
-              className="d-flex m-auto"
-              animation="grow"
-              variant="highlight"
-              size="sm"
-            />
-          }
+      <div className="mb-3">
+        <PageBreak rel={pageBreak} isLoading={isLoading} />
+      </div>
 
-          {(!isLoading) &&
-            <h2 ref={subHead} className="lead text-center text-capitalize m-0">
-              {(!query) && 'Recent Posts'}
-              {(query && !!nodes?.length) && query}
-              {(query && !nodes?.length) && 'No Results'}
-            </h2>
-          }
+      {!!nodes?.length &&
+        <div className="min-vh-50">
+          <TitleList nodes={nodes} />
         </div>
+      }
 
-        {!!nodes?.length && <TitleList nodes={nodes} />}
+      {(nodes?.length > 0 && !isLoading) &&
+        <PageNavigation
+          prev={page > 0 && `/wiki?q=${query ?? ''}&page=${Number(page) - 1}`}
+          next={nodes?.length === itemsPerPage && `/wiki?q=${query ?? ''}&page=${Number(page) + 1}`}
+        />
+      }
 
-        {/* FIXME: hopping during fetching : State? */}
-        {(nodes?.length > 0 && !isLoading) &&
-          <PageNavigation
-            prev={page > 0 && `/wiki?q=${query ?? ''}&page=${Number(page) - 1}`}
-            next={nodes?.length === itemsPerPage && `/wiki?q=${query ?? ''}&page=${Number(page) + 1}`}
-          />
-        }
-
-
-      </Container>
-
-    </div>
+    </SmallContainer>
   )
 }
 

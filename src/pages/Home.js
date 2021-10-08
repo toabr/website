@@ -1,10 +1,10 @@
-import { Container, Row, Col } from 'react-bootstrap'
 import useFetch from '../hooks/useFetch'
 
 import Meta from '../components/Meta'
 import Search from '../components/Search'
 import Showcase from '../components/Showcase'
 import PageBreak from '../components/PageBreak'
+import SmallContainer from '../layout/SmallContainer'
 
 
 /**
@@ -33,27 +33,19 @@ const Home = () => {
     <>
       <Meta title="toabr.de | Home" />
 
-      <Container fluid as="section" id="header" className="p-0 mb-5">
-        <Row style={{ maxWidth: '1040px' }}
-          className="mx-auto justify-content-center">
-          <Col sm={11} md={10} lg={9} xl={8}>
-
-            <header className="text-center my-3 py-3">
-              <h1 className="braces display-5 text-secondary">
-                <span className="text-primary">to</span>
-                <span className="">abr.de</span>
-              </h1>
-              <p className="py-2 mb-4">Explore a bunch of code snippets you may find helpful.</p>
-
-              <Search />
-
-            </header>
-
-            <PageBreak />
-
-          </Col>
-        </Row>
-      </Container>
+      <section id="header" className="p-0 mb-5">
+        <SmallContainer>
+          <header className="text-center mt-3 pt-3">
+            <h1 className="braces display-5 text-secondary">
+              <span className="text-primary">to</span>
+              <span className="">abr.de</span>
+            </h1>
+            <p className="py-2 mb-4">Explore a bunch of code snippets you may find helpful.</p>
+            <Search />
+          </header>
+          <PageBreak />
+        </SmallContainer>
+      </section>
 
 
       <Showcase nodes={reorderNodes(data, ids) || []} />

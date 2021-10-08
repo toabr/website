@@ -52,7 +52,7 @@ const Article = ({ variant, node }) => {
 
   if (variant === 'teaser') {
     return (
-      <Card as="article" bg="accent-1" className="border-0 shadow-slim shadow-drop">
+      <Card as="article" bg="accent-1" className="border-0 shadow-slim hover-drop">
         <Row className="row g-0">
           <Col md={8}>
             <Link to={link}>
@@ -91,7 +91,7 @@ const Article = ({ variant, node }) => {
 
 
   return (
-    <Card as="article" bg="accent-1" className="h-100 border-0 shadow-slim shadow-drop">
+    <Card as="article" bg="accent-1" className="h-100 border-0 shadow-slim hover-drop">
       <Link to={link} className="d-flex justify-content-center bg-primary bg-gradient p-3" style={{ height: '15rem' }}>
         <Card.Img
           variant="top"

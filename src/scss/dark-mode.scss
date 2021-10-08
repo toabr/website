@@ -1,5 +1,5 @@
 // dark mode
-html[darkmode] {
+[darkmode] {
   // Generate dark palettes for theme colors.
   $accent-1: #212529;
   $accent-2: #414850;
@@ -27,7 +27,4 @@ html[darkmode] {
 
   --#{$variable-prefix}body-color-rgb: #{to-rgb($body-bg)};
   --#{$variable-prefix}body-bg-rgb: #{to-rgb($body-color)};
-
-  // miscellaneous cheese
-  --shadow-slim: 0 6px 8px rgb(0 0 0 / 8%), 0 1px 1px rgb(0 0 0 / 35%);
 }
