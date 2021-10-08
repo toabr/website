@@ -4,11 +4,14 @@ import { ListGroup } from "react-bootstrap"
 import { formatUTC } from '../js/helper';
 import './title-list.scss'
 import useTagTitles from '../hooks/useTagTitles';
+import FaIcon from './FaIcon';
 
 
 const TitleListItem = ({ node }) => {
   // is using context :)
   const field_tags = useTagTitles(node.field_tags)
+  const sticky = node.sticky[0]?.value
+
   return (
     <LinkContainer to={`node/${node.nid[0].value}`}>
       <ListGroup.Item action className="text-body bg-body fw-bolder shadow pe-2" >
@@ -18,6 +21,11 @@ const TitleListItem = ({ node }) => {
           <small className="date d-sm-block pe-2 text-muted fw-light">
             {formatUTC(node.changed[0].value)}
           </small>
+          {sticky &&
+            <span className="mx-1" style={{transform: 'rotate(-35deg)'}} >
+              <FaIcon name="sticky" className="text-muted" />
+            </span>
+          }
           <div className="title flex-fill">
             {node.title[0].value}
           </div>
@@ -42,8 +50,8 @@ const TitleListItem = ({ node }) => {
 /**
  * render fetched nodes in a list
  * @param {object} nodes - array of node objects
- * @returns 
- */
+        * @returns
+        */
 const TitleList = ({ nodes = [], children }) => {
   const Titles = nodes ? nodes.map(node => <TitleListItem node={node} key={node.nid[0].value} />) : []
   return (

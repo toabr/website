@@ -80,6 +80,8 @@ const Wiki = (props) => {
   }
   const { nodes, isLoading } = useFetchNodes(queryObj)
 
+  console.log(nodes)
+
 
   /**
    * tag btn was clicked
