@@ -42,7 +42,7 @@ const Post = (props) => {
   const headline = node?.title ? node.title[0].value : ''
   const body = node?.body ? highLight(node.body[0].value) : ''
   const field_tags = useTagTitles(node?.field_tags)
-  const field_image = useFetchImages(nid) // fetchimg images
+  const field_image = useFetchImages({ nid }) // fetchimg images
 
 
   /**

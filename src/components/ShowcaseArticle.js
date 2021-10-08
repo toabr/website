@@ -16,6 +16,7 @@ import FaIcon from './FaIcon'
  * TODO: not agile
  */
 const Article = ({ variant, node }) => {
+  console.log(node)
 
   const { darkMode } = useThemeContext()
   const btnVariant = (darkMode) ? "outline-" : ""
@@ -56,10 +57,10 @@ const Article = ({ variant, node }) => {
         <Row className="row g-0">
           <Col md={8}>
             <Link to={link}>
-              <Card.Img
-                style={{ width: '100%', height: '21rem', objectFit: 'cover' }}
-                src={node.field_image[0].url}
-              />
+              {node.teaser &&
+                <Card.Img
+                  style={{ width: '100%', height: '21rem', objectFit: 'cover' }}
+                  src={process.env.REACT_APP_API_URL + node.teaser.['650x650']} />}
             </Link>
           </Col>
           <Col md={4}>
@@ -93,11 +94,12 @@ const Article = ({ variant, node }) => {
   return (
     <Card as="article" bg="accent-1" className="h-100 border-0 shadow-slim hover-drop">
       <Link to={link} className="d-flex justify-content-center bg-primary bg-gradient p-3" style={{ height: '15rem' }}>
-        <Card.Img
-          variant="top"
-          className="align-self-center img-fluid shadow-slim"
-          style={{ width: 'auto', maxHeight: '100%', objectFit: 'contain' }}
-          src={node.field_image[0].url} />
+        {node.teaser &&
+          <Card.Img
+            variant="top"
+            className="align-self-center img-fluid shadow-slim"
+            style={{ width: 'auto', maxHeight: '100%', objectFit: 'contain' }}
+            src={process.env.REACT_APP_API_URL + node.teaser.['325x325']} />}
       </Link>
       <Card.Body className="pt-1" style={{ fontSize: '0.85rem' }}>
         <div className="d-flex justify-content-between position-relative">

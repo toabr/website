@@ -5,6 +5,7 @@ import Search from '../components/Search'
 import Showcase from '../components/Showcase'
 import PageBreak from '../components/PageBreak'
 import SmallContainer from '../layout/SmallContainer'
+import useFetchImages from '../hooks/useFetchImages'
 
 
 /**
@@ -17,6 +18,7 @@ function reorderNodes(nodes, list) {
 
 const Home = () => {
   const ids = [85, 120, 86, 84, 87] // exact ids to fetch in order
+  let fids = null
 
   /**
    * FETCH
@@ -25,7 +27,13 @@ const Home = () => {
   const { status, data, error } = useFetch(url)
 
   if (status === 'fetched') {
-    // ...
+    // collect head images
+    fids = data.map(node => node.field_image[0].target_id)
+  }
+  
+  const imageTeaser  = useFetchImages({ fids }) 
+
+  function addImageData(node) {
   }
 
 
@@ -48,7 +56,7 @@ const Home = () => {
       </section>
 
 
-      <Showcase nodes={reorderNodes(data, ids) || []} />
+      <Showcase data={reorderNodes(data, ids) || []} imageTeaser={imageTeaser} />
     </>
   )
 }

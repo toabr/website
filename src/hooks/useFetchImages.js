@@ -8,7 +8,7 @@ import useFetch from "./useFetch"
  * @returns 
  */
 function addBaseUrl(image) {
-  if(!image.srcset_narrow) return image
+  if (!image.srcset_narrow) return image
 
   const wrapper = document.createElement('div')
   wrapper.innerHTML = image.srcset_narrow
@@ -24,18 +24,22 @@ function addBaseUrl(image) {
   img.setAttribute('srcset', srcset)
 
   // console.log(srcset)
-  return img.outerHTML
+  return { ...image, srcset_narrow: img.outerHTML }
 }
 
 
 /**
  * fetch images per Node
  * @param {Number} nid
+ * @param {Array} fids
  * @returns {Array}
  */
-function useFetchImages(nid) {
+function useFetchImages({ nid, fids }) {
+  let url = null
+  const apiBase = `${process.env.REACT_APP_API_URL}/rest/v2/image`
 
-  const url = nid && `${process.env.REACT_APP_API_URL}/rest/v2/image?nid=${nid}`
+  if (nid) url = `${apiBase}?nid=${nid}`
+  if (fids) url = `${apiBase}/${fids.toString()}`
 
   const { status, data: images, error } = useFetch(url)
   // console.log('data', images)

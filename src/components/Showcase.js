@@ -1,8 +1,17 @@
 import { Col, Row } from 'react-bootstrap'
 import Article from './ShowcaseArticle'
 
-const Showcase = ({ nodes = [] }) => {
+const Showcase = ({ data = [], imageTeaser }) => {
   // console.log('SHOWCASE RENDERS', nodes)
+
+  const nodes = data.map(node => {
+    const teaser = imageTeaser.find(image => {
+      console.log((node.nid[0].value == image.nid))
+      return (node.nid[0].value == image.nid)})
+      console.log(teaser)
+    return {...node, teaser}
+  })
+
   return (
     <section id="showcase" className="p-0">
       <Row sm={12} className="mb-4">
