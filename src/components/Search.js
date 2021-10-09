@@ -120,7 +120,7 @@ const Search = () => {
       }
 
       {!!nodes?.length &&
-        <TitleList nodes={nodes.slice(0, 5)} >
+        <TitleList nodes={nodes.slice(0, 5)} isLoading={isLoading} >
           {(nodes?.length > 5) &&
             <LinkContainer to={`/wiki?q=${activeTag || query}`}>
               <ListGroup.Item action className="text-body bg-body fw-bolder shadow text-center" >

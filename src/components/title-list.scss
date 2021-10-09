@@ -10,7 +10,7 @@
       background-image: var(--bs-gradient);
       color: white;
       .title {
-        color: var(--bs-white);
+        color: var(--bs-white) !important;
       }
       .date {
         color: var(--bs-light) !important;
