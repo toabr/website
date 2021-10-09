@@ -14,8 +14,9 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import hljs from 'highlight.js'
 
 import './post.scss'
-import PageBreak from '../components/PageBreak';
 import FaIcon from '../components/FaIcon';
+import PageBreak from '../components/PageBreak';
+import SmallContainer from '../layout/SmallContainer';
 
 
 /**
@@ -82,10 +83,12 @@ const Post = (props) => {
 
       <header>
         <PageTitle head={headline} isLoading={isLoading} />
-        <PageBreak isLoading={isLoading} />
-        <div className="date text-center text-muted my-3">
-          {node?.created[0]?.locale}
-        </div>
+        <SmallContainer>
+          <PageBreak isLoading={isLoading} />
+          <div className="date text-center text-muted my-3">
+            {node?.created[0]?.locale}
+          </div>
+        </SmallContainer>
       </header>
 
 
