@@ -138,18 +138,18 @@ const Wiki = (props) => {
         <PageBreak rel={pageBreak} isLoading={isLoading} />
       </div>
 
-      {!!nodes?.length &&
-        <div className="min-vh-50">
-          <TitleList nodes={nodes} />
-        </div>
-      }
+      <div className="min-vh-50">
+        {!!nodes?.length &&
+          <TitleList nodes={nodes} isLoading={isLoading} />
+        }
 
-      {(nodes?.length > 0 && !isLoading) &&
-        <PageNavigation
-          prev={page > 0 && `/wiki?q=${query ?? ''}&page=${Number(page) - 1}`}
-          next={nodes?.length === itemsPerPage && `/wiki?q=${query ?? ''}&page=${Number(page) + 1}`}
-        />
-      }
+        {(nodes?.length > 0 && !isLoading) &&
+          <PageNavigation
+            prev={page > 0 && `/wiki?q=${query ?? ''}&page=${Number(page) - 1}`}
+            next={nodes?.length === itemsPerPage && `/wiki?q=${query ?? ''}&page=${Number(page) + 1}`}
+          />
+        }
+      </div>
 
     </SmallContainer>
   )

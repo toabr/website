@@ -7,14 +7,14 @@ import useTagTitles from '../hooks/useTagTitles';
 import FaIcon from './FaIcon';
 
 
-const TitleListItem = ({ node }) => {
+const TitleListItem = ({ node, isLoading }) => {
   // is using context :)
   const field_tags = useTagTitles(node.field_tags)
   const sticky = node.sticky[0]?.value
 
   return (
     <LinkContainer to={`node/${node.nid[0].value}`}>
-      <ListGroup.Item action className="text-body bg-body fw-bolder shadow pe-2" >
+      <ListGroup.Item action disabled={isLoading} className="text-body bg-body fw-bolder shadow pe-2" >
 
         <div className="d-sm-flex justify-content-between flex-wrap
             align-items-center mt-1">
@@ -22,7 +22,7 @@ const TitleListItem = ({ node }) => {
             {formatUTC(node.changed[0].value)}
           </small>
           {sticky &&
-            <span className="mx-1" style={{transform: 'rotate(-35deg)'}} >
+            <span className="mx-1" style={{ transform: 'rotate(-35deg)' }} >
               <FaIcon name="sticky" className="text-muted" />
             </span>
           }
@@ -52,8 +52,12 @@ const TitleListItem = ({ node }) => {
  * @param {object} nodes - array of node objects
         * @returns
         */
-const TitleList = ({ nodes = [], children }) => {
-  const Titles = nodes ? nodes.map(node => <TitleListItem node={node} key={node.nid[0].value} />) : []
+const TitleList = ({ nodes = [], children, isLoading }) => {
+  const Titles = nodes ?
+    nodes.map(node => <TitleListItem
+      node={node}
+      isLoading={isLoading}
+      key={node.nid[0].value} />) : []
   return (
     <div className="title-list">
       <ListGroup variant="flush" className="text-start">

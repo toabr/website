@@ -16,16 +16,27 @@
         color: var(--bs-light) !important;
       }
     }
+    &.disabled,
+    &:disabled {
+      color: var(--bs-accent-3) !important;
+      pointer-events: none;
+      background-color: var(--bs-accent-2) !important;
+      .title {
+        color: var(--bs-accent-3) !important;
+      }
+    }
   }
 }
 
 html[darkmode] {
   .title-list {
-    .title {
-      color: var(--bs-primary);
-    }
-    .tag {
-      background: var(--bs-accent-1) !important;
+    .list-group-item {
+      .title {
+        color: var(--bs-primary);
+      }
+      .tag {
+        background: var(--bs-accent-1) !important;
+      }
     }
   }
 }
