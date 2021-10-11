@@ -15,7 +15,6 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import TitleList from '../components/TitleList'
 import BtnList from '../components/BtnList'
 import PageBreak from '../components/PageBreak'
-import SmallContainer from '../layout/SmallContainer'
 
 
 
@@ -68,7 +67,6 @@ const Wiki = (props) => {
   const pageTitle = 'Code Snippets Wiki'
   const pageDescription =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-  const pageBreak = useRef(null)
   const itemsPerPage = 15
 
 
@@ -106,23 +104,13 @@ const Wiki = (props) => {
   })
 
 
-  /**
-   * scroll to loading animation on fetch
-   * TODO: think about it :)
-   */
-  function ScrolyMoly() {
-    const top = pageBreak.current?.offsetTop - 85
-    if (top && (query || page) && !isLoading) {
-      window.scrollTo(0, top)
-    }
-  }
-
-
   return (
-    <SmallContainer className="mb-5">
+    <div className="container-small mb-5">
       <Meta title={pageTitle} />
 
-      {ScrolyMoly()}
+      {(!!nodes?.length && (query || page) && !isLoading) &&
+        window.scrollTo(0, 401)
+      }
 
       <Breadcrumbs crumbs={[{ name: 'Home', href: '/' }, { name: 'Wiki' }]} />
       <PageTitle head={pageTitle} description={pageDescription} />
@@ -135,7 +123,7 @@ const Wiki = (props) => {
       }} />
 
       <div className="mb-3">
-        <PageBreak rel={pageBreak} isLoading={isLoading} />
+        <PageBreak isLoading={isLoading} />
       </div>
 
       <div className="min-vh-50">
@@ -151,7 +139,7 @@ const Wiki = (props) => {
         }
       </div>
 
-    </SmallContainer>
+    </div>
   )
 }
 

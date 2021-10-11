@@ -37,8 +37,21 @@ blockquote {
   line-height: 1.8rem;
 }
 
+.container-small {
+  max-width: 685px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .min-vh-50 {
   min-height: 50vh;
+}
+
+.focus {
+  border-color: #90e4cb;
+  outline: 0;
+  box-shadow: 0 6px 8px rgb(85 102 119 / 3%), 0 1px 1px rgb(85 102 119 / 40%),
+    0 0 0 0.25rem rgb(32 201 151 / 25%) !important;
 }
 
 // shadow work START
@@ -60,7 +73,6 @@ blockquote {
   box-shadow: 0 6px 24px -5px var(--bs-accent-1);
 }
 // shadow work END
-
 
 // { toabr.de } < braces
 .braces {

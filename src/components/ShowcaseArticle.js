@@ -16,7 +16,7 @@ import FaIcon from './FaIcon'
  * TODO: not agile
  */
 const Article = ({ variant, node }) => {
-  console.log(node)
+  // console.log(node)
 
   const { darkMode } = useThemeContext()
   const btnVariant = (darkMode) ? "outline-" : ""

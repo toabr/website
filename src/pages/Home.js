@@ -4,7 +4,6 @@ import Meta from '../components/Meta'
 import Search from '../components/Search'
 import Showcase from '../components/Showcase'
 import PageBreak from '../components/PageBreak'
-import SmallContainer from '../layout/SmallContainer'
 import useFetchImages from '../hooks/useFetchImages'
 
 
@@ -42,7 +41,7 @@ const Home = () => {
       <Meta title="toabr.de | Home" />
 
       <section id="header" className="p-0 mb-5">
-        <SmallContainer>
+        <div className="container-small">
           <header className="text-center mt-3 pt-3">
             <h1 className="braces display-5 text-secondary">
               <span className="text-primary">to</span>
@@ -52,7 +51,7 @@ const Home = () => {
             <Search />
           </header>
           <PageBreak />
-        </SmallContainer>
+        </div>
       </section>
 
 

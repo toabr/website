@@ -8,6 +8,7 @@ import TitleList from './TitleList'
 
 import useFetchNodes from '../hooks/useFetchNodes';
 import { LinkContainer } from 'react-router-bootstrap';
+import FaIcon from './FaIcon';
 
 
 /**
@@ -17,23 +18,36 @@ import { LinkContainer } from 'react-router-bootstrap';
  * list of results between
  */
 const Search = () => {
-  
+
   const [query, setQuery] = useState('')
   const [activeTag, setActiveTag] = useState('')
+  const inputGroup = useRef(null)
   const inputRef = useRef(null)
+
+
+  /**
+ * focus & scroll to search input
+ */
+  const scrollToSearch = () => window.scrollTo(0, 198)
+  const blurSearch = () => inputGroup.current.classList.remove('focus')
+  const focusSearch = () => {
+    scrollToSearch()
+    inputRef.current.focus()
+    inputGroup.current.classList.add('focus')
+  }
 
 
   /**
    * fetching when query || activeTag changes
    */
-  const queryObj = (query || activeTag) ? { 
-    type: 'article', 
-    query: query, 
-    tags: activeTag, 
-    items: 10 
+  const queryObj = (query || activeTag) ? {
+    type: 'article',
+    query: query,
+    tags: activeTag,
+    items: 10
   } : undefined
   const { nodes, isLoading } = useFetchNodes(queryObj)
-  
+
 
   /**
    * trigger url rebuild > fetch
@@ -70,21 +84,21 @@ const Search = () => {
    */
   const tagBtnClick = (tag) => {
     triggerFetch('BUTTON', tag)
+    focusSearch(inputGroup.current)
   }
 
 
   return (
     <div id="search">
       <Form onSubmit={e => onFormSubmit(e)} className="">
-        <InputGroup className="shadow-slim" size="lg">
+        <InputGroup ref={inputGroup} className="shadow-slim" size="lg">
 
           <InputGroup.Text className="bg-accent-1 ps-2 pe-0">
             <Button
               size="sm"
               variant=""
               className="text-body pe-0"
-              disabled
-            >toabr.de /</Button>
+              disabled >toabr.de /</Button>
           </InputGroup.Text>
 
           <Form.Control
@@ -97,7 +111,8 @@ const Search = () => {
             // onChange={(e) => handleOnChange(e)}
             // value={searchTerm}
             readOnly={isLoading}
-            onFocus={(e) => window.scrollTo(0, 198)}
+            onFocus={(e) => focusSearch(inputGroup.current)}
+            onBlur={(e) => blurSearch(inputGroup.current)}
           />
 
           <Button
@@ -124,7 +139,7 @@ const Search = () => {
           {(nodes?.length > 5) &&
             <LinkContainer to={`/wiki?q=${activeTag || query}`}>
               <ListGroup.Item action className="text-body bg-body fw-bolder shadow text-center" >
-                <span className="title">more ...</span>
+                <span className="title"><FaIcon name="more" /></span>
               </ListGroup.Item>
             </LinkContainer >
           }

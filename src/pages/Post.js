@@ -16,7 +16,6 @@ import hljs from 'highlight.js'
 import './post.scss'
 import FaIcon from '../components/FaIcon';
 import PageBreak from '../components/PageBreak';
-import SmallContainer from '../layout/SmallContainer';
 
 
 /**
@@ -83,12 +82,12 @@ const Post = (props) => {
 
       <header>
         <PageTitle head={headline} isLoading={isLoading} />
-        <SmallContainer>
+        <div className="container-small">
           <PageBreak isLoading={isLoading} />
           <div className="date text-center text-muted my-3">
             {node?.created[0]?.locale}
           </div>
-        </SmallContainer>
+        </div>
       </header>
 
 
@@ -97,9 +96,9 @@ const Post = (props) => {
 
           <div className="body" dangerouslySetInnerHTML={{ __html: body }} />
 
-          <div className="field_images d-sm-flex justify-content-center mt-5">
+          <div className="field_images d-flex flex-wrap justify-content-center gap-3 mt-5">
             {!!field_image.length && field_image.map(image => (
-              <div className="image px-sm-2 mb-3" dangerouslySetInnerHTML={{ __html: image.srcset_narrow }} />
+              <div className="image" dangerouslySetInnerHTML={{ __html: image.srcset_narrow }} />
             ))}
           </div>
 

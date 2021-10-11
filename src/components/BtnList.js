@@ -1,9 +1,10 @@
 // button icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { LinkContainer } from 'react-router-bootstrap';
+import { Button } from 'react-bootstrap';
 
 import { useThemeContext } from '../hooks/useThemeContext';
-import { Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import FaIcon from './FaIcon';
 
 
 /**
@@ -58,7 +59,7 @@ const BtnList = ({ data = [], options = {}, more, children }) => {
       {more &&
         <LinkContainer to={more.link || '#'}>
           <Button variant={`${variant}secondary`} className="font-monospace flex-fill">
-            {more.title || '...'}
+            {more.title || <FaIcon name="more" />}
           </Button>
         </LinkContainer>
       }

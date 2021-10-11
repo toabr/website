@@ -1,16 +1,21 @@
 import { Col, Row } from 'react-bootstrap'
 import Article from './ShowcaseArticle'
 
+
+/**
+ * map teaser to node
+ */
+const mapTeaser = (data, imageTeaser) => data.map(node => {
+  const teaser = imageTeaser.find(image => {
+    return (node.nid[0].value == image.nid)})
+  return {...node, teaser}
+})
+
+
 const Showcase = ({ data = [], imageTeaser }) => {
   // console.log('SHOWCASE RENDERS', nodes)
 
-  const nodes = data.map(node => {
-    const teaser = imageTeaser.find(image => {
-      console.log((node.nid[0].value == image.nid))
-      return (node.nid[0].value == image.nid)})
-      console.log(teaser)
-    return {...node, teaser}
-  })
+  const nodes = mapTeaser(data, imageTeaser)
 
   return (
     <section id="showcase" className="p-0">
