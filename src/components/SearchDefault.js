@@ -1,5 +1,5 @@
 import { faHashtag } from '@fortawesome/free-solid-svg-icons'
-import { faDocker, faDrupal, faJs, faLinux, faReact, faSass, faNodeJs } from '@fortawesome/free-brands-svg-icons'
+import { faDocker, faDrupal, faLinux, faReact, faSass, faNodeJs } from '@fortawesome/free-brands-svg-icons'
 
 import BtnList from "./BtnList"
 
@@ -29,8 +29,8 @@ function SearchDefault({ onClick, activeTag }) {
       options={{
         onClick: onClick,
         className: 'my-4',
+        more: '/wiki'
       }}
-      more={{ link: '/wiki' }}
     />
   )
 }

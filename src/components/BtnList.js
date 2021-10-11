@@ -23,9 +23,11 @@ import FaIcon from './FaIcon';
  * @param {string} options.as - 
  * @param {string} options.className - undefined !?
  * @param {function} options.onClick - 
+ * 
+ * @param {String} options.more - url 
  * @returns 
  */
-const BtnList = ({ data = [], options = {}, more, children }) => {
+const BtnList = ({ data = [], options = {} }) => {
 
   // define button style by themeMode light/dark
   const { darkMode } = useThemeContext()
@@ -56,16 +58,13 @@ const BtnList = ({ data = [], options = {}, more, children }) => {
         </Button>)
       })}
 
-      {more &&
-        <LinkContainer to={more.link || '#'}>
+      {options.more &&
+        <LinkContainer to={options.more}>
           <Button variant={`${variant}secondary`} className="font-monospace flex-fill">
-            {more.title || <FaIcon name="more" />}
+            <FaIcon name="more" />
           </Button>
         </LinkContainer>
       }
-
-      {children}
-
     </div>
   )
 }
