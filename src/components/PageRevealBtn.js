@@ -2,9 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import './reveal-btn.scss'
 
 import { Button } from 'react-bootstrap'
-import { faReply } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { RepleyIcon } from './FaIcon';
 
 /**
  * triggers attribute toggle on body
@@ -19,13 +17,13 @@ const PageRevealBtn = () => {
     const bodyClickhandler = (e) => {
       const isOpen = isOpenRef.current
       // console.log('isOpen', isOpen)
-  
+
       if (!isOpen && e.composedPath().includes(btnRef.current)) {
         document.body.toggleAttribute('open')
         setIsOpen(true)
         return
       }
-  
+
       if (isOpen) {
         document.body.toggleAttribute('open')
         setIsOpen(false)
@@ -49,13 +47,13 @@ const PageRevealBtn = () => {
     _setIsOpen(val)
   }
 
-  
+
   return (
     <Button id="reveal-btn" ref={btnRef} variant="link" className="fs-5 rounded-circle">
-      <FontAwesomeIcon
-        icon={faReply}
-        style={{ transform: `rotate(210deg)`, transition: "all .1s linear .3s" }}
-      />
+      <div
+        style={{ transform: `rotate(210deg)`, transition: "all .1s linear .3s" }} >
+        <RepleyIcon />
+      </div>
     </Button>
   )
 }

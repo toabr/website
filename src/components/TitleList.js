@@ -4,7 +4,7 @@ import { ListGroup } from "react-bootstrap"
 import { formatUTC } from '../js/helper';
 import './title-list.scss'
 import useTagTitles from '../hooks/useTagTitles';
-import FaIcon from './FaIcon';
+import { ThumbtackIcon } from './FaIcon';
 
 
 const TitleListItem = ({ node, isLoading }) => {
@@ -22,8 +22,8 @@ const TitleListItem = ({ node, isLoading }) => {
             {formatUTC(node.changed[0].value)}
           </small>
           {sticky &&
-            <span className="mx-1" style={{ transform: 'rotate(-35deg)' }} >
-              <FaIcon name="sticky" className="text-muted" />
+            <span className="mx-1 text-muted" style={{ transform: 'rotate(-35deg)' }} >
+              <ThumbtackIcon />
             </span>
           }
           <div className="title flex-fill">

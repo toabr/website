@@ -1,6 +1,5 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Spinner } from "react-bootstrap";
-import FaIcon from "./FaIcon";
+import {BoltIcon} from "./FaIcon";
 
 export default function PageBreak({ isLoading }) {
   return (
@@ -17,10 +16,9 @@ export default function PageBreak({ isLoading }) {
             size="sm"
           />
         }
-        {!isLoading && <FaIcon name="bolt" />}
+        {!isLoading && <BoltIcon />}
       </div>
       <div className="border-bottom w-50"></div>
-      <FontAwesomeIcon icon="fa-solid fa-bolt" />
     </div>
   )
 }

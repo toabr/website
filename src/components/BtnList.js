@@ -1,10 +1,9 @@
 // button icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LinkContainer } from 'react-router-bootstrap';
 import { Button } from 'react-bootstrap';
 
 import { useThemeContext } from '../hooks/useThemeContext';
-import FaIcon from './FaIcon';
+import Icon from './FaIcon';
 
 
 /**
@@ -14,7 +13,7 @@ import FaIcon from './FaIcon';
  * @param {array} param0.data - array of objects
  * @param {string} data.title - 
  * @param {string} data.id - 
- * @param {string} data.faIcon - 
+ * @param {string} data.icon - 
  * @param {string} data.className - undefined !?
  * @param {string} data.style - 
  * 
@@ -42,20 +41,22 @@ const BtnList = ({ data = [], options = {} }) => {
         const active = item.active ? 'active' : ''
         const classes = item.className ? item.className : ''
 
-        return (<Button
-          as={options.as}
-          size={options.size}
-          onClick={() => options.onClick(item.title)} // stops propagation otherwise
-          variant={variant + style}
-          className={`${active} ${classes} text-capitalize font-monospace flex-fill`}
-          data-title={item.title}
-          data-id={item.id}
-          href={item.href}
-          key={item.id}
-        >
-          {item.faIcon && <FontAwesomeIcon icon={item.faIcon} className="me-2" />}
-          {item.title}
-        </Button>)
+        return (
+          <Button
+            as={options.as}
+            size={options.size}
+            onClick={() => options.onClick(item.title)} // stops propagation otherwise
+            variant={variant + style}
+            className={`${active} ${classes} text-capitalize font-monospace flex-fill`}
+            data-title={item.title}
+            data-id={item.id}
+            href={item.href}
+            key={item.id}
+          >
+            {item.icon && <span className="me-2" ><Icon name={item.icon} /></span>}
+            {item.title}
+          </Button>
+        )
       })}
 
       {options.more &&
