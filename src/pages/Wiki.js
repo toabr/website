@@ -64,9 +64,8 @@ const Wiki = (props) => {
   const tagList = useDataContext()
   const [query, setQuery] = useQuery('q') // fetch trigger
   const [page] = useQuery('page') // fetch trigger
-  const pageTitle = 'Code Snippets Wiki'
-  const pageDescription =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+  const pageTitle = 'Snippets Wiki'
+  const pageDescription = 'Browse a bunch of code snippets by tag.'
   const itemsPerPage = 15
 
 
