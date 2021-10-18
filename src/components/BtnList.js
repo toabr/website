@@ -61,7 +61,7 @@ const BtnList = ({ data = [], options = {} }) => {
       {options.more &&
         <LinkContainer to={options.more}>
           <Button variant={`${variant}secondary`} className="font-monospace flex-fill">
-            <FaIcon name="more" />
+            <span className="fs-5 lh-1 fw-bold">...</span>
           </Button>
         </LinkContainer>
       }

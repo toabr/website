@@ -29,8 +29,8 @@ const Home = () => {
     // collect head images
     fids = data.map(node => node.field_image[0].target_id)
   }
-  
-  const imageTeaser  = useFetchImages({ fids }) 
+
+  const imageTeaser = useFetchImages({ fids })
 
   function addImageData(node) {
   }
@@ -47,7 +47,9 @@ const Home = () => {
               <span className="text-primary">to</span>
               <span className="">abr.de</span>
             </h1>
-            <p className="py-2 mb-4">Explore a bunch of code snippets you may find helpful.</p>
+            <p className="py-2 mb-4">
+              Browse a bunch of code snippets I've snaged over time.
+            </p>
             <Search />
           </header>
           <PageBreak />

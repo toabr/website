@@ -7,7 +7,7 @@ const btnData = [
   { title: "linux", id: ["linux"], faIcon: faLinux },
   { title: "drupal", id: ["drupal"], faIcon: faDrupal },
   { title: "javaScript", id: ["javascript"], faIcon: faNodeJs },
-  { title: "scss", id: ["scss"], faIcon: faSass },
+  { title: "css", id: ["css"], faIcon: faSass },
   { title: "react", id: ["react"], faIcon: faReact },
   { title: "bash", id: ["bash"], faIcon: faHashtag },
   { title: "docker", id: ["docker"], faIcon: faDocker },
