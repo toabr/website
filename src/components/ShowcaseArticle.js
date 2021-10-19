@@ -60,7 +60,7 @@ const Article = ({ variant, node }) => {
               {node.teaser &&
                 <Card.Img
                   style={{ width: '100%', height: '21rem', objectFit: 'cover' }}
-                  src={process.env.REACT_APP_API_URL + node.teaser.['650x650']} />}
+                  src={process.env.REACT_APP_API_URL + node.teaser['650x650']} />}
             </Link>
           </Col>
           <Col md={4}>
@@ -99,7 +99,7 @@ const Article = ({ variant, node }) => {
             variant="top"
             className="align-self-center img-fluid shadow-slim"
             style={{ width: 'auto', maxHeight: '100%', objectFit: 'contain' }}
-            src={process.env.REACT_APP_API_URL + node.teaser.['325x325']} />}
+            src={process.env.REACT_APP_API_URL + node.teaser['325x325']} />}
       </Link>
       <Card.Body className="pt-1" style={{ fontSize: '0.85rem' }}>
         <div className="d-flex justify-content-between position-relative">
