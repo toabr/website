@@ -11,7 +11,7 @@ import Meta from '../components/Meta'
 import PageTitle from '../components/PageTitle'
 import Breadcrumbs from '../components/Breadcrumbs'
 
-import hljs from 'highlight.js'
+import hljs from 'highlight.js/lib/common'
 
 import './post.scss'
 import FaIcon from '../components/FaIcon';

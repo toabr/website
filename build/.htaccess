@@ -1,6 +1,14 @@
 Options -MultiViews
 RewriteEngine On
 
+# Forcing `https://`
+RewriteCond %{HTTPS} !=on
+RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+
+# respond to a request by serving index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]
+
 # Frame Options |
 # Protect website against clickjacking.
 Header always set X-Frame-Options "DENY" "expr=%{CONTENT_TYPE} =~ m#text/html#i"
@@ -48,13 +56,6 @@ ServerSignature Off
 # allows a site to control which features and APIs can be used in the browser.
 #     Permissions-Policy: none
 
-# Forcing `https://`
-RewriteCond %{HTTPS} !=on
-RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
-
-# respond to a request by serving index.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.html [QSA,L]
 
 # ----------------------------------------------------------------------
 # | Compression                                                        |
