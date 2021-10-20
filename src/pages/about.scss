@@ -1,8 +1,8 @@
 // 
 $about-width: 320px;
 
-html, body, #root, #about {
-  min-height: 100vh;
+#root, #about {
+    min-height: 100%;
 }
 
 #page {
@@ -24,10 +24,6 @@ html, body, #root, #about {
 }
 
 body {
-    background-color: var(--bs-body-bg);
-    background-image: url(../img/kendal-hnysCJrPpkc-unsplash_sm.webp);
-    background-size: contain;
-
     &[open] {
         overflow: hidden;
         #about {

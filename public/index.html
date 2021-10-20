@@ -9,16 +9,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-  <link rel="icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/logo192.png" />
+  <link rel="icon" href="%PUBLIC_URL%/images/logo192.png" />
 
   <!-- Open Graph Metadata -->
   <meta property="og:url" content="https://toabr.de/" />
   <meta property="og:title" content="toabr.de" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
+  <meta property="og:image" content="%PUBLIC_URL%/images/logo192.png" />
 
   <!-- preloads -->
+  <link rel="preload" as="image" href="%PUBLIC_URL%/images/kendal-hnysCJrPpkc-unsplash_sm.webp">
   <link rel="preload" as="font" href="%PUBLIC_URL%/fonts/Comfortaa-VariableFont_wght.ttf" type="font/ttf" crossorigin />
   <link rel="preload" as="font" href="%PUBLIC_URL%/fonts/Martel-Regular.ttf" type="font/ttf" crossorigin />
 
@@ -28,6 +29,14 @@
   <script>document.documentElement.classList.remove('no-js');</script>
   
   <style>
+    html, body {
+      min-height: 100%;
+    }
+    body {
+      width: 100%;
+      background-image: url("%PUBLIC_URL%/images/kendal-hnysCJrPpkc-unsplash_sm.webp");
+      background-size: cover;
+    }
     @font-face {
       font-family: 'Martel';
       font-style: normal;
@@ -36,7 +45,6 @@
         url('./fonts/Martel-Regular.ttf') format("truetype");
       font-display: swap;
     }
-
     @font-face {
       font-family: 'Comfortaa';
       font-style: normal;
