@@ -11,7 +11,7 @@ import useFetchImages from '../hooks/useFetchImages'
    * reorder server output
    */
 function reorderNodes(nodes, list) {
-  return nodes.map((node, index) => nodes.find(node => node.nid[0].value == list[index]))
+  return nodes.map((node, index) => nodes.find(node => node.nid[0].value === list[index]))
 }
 
 
@@ -31,10 +31,6 @@ const Home = () => {
   }
 
   const imageTeaser = useFetchImages({ fids })
-
-  function addImageData(node) {
-  }
-
 
   return (
     <>

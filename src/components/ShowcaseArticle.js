@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button, Card, Col, Row } from 'react-bootstrap'
 
 import useTagTitles from '../hooks/useTagTitles'
-import { useThemeContext } from '../hooks/useThemeContext'
+// import { useThemeContext } from '../hooks/useThemeContext'
 import { formatUTC } from '../js/helper'
 import FaIcon from './FaIcon'
 
@@ -18,8 +18,8 @@ import FaIcon from './FaIcon'
 const Article = ({ variant, node }) => {
   // console.log(node)
 
-  const { darkMode } = useThemeContext()
-  const btnVariant = (darkMode) ? "outline-" : ""
+  // const { darkMode } = useThemeContext()
+  // const btnVariant = (darkMode) ? "outline-" : ""
 
   // external || internal link
   const link = `/node/${node.nid[0].value}`
@@ -58,7 +58,9 @@ const Article = ({ variant, node }) => {
           <Col md={8}>
             <Link to={link}>
               {node.teaser &&
-                <Card.Img
+                <img className="card-img"
+                  loading="lazy"
+                  alt={node.title[0].value}
                   style={{ width: '100%', height: '21rem', objectFit: 'cover' }}
                   src={process.env.REACT_APP_API_URL + node.teaser['650x650']} />}
             </Link>
@@ -95,9 +97,10 @@ const Article = ({ variant, node }) => {
     <Card as="article" bg="accent-1" className="h-100 border-0 shadow-slim hover-drop">
       <Link to={link} className="d-flex justify-content-center bg-primary bg-gradient p-3" style={{ height: '15rem' }}>
         {node.teaser &&
-          <Card.Img
-            variant="top"
-            className="align-self-center img-fluid shadow-slim"
+          <img
+            loading="lazy"
+            alt={node.title[0].value}
+            className="card-img-top align-self-center img-fluid shadow-slim"
             style={{ width: 'auto', maxHeight: '100%', objectFit: 'contain' }}
             src={process.env.REACT_APP_API_URL + node.teaser['325x325']} />}
       </Link>

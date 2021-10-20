@@ -27,35 +27,50 @@
 
   <!-- replace no-js class in <html> -->
   <script>document.documentElement.classList.remove('no-js');</script>
-  
+
   <style>
-    html, body {
+    html,
+    body {
       min-height: 100%;
     }
+
     body {
       background-image: url("%PUBLIC_URL%/images/kendal-hnysCJrPpkc-unsplash_sm.webp");
     }
+
     @font-face {
       font-family: 'Martel';
       font-style: normal;
       font-weight: 400;
       src: local('Martel-Regular'),
-        url('./fonts/Martel-Regular.ttf') format("truetype");
+        url('%PUBLIC_URL%/fonts/Martel-Regular.ttf') format("truetype");
       font-display: swap;
     }
+
     @font-face {
       font-family: 'Comfortaa';
       font-style: normal;
       font-weight: 400;
       src: local('Comfortaa'),
-        url('./fonts/Comfortaa-VariableFont_wght.ttf') format("truetype");
+        url('%PUBLIC_URL%/fonts/Comfortaa-VariableFont_wght.ttf') format("truetype");
       font-display: swap;
+    }
+
+    html.no-js {
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.5rem;
+      text-align: center;
     }
   </style>
 </head>
 
 <body style="background-color: #343a40;">
-  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <noscript>You need to enable JavaScript.</noscript>
   <div id="root"></div>
+
+</body>
 
 </html>

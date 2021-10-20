@@ -98,7 +98,7 @@ const Post = (props) => {
 
           <div className="field_images d-flex flex-wrap justify-content-center gap-3 mt-5">
             {!!field_image.length && field_image.map(image => (
-              <div className="image" dangerouslySetInnerHTML={{ __html: image.srcset_narrow }} />
+              <div key={image.fid} className="image" dangerouslySetInnerHTML={{ __html: image.srcset_narrow }} />
             ))}
           </div>
 
