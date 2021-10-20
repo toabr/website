@@ -1,20 +1,5 @@
 // Default variable overrides
 
-// Typography
-@font-face {
-  font-family: 'Martel';
-  src:  local('Martel-Regular'),
-        url('../fonts/Martel-Regular.ttf') format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: 'Comfortaa';
-  src:  local('Comfortaa'),
-        url('../fonts/Comfortaa-VariableFont_wght.ttf') format("truetype");
-  font-weight: normal;
-}
-
 $font-family-sans-serif:      'Comfortaa', sans-serif;
 $font-family-serif:           'Martel', serif;
 
