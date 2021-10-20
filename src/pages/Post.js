@@ -53,7 +53,7 @@ const Post = (props) => {
    * to determin the language to use
    */
   function highLight(body) {
-    const languages = ['html', 'sh', 'js', 'json', 'css', 'scss', 'docker', 'php', 'yml']
+    const languages = ['html', 'sh', 'bash', 'js', 'json', 'css', 'scss', 'docker', 'php', 'yml', 'ini']
 
     const wrapper = document.createElement('div')
     wrapper.innerHTML = body
