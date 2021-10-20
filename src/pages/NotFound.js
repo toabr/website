@@ -10,7 +10,7 @@ const NotFound = () => {
             <Card.Title className=''>Page not found</Card.Title>
             <Card.Text className=''>
               <p>Error code 404</p>
-              <code>dont contact the admin</code>
+              <code>Please dont contact the admin</code>
             </Card.Text>
             <Link to='/'>
               <Button className=''>Home Page</Button>

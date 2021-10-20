@@ -103,7 +103,7 @@ const Wiki = (props) => {
 
   return (
     <div className="container-small mb-5">
-      <Meta title={pageTitle} />
+      <Meta title={'toabr.de | Wiki'} />
 
       {(!!nodes?.length && (query || page) && !isLoading) &&
         window.scrollTo(0, 401)
