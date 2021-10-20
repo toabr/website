@@ -60,6 +60,8 @@ const Article = ({ variant, node }) => {
               {node.teaser &&
                 <img className="card-img"
                   loading="lazy"
+                  width="650"
+                  height="650"
                   alt={node.title[0].value}
                   style={{ width: '100%', height: '21rem', objectFit: 'cover' }}
                   src={process.env.REACT_APP_API_URL + node.teaser['650x650']} />}
@@ -98,6 +100,8 @@ const Article = ({ variant, node }) => {
       <Link to={link} className="d-flex justify-content-center bg-primary bg-gradient p-3" style={{ height: '15rem' }}>
         {node.teaser &&
           <img
+            width="325"
+            height="325"
             loading="lazy"
             alt={node.title[0].value}
             className="card-img-top align-self-center img-fluid shadow-slim"
