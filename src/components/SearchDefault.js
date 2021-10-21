@@ -2,12 +2,12 @@ import BtnList from "./BtnList"
 
 const btnData = [
   { title: "linux", id: ["linux"], icon: "linux" },
-  { title: "drupal", id: ["drupal"], icon: "drupal" },
-  { title: "javaScript", id: ["javascript"], icon: "js" },
-  { title: "css", id: ["css"], icon: "css" },
   { title: "react", id: ["react"], icon: "react" },
+  { title: "drupal", id: ["drupal"], icon: "drupal" },
   { title: "bash", id: ["bash"], icon: "hashtag" },
+  { title: "css", id: ["css"], icon: "css" },
   { title: "docker", id: ["docker"], icon: "docker" },
+  { title: "javaScript", id: ["javascript"], icon: "js" },
 ]
 
 function SearchDefault({ onClick, activeTag }) {
