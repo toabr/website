@@ -7,7 +7,7 @@ const btnData = [
   { title: "bash", id: ["bash"], icon: "hashtag" },
   { title: "css", id: ["css"], icon: "css" },
   { title: "docker", id: ["docker"], icon: "docker" },
-  { title: "javaScript", id: ["javascript"], icon: "js" },
+  { title: "javascript", id: ["javascript"], icon: "js" },
 ]
 
 function SearchDefault({ onClick, activeTag }) {
