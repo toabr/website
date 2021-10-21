@@ -1,4 +1,4 @@
-import { BootstrapIcon, CodepenIcon, CoffeeIcon, CssIcon, DockerIcon, DrupalIcon, GamingIcon, GithubIcon, GlassesIcon, HeadphonesIcon, HtmlIcon, JsIcon, LinuxIcon, ReactIcon, SketchfabIcon, VimeoIcon } from '../components/FaIcon'
+import { CodepenIcon, CoffeeIcon, GithubIcon, SketchfabIcon, VimeoIcon } from '../components/FaIcon'
 import './about.scss'
 
 const About = () => {
