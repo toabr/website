@@ -26,10 +26,10 @@ const About = () => {
           <dt>No semicolons</dt>
 
           <dd>Uses:</dd>
-          <dt>HTML, CSS & JavaScript</dt>
+          <dt>HTML, CSS, JavaScript & <CoffeeIcon/></dt>
 
           <dd>And builds with:</dd>
-          <dt>Linux, VsCode, Git, Bash, Docker, Drupal, Bootstrap, React & <CoffeeIcon/></dt>
+          <dt>Linux, VsCode, Git, Bash, Docker, Drupal, Bootstrap, React</dt>
 
           <dt className="d-flex gap-4 mt-4 fs-3">
             <a href="https://github.com/toabr" target="_blank" rel="noreferrer" title="GitHub" alt="GitHub">
