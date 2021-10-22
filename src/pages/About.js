@@ -15,8 +15,8 @@ const About = () => {
 
       <div className="border-top border-3 border-primary w-50 mb-3" />
 
-      <p className="description">
-        <dl ClassName="fw-light">
+      <div className="description">
+        <dl className="fw-light">
           <dd>A web developer who enjoys:</dd>
           <dt>Rapid Prototyping</dt>
           <dt>Animating interfaces</dt>
@@ -47,7 +47,7 @@ const About = () => {
           </dt>
         </dl>
 
-      </p>
+      </div>
       <footer className="position-fixed bottom-0">
         <p className="mb-1 text-muted decoration-none">Photo by <a className="text-secondary decoration-none" rel="noreferrer" target="_blank" href="https://unsplash.com/@hikendal?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kendal</a> on <a className="text-secondary decoration-none" rel="noreferrer" target="_blank" href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
         </p>

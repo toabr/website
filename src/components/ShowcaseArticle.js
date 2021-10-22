@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { Button, Card, Col, Row } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 
 import useTagTitles from '../hooks/useTagTitles'
 // import { useThemeContext } from '../hooks/useThemeContext'
@@ -10,12 +10,10 @@ import FaIcon from './FaIcon'
 
 /**
  * teaser cards (on frontpage)
- * @param {string} variant - big format
  * @param {object} node - content data
- * @returns one card
- * TODO: not agile
+ * @returns a Card
  */
-const Article = ({ variant, node }) => {
+const Article = ({ node }) => {
   // console.log(node)
 
   // const { darkMode } = useThemeContext()
@@ -23,8 +21,7 @@ const Article = ({ variant, node }) => {
 
   // external || internal link
   const link = `/node/${node.nid[0].value}`
-  const summary = node.body[0].summary ? node.body[0].summary :
-    'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.'
+  const summary = node.body[0].summary ? node.body[0].summary : 'Summary is missing ...'
 
   // add titles to field_tags
   const field_tags = useTagTitles(node.field_tags).map((tag) => (
@@ -36,7 +33,7 @@ const Article = ({ variant, node }) => {
     </Link>
   ))
 
-  const resource = (
+  const resource = node.field_resource ? (
     <Button
       href={node.field_resource[0]?.uri}
       target="_blank"
@@ -48,73 +45,28 @@ const Article = ({ variant, node }) => {
       size="">
       <FaIcon name={node.field_resource[0]?.title} className="" />
     </Button>
-  )
-
-
-  if (variant === 'teaser') {
-    return (
-      <Card as="article" bg="accent-1" className="border-0 shadow-slim hover-drop">
-        <Row className="row g-0">
-          <Col md={8}>
-            <Link to={link}>
-              {node.teaser &&
-                <img className="card-img"
-                  loading="lazy"
-                  width="650"
-                  height="650"
-                  alt={node.title[0].value}
-                  style={{ width: '100%', height: '21rem', objectFit: 'cover' }}
-                  src={process.env.REACT_APP_API_URL + node.teaser['650x650']} />}
-            </Link>
-          </Col>
-          <Col md={4}>
-            <Card.Body className="" style={{ fontSize: '0.85rem' }}>
-              <div className="text-primary mb-2">
-                {field_tags}
-              </div>
-              <Card.Title className="fw-bold">
-                <Link to={link} className="text-body text-decoration-none">
-                  {node.title[0].value}
-                </Link>
-              </Card.Title>
-              <Card.Subtitle as="small" className="mb-2 text-muted">
-                {formatUTC(node.changed[0].value)}
-              </Card.Subtitle>
-              <Card.Text className="font-serif text-accent-3 m-0">
-                {summary}
-              </Card.Text>
-              <div className="text-end">
-                {node.field_resource[0] && resource}
-              </div>
-            </Card.Body>
-          </Col>
-        </Row>
-      </Card>
-
-    )
-  }
-
+  ) : null
 
   return (
-    <Card as="article" bg="accent-1" className="h-100 border-0 shadow-slim hover-drop">
-      <Link to={link} className="d-flex justify-content-center bg-primary bg-gradient p-3" style={{ height: '15rem' }}>
-        {node.teaser &&
-          <img
-            width="325"
-            height="325"
-            loading="lazy"
-            alt={node.title[0].value}
-            className="card-img-top align-self-center img-fluid shadow-slim"
-            style={{ width: 'auto', maxHeight: '100%', objectFit: 'contain' }}
-            src={process.env.REACT_APP_API_URL + node.teaser['325x325']} />}
-      </Link>
-      <Card.Body className="pt-1" style={{ fontSize: '0.85rem' }}>
+    <Card as="article" bg="accent-1" className="border-0 shadow-slim hover-drop">
+      <div className="card__image bg-primary bg-gradient p-3" >
+        <Link to={link} className="align-items-center d-flex flex-column h-100 justify-content-center" > {/* d-flex justify-content-center h-100 */}
+          {node.teaser &&
+            <img width="325" height="325" loading="lazy"
+              className="img-fluid shadow-slim"
+              style={{width: 'auto', maxHeight: '100%', objectFit: 'contain'}}
+              alt={node.title[0].value}
+              src={node.teaser ? process.env.REACT_APP_API_URL + node.teaser['650x650'] : ''} />}
+        </Link>
+      </div>
+
+      <div className="card__body px-3" style={{ fontSize: '0.85rem' }}>
         <div className="d-flex justify-content-between position-relative">
           <div className="text-primary fw-bolder my-2">
             {field_tags}
           </div>
-          <div className="position-absolute" style={{ top: '-23px', right: '-8px' }} >
-            {node.field_resource[0] && resource}
+          <div style={{ transform: 'translateY(0.58rem)' }} >
+            {resource}
           </div>
         </div>
         <Card.Title className="fw-bold">
@@ -125,13 +77,13 @@ const Article = ({ variant, node }) => {
         <Card.Subtitle as="small" className="mb-2 text-muted">
           {formatUTC(node.changed[0].value)}
         </Card.Subtitle>
-        <Card.Text className="font-serif text-accent-3 py-1 m-0">
+        <Card.Text className="font-serif text-accent-3 py-1 mb-3">
           {summary}
         </Card.Text>
         <div className="text-end">
 
         </div>
-      </Card.Body>
+      </div>
     </Card >
   )
 }

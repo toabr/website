@@ -8,26 +8,24 @@ import useFetchImages from '../hooks/useFetchImages'
 
 
 /**
-   * reorder server output
-   */
-function reorderNodes(nodes, list) {
-  return nodes.map((node, index) => nodes.find(node => node.nid[0].value === list[index]))
-}
-
-
+ * Renders Homepage &
+ * Prefetches Nodes for Showcase
+ */
 const Home = () => {
-  const ids = [85, 120, 86, 84, 87] // exact ids to fetch in order
+  // Teaser image ids
   let fids = null
 
   /**
    * FETCH
    */
-  const url = `${process.env.REACT_APP_API_URL}/rest/v2/node/work/${ids.toString()}`
+  const url = `${process.env.REACT_APP_API_URL}/rest/v2/node/work/all?sort_by=created&sort_order=DESC&items_per_page=10`
   const { status, data, error } = useFetch(url)
 
   if (status === 'fetched') {
-    // collect head images
-    fids = data.map(node => node.field_image[0].target_id)
+    // collect head image ids to fetch later
+    fids = data.filter(
+      node => !!node.field_image.length).map(
+        node => node.field_image[0].target_id)
   }
 
   const imageTeaser = useFetchImages({ fids })
@@ -53,7 +51,7 @@ const Home = () => {
       </section>
 
 
-      <Showcase data={reorderNodes(data, ids) || []} imageTeaser={imageTeaser} />
+      <Showcase data={data || []} imageTeaser={imageTeaser} />
     </>
   )
 }

@@ -1,0 +1,104 @@
+// imported in src/scss/bootstrap
+
+#showcase {
+
+  display: grid;
+  grid-gap: 2rem 1rem;
+  grid-template-columns: repeat(6, 1fr);
+
+  @mixin card--xl {
+    grid-column: span 6;
+  }
+  
+  @mixin card--sm {
+    grid-column: span 3;
+  }
+  
+  @mixin card--xs {
+    grid-column: span 2;
+  }
+
+  .card {
+    // parent grid
+    @include card--xl;
+  
+    // own grid
+    display: grid;
+    grid-template-areas: "img" "body";
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr;
+    grid-gap: 0;
+    overflow: auto;
+    &:hover {
+      cursor: pointer;
+    }
+    .card__image {
+      grid-area: img;
+      height: 15rem;
+    }
+  
+    .card__body {
+      grid-area: body;
+    }
+  }
+
+  @mixin card--teaser {
+    grid-column: span 6;
+    grid-template-areas: "img body";
+    grid-template-columns: 4fr 2fr;
+    .card__image {
+      width: 100%;
+      height: 100%;
+    }
+    .card__body {
+    }
+  }
+  
+
+  // small Grid 2 cards per row
+  @include media-breakpoint-up(sm) {
+    // every card
+    .card:nth-child(1n) {
+      @include card--sm;
+    }
+  }
+
+  // medium Grid 1 | 2 | 2 | 1
+  @include media-breakpoint-up(md) {
+    // every card
+    .card:nth-child(1n) {
+      @include card--sm;
+    }
+
+    // card: 1 | 7 | 13 ...
+    .card:nth-child(6n + 1) {
+      @include card--teaser;
+    }
+
+    // card: 6 | 12 | 18 ...
+    .card:nth-child(6n) {
+      @include card--xl;
+    }
+  }
+
+  // full Grid 1 | 3 | 2
+  @media only screen and (min-width: 920px) {
+    // every card
+    .card:nth-child(1n) {
+      @include card--sm;
+    }
+
+    // card: 2,3,4 | 8,9,10 ...
+    .card:nth-child(6n + 2),
+    .card:nth-child(6n + 3),
+    .card:nth-child(6n + 4) {
+      @include card--xs;
+    }
+
+    // card: 1 | 7 | 13 ...
+    .card:nth-child(6n + 1) {
+      @include card--teaser;
+    }
+  }
+
+}
