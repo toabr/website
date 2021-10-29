@@ -49,8 +49,8 @@ const Article = ({ node }) => {
 
   return (
     <Card as="article" bg="accent-1" className="border-0 shadow-slim hover-drop">
-      <div className="card__image bg-primary bg-gradient p-3" >
-        <Link to={link} className="align-items-center d-flex flex-column h-100 justify-content-center" > {/* d-flex justify-content-center h-100 */}
+      <div className="card__image d-flex justify-content-center bg-primary bg-gradient p-3" >
+        <Link to={link} > {/* d-flex justify-content-center h-100 */}
           {node.teaser &&
             <img width="325" height="325" loading="lazy"
               className="img-fluid shadow-slim"
