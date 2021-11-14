@@ -1,7 +1,7 @@
 class ApiService {
     constructor() {
-        this.apiUrl = process.env.REACT_APP_API_URL;
-        this.delay = (process.env.NODE_ENV === 'development')? process.env.REACT_APP_API_DELAY : 0;
+        this.apiUrl = process.env.API_URL;
+        this.delay = (process.env.NODE_ENV === 'development')? process.env.API_DELAY : 0;
     }
 
     fetchData = (requestUrl) => {

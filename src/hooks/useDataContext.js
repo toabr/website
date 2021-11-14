@@ -6,7 +6,7 @@ const DataContext = createContext({});
 
 // export a custom context provider
 export function DataProvider({ children }) {
-  const url = `${process.env.REACT_APP_API_URL}/api/term/`
+  const url = `${process.env.API_URL}/api/term/`
   const { status, data, error } = useFetch(url)
 
   if (status === 'error') {

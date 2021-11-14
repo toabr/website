@@ -18,7 +18,7 @@ export const urlBuilder = ({
   items = 10, // 5, 10, 15, 20, 25, 50
   page,
 }) => {
-  let url = `${process.env.REACT_APP_API_URL}/rest/v2/node?`
+  let url = `${process.env.API_URL}/rest/v2/node?`
   if (nid) url += `_nid=${nid}&`
   if (type) url += `_type=${type}&`
   if (tags) url += `_tags=${tags.toString()}&`

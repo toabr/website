@@ -18,7 +18,7 @@ const Home = () => {
   /**
    * FETCH
    */
-  const url = `${process.env.REACT_APP_API_URL}/rest/v2/node/work/all?sort_by=created&sort_order=DESC&items_per_page=10`
+  const url = `${process.env.API_URL}/rest/v2/node/work/all?sort_by=created&sort_order=DESC&items_per_page=10`
   const { status, data, error } = useFetch(url)
 
   if (status === 'fetched') {

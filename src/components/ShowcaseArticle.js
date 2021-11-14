@@ -56,7 +56,7 @@ const Article = ({ node }) => {
               className="img-fluid shadow-slim"
               style={{width: 'auto', maxHeight: '100%', objectFit: 'contain'}}
               alt={node.title[0].value}
-              src={node.teaser ? process.env.REACT_APP_API_URL + node.teaser['650x650'] : ''} />}
+              src={node.teaser ? process.env.API_URL + node.teaser['650x650'] : ''} />}
         </Link>
       </div>
 

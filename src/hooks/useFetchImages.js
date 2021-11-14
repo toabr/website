@@ -16,11 +16,11 @@ function addBaseUrl(image) {
 
   // set img src 
   const src = img.getAttribute('src')
-  img.setAttribute('src', process.env.REACT_APP_API_URL + src)
+  img.setAttribute('src', process.env.API_URL + src)
 
   // set img srcset 
   const srcset = img.getAttribute('srcset').split(', ').map(
-    url => process.env.REACT_APP_API_URL + url)
+    url => process.env.API_URL + url)
   img.setAttribute('srcset', srcset)
 
   // console.log(srcset)
@@ -36,7 +36,7 @@ function addBaseUrl(image) {
  */
 function useFetchImages({ nid, fids }) {
   let url = null
-  const apiBase = `${process.env.REACT_APP_API_URL}/rest/v2/image`
+  const apiBase = `${process.env.API_URL}/rest/v2/image`
 
   if (nid) url = `${apiBase}/${nid}`
   if (fids) url = `${apiBase}/all/${fids.toString()}`
