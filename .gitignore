@@ -10,7 +10,9 @@
 /tests/api.rest
 
 # production
-# /build
+.parcel-cache
+build
+dist
 
 # misc
 .vscode

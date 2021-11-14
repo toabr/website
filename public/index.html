@@ -9,20 +9,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="canonical" href="https://toabr.de/">
-  <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/logo192.png" />
-  <link rel="icon" href="%PUBLIC_URL%/images/logo192.png" />
+  <link rel="manifest" href="./site.webmanifest" />
+  <link rel="apple-touch-icon" href="./images/logo192.png" />
+  <link rel="icon" href="./images/logo192.png" />
 
   <!-- Open Graph Metadata -->
   <meta property="og:url" content="https://toabr.de/" />
   <meta property="og:title" content="toabr.de" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="%PUBLIC_URL%/images/logo192.png" />
+  <meta property="og:image" content="./images/logo192.png" />
 
   <!-- preloads -->
-  <link rel="preload" as="image" href="%PUBLIC_URL%/images/kendal-hnysCJrPpkc-unsplash_sm.webp">
-  <link rel="preload" as="font" href="%PUBLIC_URL%/fonts/Comfortaa-VariableFont_wght.ttf" type="font/ttf" crossorigin />
-  <link rel="preload" as="font" href="%PUBLIC_URL%/fonts/Martel-Regular.ttf" type="font/ttf" crossorigin />
+  <link rel="preload" as="image" href="./images/kendal-hnysCJrPpkc-unsplash_sm.webp">
+  <link rel="preload" as="font" href="./fonts/Comfortaa-VariableFont_wght.ttf" type="font/ttf" crossorigin />
+  <link rel="preload" as="font" href="./fonts/Martel-Regular.ttf" type="font/ttf" crossorigin />
 
   <meta name="theme-color" content="#20c997" />
 
@@ -36,7 +36,7 @@
     }
 
     body {
-      background-image: url("%PUBLIC_URL%/images/kendal-hnysCJrPpkc-unsplash_sm.webp");
+      background-image: url("./images/kendal-hnysCJrPpkc-unsplash_sm.webp");
     }
 
     @font-face {
@@ -44,7 +44,7 @@
       font-style: normal;
       font-weight: 400;
       src: local('Martel-Regular'),
-        url('%PUBLIC_URL%/fonts/Martel-Regular.ttf') format("truetype");
+        url('./fonts/Martel-Regular.ttf') format("truetype");
       font-display: swap;
     }
 
@@ -53,7 +53,7 @@
       font-style: normal;
       font-weight: 300 700;
       src: local('Comfortaa'),
-        url('%PUBLIC_URL%/fonts/Comfortaa-VariableFont_wght.ttf') format("truetype");
+        url('./fonts/Comfortaa-VariableFont_wght.ttf') format("truetype");
       font-display: swap;
     }
 
@@ -67,10 +67,11 @@
     }
   </style>
 </head>
-
 <body style="background-color: #343a40;">
-  <noscript>You need to enable JavaScript.</noscript>
+
   <div id="root"></div>
+  <script type="module" src="../src/index.js"></script>
+  <noscript>You need to enable JavaScript.</noscript>
 
 </body>
 
