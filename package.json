@@ -16,9 +16,9 @@
     "serve": "^13.0.2"
   },
   "scripts": {
-    "start": "parcel --hmr-port 38833",
+    "start": "parcel --hmr-port 35588",
     "build": "rm -rf dist; parcel build",
-    "serve": "serve ./dist"
+    "serve": "serve dist"
   },
   "browserslist": {
     "production": [

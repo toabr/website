@@ -10,6 +10,7 @@
 /tests/api.rest
 
 # production
+package-lock.json
 .parcel-cache
 build
 dist

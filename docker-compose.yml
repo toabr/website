@@ -4,13 +4,9 @@ services:
     image: "parcel-starter"
     user: "node"
     working_dir: /home/node/app
-    environment:
-      - NODE_ENV=development
-      # - PATH=$PATH:/home/node/app/node_modules/.bin
     volumes:
       - ./:/home/node/app
     ports:
       - "8080:1234"
-      - "38833:38833"
-      - "3000:3000"
+      - "35588:35588"
     command: "yarn start"
