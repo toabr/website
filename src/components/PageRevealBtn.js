@@ -14,18 +14,21 @@ const PageRevealBtn = () => {
   const btnRef = useRef(null)
 
   useEffect(() => {
+    // init
+    document.body.setAttribute('open', false)
+
     const bodyClickhandler = (e) => {
       const isOpen = isOpenRef.current
       // console.log('isOpen', isOpen)
 
       if (!isOpen && e.composedPath().includes(btnRef.current)) {
-        document.body.toggleAttribute('open')
+        document.body.setAttribute('open', true)
         setIsOpen(true)
         return
       }
 
       if (isOpen) {
-        document.body.toggleAttribute('open')
+        document.body.setAttribute('open', false)
         setIsOpen(false)
         return
       }

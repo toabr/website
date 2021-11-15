@@ -17,7 +17,9 @@
   },
   "scripts": {
     "start": "parcel --hmr-port 35588",
-    "build": "rm -rf dist; parcel build",
+    "clean": "rm -rf dist",
+    "copy" : "cp public/.htaccess dist && cp public/robots.txt dist",
+    "build": "yarn clean && parcel build && yarn copy",
     "serve": "serve dist"
   },
   "browserslist": {

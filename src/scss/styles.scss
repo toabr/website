@@ -1,6 +1,8 @@
-//
+/* ======================================
+ *   Basics 
+ * =====================================*/
 
-// scrollbar styles
+/* scrollbar styles */
 ::-webkit-scrollbar {
   width: 8px;
   height: 5px;
@@ -14,22 +16,16 @@ body::-webkit-scrollbar-thumb {
 ::-webkit-scrollbar-track-piece {
   background-color: transparent;
 }
+
+/* user text selection */
 ::selection {
   background-color: var(--bs-highlight);
   color: var(--bs-light);
 }
 
+/* Font styles */
 :root {
   --font-serif: #{inspect($font-family-serif)};
-  --shadow-slim: #{$box-shadow-slim};
-}
-
-pre {
-  @extend .shadow-slim, .hover-drop;
-}
-
-blockquote {
-  @extend .blockquote;
 }
 
 .font-serif {
@@ -54,7 +50,11 @@ blockquote {
     0 0 0 0.25rem rgb(32 201 151 / 25%) !important;
 }
 
-// shadow work START
+/* Shadows */
+:root {
+  --shadow-slim: #{$box-shadow-slim};
+}
+
 .shadow-slim {
   box-shadow: var(--shadow-slim);
 }
@@ -72,9 +72,8 @@ blockquote {
 [darkmode] .hover-drop:hover {
   box-shadow: 0 6px 24px -5px var(--bs-accent-1);
 }
-// shadow work END
 
-// { toabr.de } < braces
+/* Headline Braces */
 .braces {
   &::before {
     content: "{";
@@ -86,5 +85,103 @@ blockquote {
     content: "}";
     color: rgba(var(--bs-accent-3-rgb), 0.35);
     padding-left: 1rem;
+  }
+}
+
+
+pre {
+  @extend .shadow-slim, .hover-drop;
+}
+
+blockquote {
+  @extend .blockquote;
+}
+
+/* ======================================
+ *   About Section 
+ * =====================================*/
+
+$about-width: 320px;
+
+#about {
+  min-height: 100%;
+}
+
+#page {
+  background: rgba(var(--bs-body-bg-rgb), 91%);
+  transition: transform 0.3s ease-out;
+}
+
+#about {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: $about-width;
+  
+  .title {
+    font-size: 32px;
+  }
+  
+  .description {
+    dd {
+      margin-top: 0.8125rem;
+      font-weight: 600;
+      // text-transform: capitalize;
+    }
+    dt {
+      font-weight: unset;
+      padding-left: 0.5rem;
+    }
+  }
+}
+
+[open=false] {
+  #about {
+    left: -$about-width;
+    opacity: 0;
+    
+    .title div{
+      transform: translateX(-25px);
+      &:nth-child(2) {
+        transform: translateX(-35px);
+      }
+      &:nth-child(3) {
+        transform: translateX(-45px);
+      }
+    }
+  }
+}
+
+[open=true] {
+  overflow: hidden;
+  
+  #about {
+    left: 0;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 1.5s ease-out;
+    
+    .title div {
+      transition: all 1.8s ease-out;
+      transform: translateX(0);
+    }
+  }
+
+  #page {
+    width: 100%;
+    transform: translate($about-width, 58px);
+    position: fixed;
+    opacity: 0.8;
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(var(--bs-body-bg-rgb), 35%);
+      background-image: url(../img/overlay_02.png);
+      z-index: 1100;
+    }
   }
 }

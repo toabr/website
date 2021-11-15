@@ -1,6 +1,5 @@
 // router
 import { BrowserRouter as Router } from 'react-router-dom'
-import About from '../pages/About'
 
 // components
 import Footer from '../components/Footer'
@@ -20,7 +19,6 @@ const Layout = ({ children }) => {
           <Footer />
         </main>
       </div>
-      <About />
     </Router>
   )
 }
