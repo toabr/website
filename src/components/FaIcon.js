@@ -13,6 +13,7 @@ export default function FaIcon({ name = '', classNameName }) {
     case 'css': return <CssIcon />
     case 'react': return <ReactIcon />
     case 'docker': return <DockerIcon />
+    case 'codepen': return <CodepenIcon />
     default: return <HashtagIcon />
   }
 }
