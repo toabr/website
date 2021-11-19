@@ -1,12 +1,10 @@
 version: "3"
 services:
   node:
-    image: "parcel-starter"
-    user: "node"
-    working_dir: /home/node/app
+    build: .
+    image: parcel/starter
     volumes:
       - ./:/home/node/app
     ports:
       - "8080:1234"
-      - "35588:35588"
     command: "yarn start"

@@ -16,7 +16,7 @@
     "serve": "^13.0.2"
   },
   "scripts": {
-    "start": "parcel --hmr-port 35588",
+    "start": "parcel",
     "clean": "rm -rf dist",
     "copy" : "cp public/.htaccess dist && cp public/robots.txt dist",
     "build": "yarn clean && parcel build && yarn copy",
