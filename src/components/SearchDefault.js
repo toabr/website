@@ -2,11 +2,12 @@ import BtnList from "./BtnList"
 
 const btnData = [
   { title: "linux", id: ["linux"], icon: "linux" },
-  { title: "react", id: ["react"], icon: "react" },
-  { title: "drupal", id: ["drupal"], icon: "drupal" },
-  { title: "bash", id: ["bash"], icon: "hashtag" },
-  { title: "css", id: ["css"], icon: "css" },
+  { title: "git", id: ["git"], icon: "git" },
   { title: "docker", id: ["docker"], icon: "docker" },
+  { title: "bash", id: ["bash"], icon: "hashtag" },
+  { title: "drupal", id: ["drupal"], icon: "drupal" },
+  { title: "react", id: ["react"], icon: "react" },
+  { title: "css", id: ["css"], icon: "css" },
   { title: "javascript", id: ["javascript"], icon: "js" },
 ]
 
