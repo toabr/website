@@ -8,7 +8,7 @@ import { RepleyIcon } from './FaIcon';
  * triggers attribute toggle on body
  * to show hidden about page
  */
-const PageRevealBtn = () => {
+const RevealBtn = () => {
   const [isOpen, _setIsOpen] = useState(false)
   const isOpenRef = useRef(isOpen)
   const btnRef = useRef(null)
@@ -61,4 +61,4 @@ const PageRevealBtn = () => {
   )
 }
 
-export default PageRevealBtn
+export default RevealBtn

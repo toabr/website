@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 import { Container } from 'react-bootstrap';
-import PageRevealBtn from './PageRevealBtn'
+import RevealBtn from './RevealBtn'
 import ThemeSwitch from './ThemeSwitch';
 
 
@@ -30,7 +30,7 @@ const Navi = () => {
       <Contact show={modalShow} handleClose={handleModalClose} handleSubmit={handleFormSubmit} /> */}
       
       <div className="d-flex justify-content-between align-items-center">
-        <PageRevealBtn />
+        <RevealBtn />
         <ThemeSwitch />
       </div>
     </Container>
