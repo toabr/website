@@ -23,7 +23,7 @@ Options -Indexes
 
 # HTTP Strict Transport Security (HSTS) |
 # Force client-side TLS (Transport Layer Security) redirection.
-Header always set Strict-Transport-Security "max-age=16070400; includeSubDomains" "expr=%{HTTPS} == 'on'"
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" "expr=%{HTTPS} == 'on'"
 
 # Content Type Options |
 # Prevent some browsers from MIME-sniffing the response.
