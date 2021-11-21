@@ -60,12 +60,12 @@ const Article = ({ node }) => {
         </Link>
       </div>
 
-      <div className="card__body px-3" style={{ fontSize: '0.85rem' }}>
+      <div className="card__body px-3 pt-2" style={{ fontSize: '0.85rem' }}>
         <div className="d-flex justify-content-between position-relative">
           <div className="text-primary fw-bolder my-2">
             {field_tags}
           </div>
-          <div style={{ transform: 'translateY(0.58rem)' }} >
+          <div className="resource-icon">
             {resource}
           </div>
         </div>
