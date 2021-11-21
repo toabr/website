@@ -101,11 +101,7 @@ blockquote {
  *   About Section 
  * =====================================*/
 
-$about-width: 320px;
-
-#about {
-  min-height: 100%;
-}
+$about-width: 350px;
 
 #page {
   background: rgba(var(--bs-body-bg-rgb), 91%);
@@ -115,12 +111,29 @@ $about-width: 320px;
 #about {
   position: fixed;
   top: 0;
+  // left: -$about-width;
   left: 0;
-  z-index: -1;
   width: $about-width;
+  height: 100vh;
+  z-index: -1;
+  // font-size: 2vh;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
   
   .title {
-    font-size: 32px;
+    font-size: 2em;
+
+    div {
+      transform: translateX(-25px);
+      transition: all 1.8s ease-out;
+
+      &:nth-child(2) {
+        transform: translateX(-35px);
+      }
+      &:nth-child(3) {
+        transform: translateX(-45px);
+      }
+    }
   }
   
   .description {
@@ -136,38 +149,23 @@ $about-width: 320px;
   }
 }
 
-[open=false] {
+html.no-js,
+[open=true] {
+  overflow: hidden;
+  
   #about {
-    left: -$about-width;
-    opacity: 0;
+    // left: 0;
+    // z-index: 1;
+    opacity: 1;
+    transition: opacity 1.5s ease-out;
     
-    .title div{
-      transform: translateX(-25px);
-      &:nth-child(2) {
-        transform: translateX(-35px);
-      }
-      &:nth-child(3) {
-        transform: translateX(-45px);
-      }
+    .title div {
+      transform: translateX(0);
     }
   }
 }
 
 [open=true] {
-  overflow: hidden;
-  
-  #about {
-    left: 0;
-    z-index: 1;
-    opacity: 1;
-    transition: opacity 1.5s ease-out;
-    
-    .title div {
-      transition: all 1.8s ease-out;
-      transform: translateX(0);
-    }
-  }
-
   #page {
     width: 100%;
     transform: translate($about-width, 58px);
