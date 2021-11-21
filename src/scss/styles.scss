@@ -107,32 +107,16 @@ $about-width: 350px;
   transition: transform 0.3s ease-out;
 }
 
-#about {
+.about {
   position: fixed;
   top: 0;
-  // left: -$about-width;
   left: 0;
   width: $about-width;
   height: 100vh;
-  z-index: -1;
   // font-size: 2vh;
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
   
   .title {
     font-size: 2em;
-
-    div {
-      transform: translateX(-25px);
-      transition: all 1.8s ease-out;
-
-      &:nth-child(2) {
-        transform: translateX(-35px);
-      }
-      &:nth-child(3) {
-        transform: translateX(-45px);
-      }
-    }
   }
   
   .description {
@@ -148,18 +132,43 @@ $about-width: 350px;
   }
 }
 
+body[open] .about {
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  // left: -$about-width;
+
+  .title {
+    div {
+      transform: translateX(-25px);
+      transition: all 1.8s ease-out;
+
+      &:nth-child(2) {
+        transform: translateX(-35px);
+      }
+      &:nth-child(3) {
+        transform: translateX(-45px);
+      }
+    }
+  }
+}
+
 html.no-js,
-[open=true] {
+body[open=true] {
   overflow: hidden;
   
-  #about {
+  .about {
     // left: 0;
     // z-index: 1;
     opacity: 1;
     transition: opacity 1.5s ease-out;
     
-    .title div {
-      transform: translateX(0);
+    .title {
+      div:nth-child(1),
+      div:nth-child(2),
+      div:nth-child(3) {
+        transform: translateX(0);
+      }
     }
   }
 }
