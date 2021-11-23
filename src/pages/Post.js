@@ -12,6 +12,7 @@ import PageTitle from '../components/PageTitle'
 import Breadcrumbs from '../components/Breadcrumbs'
 
 import hljs from 'highlight.js/lib/common'
+import '../scss/highlight.scss'
 
 import './post.scss'
 import FaIcon from '../components/FaIcon';
