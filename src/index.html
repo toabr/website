@@ -9,10 +9,10 @@
   <meta name="description" content="personal portfolio" />
   <meta name="theme-color" content="#20c997" />
 
-  <link rel="shortcut icon" href="./images/logo192.png" />
+  <link rel="shortcut icon" href="./img/logo192.png" />
   <link rel="canonical" href="https://toabr.de/">
   <link rel="manifest" href="./site.webmanifest" />
-  <link rel="apple-touch-icon" href="./images/logo192.png" />
+  <link rel="apple-touch-icon" href="./img/logo192.png" />
 
   <!-- Open Graph Metadata -->
   <meta property="og:type" content="website" />
@@ -20,15 +20,16 @@
   <meta property="og:url" content="https://toabr.de/" />
   <meta property="og:title" content="toabr.de" />
   <meta property="og:description" content="" />
-  <meta property="og:image" content="./images/logo192.png" />
+  <meta property="og:image" content="./img/logo192.png" />
 
   <!-- preloads -->
-  <link rel="preload" as="image" href="./images/hero.webp">
-  <link rel="preload" as="image" href="./images/kendal-hnysCJrPpkc-unsplash_sm.webp">
+  <link rel="preload" as="image" href="./img/hero.webp">
+  <link rel="preload" as="image" href="./img/kendal-hnysCJrPpkc-unsplash_sm.webp">
   <link rel="preload" as="font" href="./fonts/Comfortaa-VariableFont_wght.ttf" type="font/ttf" crossorigin />
   <link rel="preload" as="font" href="./fonts/Martel-Regular.ttf" type="font/ttf" crossorigin />
 
-  <script type="module" src="../src/index.js"></script>
+  <link rel="stylesheet" href="./scss/styles.scss">
+  <script type="module" src="./index.js"></script>
   
   <style>
     html,
@@ -41,7 +42,7 @@
     }
 
     body[open] {
-      background-image: url(./images/kendal-hnysCJrPpkc-unsplash_sm.webp);
+      /* background-image: url(./images/kendal-hnysCJrPpkc-unsplash_sm.webp); */
     }
 
     @font-face {
@@ -63,7 +64,7 @@
     }
 
     .hero__back {
-      background-image: url(./images/hero.webp);
+      /* background-image: url("/public/images/hero.webp"); */
     }
 
     html.no-js noscript {
