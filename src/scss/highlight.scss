@@ -35,7 +35,7 @@ code.hljs {
 .hljs-title,
 .hljs-number,
 .hljs-type {
-  color: $primary;
+  color: var(--bs-primary);
   font-style: italic;
 }
 .hljs-attribute,
@@ -48,7 +48,7 @@ code.hljs {
 .hljs-symbol,
 .hljs-template-variable,
 .hljs-variable {
-  color: $pink;
+  color: var(--bs-highlight);
 }
 .hljs-emphasis {
   font-style: italic;
@@ -59,6 +59,6 @@ code.hljs {
  */
 // .hljs-attr,
 .hljs-params {
-  color: $pink;
+  color: var(--bs-highlight);
   font-style: italic;
 }
