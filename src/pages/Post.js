@@ -11,6 +11,7 @@ import Meta from '../components/Meta'
 import PageTitle from '../components/PageTitle'
 import Breadcrumbs from '../components/Breadcrumbs'
 
+import EmbedGists from '../components/EmbedGists'
 import hljs from 'highlight.js/lib/common'
 import '../scss/highlight.scss'
 
@@ -95,7 +96,12 @@ const Post = (props) => {
       <div id={`Post-${nid}`} className="post mx-auto min-vh-50">
         {node && !isLoading && <>
 
-          <div className="body" dangerouslySetInnerHTML={{ __html: body }} />
+          <EmbedGists
+            htmlString={body}
+            render={(html) => (
+              <div className="body" dangerouslySetInnerHTML={{ __html: html }} />
+            )}
+          />
 
           <div className="field_images d-flex flex-wrap justify-content-center gap-3 mt-5">
             {!!field_image.length && field_image.map(image => (
