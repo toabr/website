@@ -16,16 +16,15 @@ const TitleListItem = ({ node, isLoading }) => {
     <LinkContainer to={`node/${node.nid[0].value}`}>
       <ListGroup.Item action disabled={isLoading} className="text-body bg-body fw-bolder shadow pe-2" >
 
-        <div className="d-sm-flex justify-content-between flex-wrap
-            align-items-center mt-1">
-          <small className="date d-sm-block pe-2 text-muted fw-light">
-            {formatUTC(node.changed[0].value)}
-          </small>
+        <div className="d-sm-flex justify-content-between flex-wrap align-items-center mt-1">
           {sticky &&
-            <span className="mx-1 text-muted" style={{ transform: 'rotate(-35deg)' }} >
+            <span className="sticky mx-1 text-muted" style={{ transform: 'translate(-3px, 1px) rotate(-35deg)' }} >
               <ThumbtackIcon />
             </span>
           }
+          <small className="date d-sm-block pe-2 text-muted fw-light">
+            {formatUTC(node.changed[0].value)}
+          </small>
           <div className="title flex-fill">
             {node.title[0].value}
           </div>

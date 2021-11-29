@@ -73,6 +73,7 @@ const Wiki = (props) => {
   const queryObj = {
     tags: encodeURI(query || ''),
     type: 'article',
+    by: 'changed',
     items: itemsPerPage,
     page: page || 0
   }
