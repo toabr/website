@@ -87,7 +87,7 @@ const Post = (props) => {
         <div className="container-small">
           <PageBreak isLoading={isLoading} />
           <div className="date text-center text-muted my-3">
-            {node?.created[0]?.locale}
+            {node?.changed[0]?.locale}
           </div>
         </div>
       </header>

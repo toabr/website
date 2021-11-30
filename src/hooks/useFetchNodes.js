@@ -38,6 +38,7 @@ export const urlBuilder = ({
 function addLocalDate(nodes = []) {
   return nodes.map(node => {
     node.created[0].locale = formatUTC(node.created[0].value)
+    node.changed[0].locale = formatUTC(node.changed[0].value)
     return node
   })
 }
