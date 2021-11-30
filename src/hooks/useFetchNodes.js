@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import useFetch from "./useFetch"
-import { formatUTC } from "../js/helper"
+import { formatUTC, timeAgo } from "../js/helper"
 
 /**
    * url builder for version API_V2
@@ -38,7 +38,11 @@ export const urlBuilder = ({
 function addLocalDate(nodes = []) {
   return nodes.map(node => {
     node.created[0].locale = formatUTC(node.created[0].value)
+    node.created[0].timeAgo = timeAgo(new Date(node.created[0].value))
+
     node.changed[0].locale = formatUTC(node.changed[0].value)
+    node.changed[0].timeAgo = timeAgo(new Date(node.changed[0].value))
+
     return node
   })
 }

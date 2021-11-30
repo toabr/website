@@ -78,7 +78,7 @@ const Article = ({ node }) => {
           </Link>
         </Card.Title>
         <Card.Subtitle as="small" className="mb-2 text-muted">
-          {formatUTC(node.changed[0].value)}
+          {formatUTC(node.created[0].value)}
         </Card.Subtitle>
         <Card.Text className="font-serif text-accent-3 py-1 mb-3">
           {summary}
