@@ -49,14 +49,17 @@ const Article = ({ node }) => {
 
   return (
     <Card as="article" bg="accent-1" className="border-0 shadow-slim hover-drop">
-      <div className="card__image d-flex justify-content-center bg-primary bg-gradient p-3" >
-        <Link to={link} > {/* d-flex justify-content-center h-100 */}
+      <div className="card__image bg-primary bg-gradient p-3" >
+        <Link to={link} className="h-100 d-flex justify-content-center align-items-center">
           {node.teaser &&
-            <img width="325" height="325" loading="lazy"
+            <img
+              // width="325" height="325" 
+              loading="lazy"
               className="img-fluid shadow-slim"
-              style={{width: 'auto', maxHeight: '100%', objectFit: 'contain'}}
+              style={{maxHeight: '100%'}}
               alt={node.title[0].value}
-              src={node.teaser ? process.env.API_URL + node.teaser['650x650'] : ''} />}
+              src={node.teaser ? process.env.API_URL + node.teaser['650x650'] : ''} />
+          }
         </Link>
       </div>
 
