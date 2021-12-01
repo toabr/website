@@ -23,6 +23,26 @@ export const orderByTitle = arr => {
 
 
 /**
+ * throttle events
+ * @param {Function} fn function to run
+ * @param {Number} delay in ms
+ * @returns 
+ * TODO: return a promise
+ */
+export const throttle = (fn, delay) => {
+  let allowSample = true;
+
+  return (e) => {
+    if (allowSample) {
+      allowSample = false;
+      setTimeout(function () { allowSample = true; }, delay);
+      fn(e);
+    }
+  }
+}
+
+
+/**
  * difference between date1 and date2 in days (date2 - date1)
  * @param {Date} date1 
  * @param {Date} date2 
