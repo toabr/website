@@ -88,12 +88,12 @@ const Post = (props) => {
           <PageBreak isLoading={isLoading} />
           <div className="date text-center text-muted my-3">
             {node?.created[0] &&
-              <time datetime={node.created[0].value}>
+              <time dateTime={node.created[0].value}>
                 {node.created[0].locale}
               </time>
             }
             {node?.changed[0] && node?.created[0]?.locale !== node?.changed[0]?.locale &&
-              <time datetime={node.changed[0].value}>
+              <time dateTime={node.changed[0].value}>
                 , changed {node.changed[0].timeAgo} ago
               </time>
             }
