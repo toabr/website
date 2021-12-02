@@ -1,9 +1,8 @@
-import useFetch from '../hooks/useFetch'
-
 import Meta from '../components/Meta'
 import Search from '../components/Search'
 import Showcase from '../components/Showcase'
 import PageBreak from '../components/PageBreak'
+import useFetchNodes from '../hooks/useFetchNodes'
 import useFetchImages from '../hooks/useFetchImages'
 
 
@@ -15,18 +14,21 @@ const Home = () => {
   // Teaser image ids
   let fids = null
 
-  /**
-   * FETCH
-   */
-  const url = `${process.env.API_URL}/rest/v2/node/work/all?sort_by=created&sort_order=DESC&items_per_page=10`
-  const { status, data, error } = useFetch(url)
-
-  if (status === 'fetched') {
-    // collect head image ids to fetch later
-    fids = data.filter(
-      node => !!node.field_image.length).map(
-        node => node.field_image[0].target_id)
+  const queryObj = {
+    type: 'work',
+    by: 'created',
+    items: 25,
+    page: 0
   }
+
+  const { nodes, isLoading } = useFetchNodes(queryObj)
+
+  fids = nodes ?
+    nodes.filter(
+      node => !!node.field_image.length).map(
+        node => node.field_image[0].target_id
+      ) :
+    null
 
   const imageTeaser = useFetchImages({ fids })
 
@@ -46,12 +48,12 @@ const Home = () => {
             </p>
             <Search />
           </header>
-          <PageBreak />
+          <PageBreak isLoading={isLoading} />
         </div>
       </section>
 
 
-      <Showcase data={data || []} imageTeaser={imageTeaser} />
+      <Showcase data={nodes || []} imageTeaser={imageTeaser} />
     </>
   )
 }
