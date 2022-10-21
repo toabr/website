@@ -3,14 +3,7 @@ import { useEffect, useState } from 'react'
 // to store the state to local storage
 export default function usePersistedState(key, defaultValue) {
   const [state, setState] = useState(() => {
-
-    const storedValue = JSON.parse(localStorage.getItem(key))
-
-    if(storedValue === null) {
-      return defaultValue
-    } else {
-      return storedValue
-    }
+    return JSON.parse(localStorage.getItem(key)) ?? defaultValue // test for null
   })
 
   useEffect(() => {
